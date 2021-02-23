@@ -1,0 +1,18 @@
+@import '../config.styl'
+
+.fieldset
+	border-radius 8px
+	border 2px solid grey
+	transition all $transition
+	margin 0
+
+	> legend
+		font-weight 600
+		transition all $transition
+		padding 0 4px
+
+	&:hover
+		border-color black
+
+		> legend
+			color $default

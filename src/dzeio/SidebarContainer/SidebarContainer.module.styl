@@ -1,0 +1,32 @@
+@import "../config.styl"
+
+.sidebar
+	position fixed
+	width 200px
+	top 0
+	left 0
+	height 100%
+	background white
+	padding 16px
+
+.content
+	padding-left 200px
+
+.item
+	display flex
+	padding 8px 16px
+	margin-top 8px
+	transition $transition
+	border-radius 8px
+
+	svg
+		margin-right 8px
+
+	div
+		text-align center
+		flex-grow 1
+		margin-left -32px
+
+	&:hover
+		background $default
+		color white
