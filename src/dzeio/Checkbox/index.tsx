@@ -17,7 +17,6 @@ interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLIn
 
 export default class Checkbox extends React.Component<Props> {
 
-
 	public render() {
 		const props: Props = Object.assign({}, this.props)
 		delete props.label

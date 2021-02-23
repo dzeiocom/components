@@ -5,59 +5,19 @@ import NextImage from 'next/image'
 import css from './Image.module.styl'
 
 export interface ImageProps {
-	defaultHeight?: number
-	src?: string
-	sources?: Array<string>
+	src: string
 	deleteOnError?: boolean
-	downgradeOnError?: string
 	canFullscreen?: boolean
-	max?: {
-		height?: number|string
-		width?: number|string
-	}
-	width?: number|string
-	default?: {
-		height?: number|string
-		width?: number|string
-	}
+	width: number
+	height: number
 	alt?: string
-	classes?: string
+
+	// ClassNames
+	parentClassName?: string
 	className?: string
+
+	// Events
 	onClick?: () => void
-}
-
-enum images {
-	JPEG = 'image/jpeg',
-	XICON = 'image/x-icon',
-	TIFF = 'image/tiff'
-}
-
-const mimeTypes = {
-	apng: 'image/apng',
-	bmp: 'image/bmp',
-	gif: 'image/gif',
-
-	ico: images.XICON,
-	cur: images.XICON,
-
-	jpg: images.JPEG,
-	jpeg: images.JPEG,
-	jfif: images.JPEG,
-	pjpeg: images.JPEG,
-	pjp: images.JPEG,
-
-	png: 'image/png',
-	svg: 'image/svg+xml',
-
-	tif: images.TIFF,
-	tiff: images.TIFF,
-
-	webp: 'image/webp'
-}
-
-const getMimeType = (img: string) => {
-	const arr = img.split('.')
-	return mimeTypes[arr[arr.length-1] as 'apng'] || mimeTypes.png
 }
 
 type evType<T = HTMLImageElement> = React.SyntheticEvent<T, Event>
@@ -69,7 +29,6 @@ export default class Image extends React.Component<ImageProps> {
 	private parent: React.RefObject<HTMLDivElement> = React.createRef()
 	private pic: React.RefObject<HTMLDivElement> = React.createRef()
 
-	private wasDowngraded = false
 	private cardPos: Array<number> = []
 	private cardSize: Array<number> = []
 
@@ -104,30 +63,15 @@ export default class Image extends React.Component<ImageProps> {
 
 	public render() {
 		const pic = (
-			// <picture ref={this.pic} className={this.props.classes}>
-			// 	{this.props.sources && this.props.sources.map((el, index) => (
-			// 		<source key={index} srcSet={el} type={getMimeType(el)}/>
-			// 	))}
-			// 	<img
-			// 	/>
-			// </picture>
-			<div ref={this.pic} className={buildClassName(this.props.classes, css.parent)}>
+			<div ref={this.pic} className={buildClassName(this.props.parentClassName, css.parent)}>
 				<NextImage
 					className={buildClassName([css.image], [this.props.className])}
-					// ref={this.ref}
-					src={this.props.src || ''}
-					onClick={this.props.canFullscreen && this.onClick || this.props.onClick}
-					onLoad={this.props.default && this.onLoad || undefined}
+					src={this.props.src}
+					onClick={this.props.canFullscreen ? this.onClick : this.props.onClick}
 					onError={this.props.deleteOnError && this.onError || undefined}
 					// layout="fill"
-					width={200}
-					height={44}
-					// style={{
-					// 	width: this.props.default?.width,
-					// 	height: this.props.default?.height,
-					// 	maxHeight: this.props.max?.height,
-					// 	maxWidth: this.props.max?.width
-					// }}
+					width={this.props.width}
+					height={this.props.height}
 					alt={this.props.alt}
 				/>
 			</div>
@@ -191,8 +135,8 @@ export default class Image extends React.Component<ImageProps> {
 					return
 				}
 				const w = this.valToPixel(this.props.width)
-				const mh = this.valToPixel(this.props.max?.height)
-				const mw = this.valToPixel(this.props.max?.width)
+				const mh = this.valToPixel(this.props?.height)
+				const mw = this.valToPixel(this.props?.width)
 				c.classList.add(css.none)
 				i.style.height = ''
 				i.style.width = w

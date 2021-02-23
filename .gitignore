@@ -1,6 +1,7 @@
 module/
 storybook-static/
-index.js
+*.js
 style.css
 yarn-error.log
 node_modules
+types

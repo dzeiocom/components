@@ -1,6 +1,6 @@
 import { SVGAttributes } from 'react'
 
-export type ColorType = 'primary' | 'secondary' | 'info' | 'success' | 'danger' | 'warning'
+export type ColorType = 'primary' | 'info' | 'success' | 'error' | 'warning'
 
 export interface IconProps extends SVGAttributes<SVGElement> {
 	color?: string

@@ -1,11 +1,15 @@
-.fullscrean
+@import './config'
+
+.fullscreen
 	min-height 100vh
 
-.fullHeight
-	height 50vh
+.w100p
+	width 100%
 
+.hideMobile
+	@media (max-width $mobile)
+		display none
 
-
-// Utils for Width
-.w50p
-	width 50%
+.hideTablet
+	@media (max-width $tablet)
+		display none

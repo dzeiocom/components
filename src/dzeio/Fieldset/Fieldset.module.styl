@@ -1,7 +1,7 @@
 @import '../config.styl'
 
 .fieldset
-	border-radius 8px
+	border-radius 4px
 	border 2px solid grey
 	transition all $transition
 	margin 0
@@ -10,9 +10,10 @@
 		font-weight 600
 		transition all $transition
 		padding 0 4px
-
+		@media (prefers-color-scheme dark)
+			color white
 	&:hover
 		border-color black
 
-		> legend
-			color $default
+		@media (prefers-color-scheme dark)
+			border-color white

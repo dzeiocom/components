@@ -1,16 +1,32 @@
-$default = #4285f4 // This color should never appear
-$primary = #4285f4
-$secondary = #FCFCFC
-$info = #03A9F4
-$success = #2DCE89
-$danger = #F5365C
-$warning = #FB6340
+
+$main = #4285F4
+$textOnMain = white
+
+$infoDark = #304FFE
+$infoLight = #29B6F6
+
+$successDark = #388E3C
+$successLight = #4CAF50
+
+$errorDark = #D32F2F
+$errorLight = #F44336
+
+$warningDark = #F57C00
+$warningLight = #FF9800
+
+$backgroundDark = #161616
+$backgroundLight = #EEEEEE
+$foregroundDark = #202020
+$foregroundLight = #FFFFFF
+
+$grayDark = #B0B0B0
+$grayLight = #E0E0E0
+
 
 $transitionTime = .15s
 $transitionFunction = ease-in-out
 $transition = $transitionTime $transitionFunction
 
-$darkBackground = #161616
 
 // Breakpoints
 $mobile = 768px
@@ -22,7 +38,17 @@ $colCount = 12
 $colCountTablet = 8
 $colCountMobile = 4
 
-$gapSize = 16px //$totalGapSize / ($colCount+1)
+$gapSize = 16px
 
 rem($a)
 	($a / 16)rem
+
+// @deprecated colors
+$primary = $main
+$default = $main
+$secondary = $main
+$info = $infoLight
+$success = $successLight
+$danger = $errorLight
+$warning = $warningLight
+$darkBackground = $backgroundDark

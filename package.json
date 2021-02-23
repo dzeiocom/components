@@ -1,6 +1,6 @@
 {
 	"name": "@dzeio/components",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"license": "MIT",
 	"main": "./index.js",
 	"module": "./module/index.js",
@@ -44,7 +44,7 @@
 	"scripts": {
 		"storybook": "start-storybook -p 6006",
 		"build-storybook": "build-storybook",
-		"build": "tsc || rollup --config",
+		"build": "tsc && rollup --config",
 		"prepublishOnly": "yarn build"
 	}
 }

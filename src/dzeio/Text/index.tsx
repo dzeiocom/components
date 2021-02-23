@@ -3,10 +3,10 @@ import { buildClassName } from '../Util'
 import css from './Text.module.styl'
 interface Props {
 	color?: 'black' | 'white'
-	type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'em'
+	type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'em' | 'span'
 	className?: string
 	noDarkTheme?: boolean
-	align?: 'right' | 'center'
+	align?: 'left' | 'right' | 'center'
 	children: React.ReactNode
 }
 
@@ -31,6 +31,7 @@ export default class Text extends React.Component<Props> {
 		case 'h5': return (<h5 className={classes}>{this.props.children}</h5>)
 		case 'h6': return (<h6 className={classes}>{this.props.children}</h6>)
 		case 'em': return (<p className={classes}><em>{this.props.children}</em></p>)
+		case 'span': return (<span className={classes}>{this.props.children}</span>)
 		default: return (<p className={classes}>{this.props.children}</p>)
 		}
 	}

@@ -1,8 +1,9 @@
 import React from 'react'
 import { X } from 'react-feather'
-import { BoxWrapper, BoxHeader, BoxBody } from '../Box'
-import { Props as HeaderProps } from '../Box/BoxHeader'
+import Text from '../Text'
+import Box from '../Box'
 import Row from '../Row'
+import { Props as HeaderProps } from '../Box/BoxHeader'
 
 import css from './Popup.module.styl'
 
@@ -15,20 +16,16 @@ interface Props {
 export default class Popup extends React.Component<Props> {
 
 	public render = () => (
-		<Row onClick={this.parentClose} justify="center" align="center" className={css.popup}>
-			<BoxWrapper className={css.popupChild}>
-				<BoxHeader {...this.props.header}>
-					<X onClick={this.props.onClose} className={css.exit} />
-				</BoxHeader>
-				<BoxBody>
-					{this.props.children}
-				</BoxBody>
-			</BoxWrapper>
+		<Row nomargin onClick={this.parentClose} justify="center" align="center" className={css.popup}>
+			<Box {...this.props.header} className={css.popupChild} onClick={(ev) => ev.stopPropagation()} headerButtons={(<Text><X onClick={this.props.onClose} className={css.exit} /></Text>)}>
+				{this.props.children}
+			</Box>
 		</Row>
 	)
 
 	private parentClose = (ev: React.MouseEvent<HTMLDivElement>) => {
-		if ((ev.target as HTMLElement).classList.contains(css.popup) && this.props.onClose) {
+		const target = ev.currentTarget
+		if (target.classList.contains(css.popup) && this.props.onClose) {
 			this.props.onClose()
 		}
 	}

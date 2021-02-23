@@ -9,6 +9,7 @@ interface Props {
 	// Wrapper
 	outline?: boolean
 	className?: string
+	onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 
 	// Header
 	title?: string
@@ -25,7 +26,7 @@ interface Props {
 
 export default class Box extends React.Component<Props> {
 	public render = () => (
-		<BoxWrapper outline={this.props.outline} className={this.props.className}>
+		<BoxWrapper onClick={this.props.onClick} outline={this.props.outline} className={this.props.className}>
 			{(this.props.headerButtons || this.props.title || this.props.titleColSize || this.props.subtitle || this.props.delimiter || this.props.titleClassName) && (
 				<BoxHeader
 					title={this.props.title}
@@ -37,7 +38,6 @@ export default class Box extends React.Component<Props> {
 					{this.props.headerButtons}
 				</BoxHeader>
 			)}
-			<BoxHeader></BoxHeader>
 			<BoxBody noPadding={this.props.noPadding}>
 				{this.props.children}
 			</BoxBody>

@@ -2,7 +2,12 @@
 
 .parent
 	position relative
-	margin 16px
+	margin 16px 0
+	max-width 100%
+	display inline-block
+
+	+ .parent
+		margin-left 16px
 
 	label
 		font-size 1rem
@@ -22,23 +27,104 @@
 	svg
 		position absolute
 		color #AAA
-		top 14px
-		left 16px // input padding-left
 		transition color $transition
 		pointer-events none
+		top 14px
+		&.left
+			left 16px // input padding-left
 
-		~ label
-			left 16px + 24px + 16px
+			~ label
+				left 16px + 24px + 16px
+
+		&.right
+			right 16px
 
 	select
 		appearance none
 
+		option
+			background $foregroundLight
+			color black
+			@media (prefers-color-scheme dark)
+				background lighten($foregroundDark, 5%)
+				color white
+
+	textarea
+		resize none
+		overflow-y hidden
+
+
+	/* Remove the arrows from the Number Input */
+	input[type="number"]
+		-moz-appearance textfield
+
+	input::-webkit-outer-spin-button
+	input::-webkit-inner-spin-button
+		-webkit-appearance none
+		margin 0
+	/* End */
+
+	.autocomplete
+		display flex
+		opacity 0
+		transition all $transition
+		pointer-events none
+		// display flex
+		flex-direction column
+		list-style none
+		position absolute
+		top calc(100% - 4px)
+		left 0
+		width 100%
+		z-index 100
+		box-shadow 0 4px 8px rgba(black, .3)
+		margin 0
+		padding 0
+		background darken($foregroundLight, 5%)
+		@media (prefers-color-scheme dark)
+			background lighten($foregroundDark, 5%)
+
+		border-bottom-left-radius 4px
+		border-bottom-right-radius 4px
+		max-height 25vh
+		overflow-y auto
+		@media (max-width $mobile)
+			max-height 50vh
+		&.reverse
+			flex-direction column-reverse
+			top initial
+			bottom 100%
+			box-shadow 0 -4px 8px rgba(black, .3)
+			border-radius 0
+			border-top-left-radius 4px
+			border-top-right-radius 4px
+		li
+			transition all $transition
+			padding 8px
+			@media (max-width $mobile)
+				padding 24px
+			cursor pointer
+			&:hover
+				background darken(@background, 20%)
+				@media (prefers-color-scheme dark)
+					background lighten(lighten($foregroundDark, 5%), 20%)
+
+
+	input:focus + .autocomplete
+	select:focus + .autocomplete
+	textarea:focus + .autocomplete
+	.autocomplete:hover
+		opacity 1
+		pointer-events inherit
+
 	input
 	select
+	textarea
 		padding 14px 16px
 		height 56px
 		border 2px solid rgba(black, .3)
 		border-radius 4px
+		max-width 100%
 		box-sizing border-box
 		font-size .875rem
 		outline none
@@ -49,7 +135,7 @@
 			border-color rgba(white, .3)
 			color white
 
-		&:hover
+		&:not(:disabled):hover
 			border-color black
 			@media (prefers-color-scheme dark)
 				border-color white
@@ -72,6 +158,16 @@
 				@media (prefers-color-scheme dark)
 					background #202020
 
+		&:disabled
+			border-color #999
+
+			@media (prefers-color-scheme dark)
+				border-color #444
+				~label
+					color #444
+			~ label
+				color #999
+
 		&:invalid
 			border-color $danger
 
@@ -89,68 +185,19 @@
 			~ svg
 				color @border-color
 
-			&.primary
-				border-color $primary
-
-				~ label
-					color @border-color
-
-				~ svg
-					color @border-color
-
-			&.secondary
-				border-color $secondary
-
-				~ label
-					color @border-color
-
-				~ svg
-					color @border-color
-
-			&.info
-				border-color $info
-
-				~ label
-					color @border-color
-
-				~ svg
-					color @border-color
-
-			&.success
-				border-color $success
-
-				~ label
-					color @border-color
-
-				~ svg
-					color @border-color
-
-			&.danger
-				border-color $danger
-
-				~ label
-					color @border-color
-
-				~ svg
-					color @border-color
-
-			&.warning
-				border-color $warning
-
-				~ label
-					color @border-color
-
-				~ svg
-					color @border-color
-
-		&.hasIcon
+		&.iconLeft
 			padding-left 16px + 24px + 16px
-
+		&.iconRight
+			padding-right 16 + 24 + 16px
 		&.filled
 			border none
 			background rgba(gray, .1)
 			border-radius @border-radius @border-radius 0 0
 			border-bottom 2px solid rgba(black,.4)
+
+			@media (prefers-color-scheme dark)
+				background rgba(white, .1)
+				border-bottom 2px solid rgba(white,.4)
 
 			&.opaque
 				background white
@@ -161,7 +208,8 @@
 			&:hover
 				background rgba(gray, .2)
 
-
+				@media (prefers-color-scheme dark)
+					background rgba(white, .2)
 
 				&.opaque
 					background darken(white, 5%)
@@ -169,6 +217,7 @@
 						background #1c1c1c
 			&:focus
 				background rgba(gray, .3)
+				border-bottom 2px solid $default
 
 				&.opaque
 					background white
@@ -185,14 +234,20 @@
 					background transparent
 					padding 0
 					font-size .75rem
-				~ svg ~ label
+				~ svg.left ~ label
 					left 16px + 24px + 16px // .input/padding-left label/padding-left
+		~ svg.rotate
+			transform rotateX(0)
+			transition $transition
 
+		&:hover:focus ~ svg.rotate, ~.autocomplete:hover ~ svg.rotate
+			transform rotateX(180deg)
 	div
 		display flex
 		justify-content space-between
 		padding 0 16px
 		font-size .9em
 
-	&.block input
+	&.block, &.block input, &.block select, &.block textarea
 		width 100%
+		display block

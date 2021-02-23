@@ -1,3 +1,5 @@
+@import "../config.styl"
+
 .popup
 	position fixed
 	height 100%
@@ -6,9 +8,21 @@
 	left 0
 	background rgba(black, .3)
 	cursor pointer
+	z-index 1000
 
 .popupChild
 	cursor initial
+	z-index 1001
+
+	min-width 50%
+
+	@media (max-width $tablet)
+		min-width 70%
+
+	@media (max-width $mobile)
+		min-width 90%
+	// min-height 50vh
 
 .exit
 	cursor pointer
+	height 100%

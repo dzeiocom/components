@@ -24,7 +24,7 @@ export default class SidebarContainer extends React.Component<Props> {
 			<nav className={css.sidebar}>
 				<Link href="/dashboard">
 					<a>
-						<Image src="/assets/logo.svg" max={{ width: '100%' }} />
+						<Image src="/assets/logo.svg" width={175} height={100} />
 					</a>
 				</Link>
 				{this.menu.map((item, index) => (

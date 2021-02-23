@@ -6,6 +6,8 @@ import Image from '../Image'
 
 import css from './Button.module.styl'
 
+// MAKE OUTLINE use Fieldset instead of the current one xd
+
 interface Props {
 	outline?: boolean
 	nomargintop?: boolean
@@ -31,7 +33,7 @@ export default class Button extends React.Component<Props> {
 			inner = (
 				<>
 					{typeof Icon === 'string' ? (
-						<Image src={Icon} max={{ height: 16, width: 16 }} />
+						<Image src={Icon} width={16} height={16} />
 					) : (
 						<Icon size={16} />
 					)}

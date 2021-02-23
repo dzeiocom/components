@@ -15,8 +15,8 @@
 	border-radius 4px
 	border none
 	justify-content center
-	color white
-	background-color $default
+	color $textOnMain
+	background-color $main
 
 	// Chrome Specific
 	outline none
@@ -68,22 +68,31 @@
 		margin-top 8px
 
 	&:disabled
-		background #E0E0E0 !important
-		color #B0B0B0 !important
-		transform none !important
-		box-shadow none !important
+		background $grayLight
+		color $grayDark
+		transform none
+		box-shadow none
 		cursor initial
 
+		&.outline
+			border 2px solid @grayDark
+			background transparent
+			color @grayDark
+
+			@media (prefers-color-scheme dark)
+				border 2px solid @grayLight
+				color @grayLight
+
 	&.loading
-		color transparent !important
+		color transparent
 		position relative
 		pointer-events none
 
 		&::after
 			content ""
 			display block
-			border white 2px solid
-			border-color transparent transparent white white
+			border $textOnMain 2px solid
+			border-color transparent transparent $textOnMain $textOnMain
 			width 1em
 			position absolute
 			top calc(50% - (1em / 2))
@@ -93,105 +102,69 @@
 			box-sizing inherit
 			animation ButtonLoading 1s infinite linear
 
-
-
 .textInner
 	margin-left 8px
 
-.primary
-	background-color $primary
-	&.outline
-		color @background-color
-		border-color @background-color
+/**
+ * $color: the color to use
+ * $theme: the theme used ('lighten' | 'darken')
+*/
+btn($color, $theme)
+	background-color $color
 
-	&:hover
-		background-color @background-color
+	// Get Text Color
+	$textColor = white
+	if $theme is 'darken'
+		$textColor = black
+	else
+		$textColor = white
 
-	&:active
-	&:focus
-		background-color darken(@background-color, 30%)
-
-	&.loading::after
-		border-color transparent transparent @background-color @background-color
-
-.secondary
-	background-color $secondary
-	color black
-	&.outline
-		color @color
-		border-color @background-color
-
-	&:hover
-		background-color @background-color
-
-	&:active
-	&:focus
-		background-color darken(@background-color, 30%)
-
-	&.loading::after
-		border-color transparent transparent @color @color
-.info
-	background-color $info
-	&.outline
-		color @background-color
-		border-color @background-color
-
-	&:hover
-		background-color @background-color
-
-	&:active
-	&:focus
-		background-color darken(@background-color, 30%)
-
-	&.loading::after
-		border-color transparent transparent @background-color @background-color
-.success
-	background-color $success
-	&.outline
-		color @background-color
-		border-color @background-color
-
-	&:hover
-		background-color @background-color
-
-	&:active
-	&:focus
-		background-color darken(@background-color, 30%)
-
-	&.loading::after
-		border-color transparent transparent @background-color @background-color
-.danger
-	background-color $danger
+	color $textColor
 
 	&.outline
 		color @background-color
 		border-color @background-color
 
-	&:hover
-		background-color @background-color
-
-	&:active
-	&:focus
-		background-color darken(@background-color, 30%)
-
-	&.loading::after
-		border-color transparent transparent @background-color @background-color
-.warning
-	background-color $warning
-
-	&.outline
-		color @background-color
-		border-color @background-color
+		&:hover
+		&:active
+		&:focus
+			color @color
 
 	&:hover
 		background-color @background-color
+		box-shadow 0 4px 4px rgba(@background-color,.2)
 
 	&:active
 	&:focus
-		background-color darken(@background-color, 30%)
+		if $theme is 'darken'
+			background-color darken(@background-color, 30%)
+		else
+			background-color lighten(@background-color, 30%)
 
-	&.loading::after
-		border-color transparent transparent @background-color @background-color
+	&.loading
+		color transparent
+		&::after
+			border-color transparent transparent $textColor $textColor
+
+.info:not(:disabled)
+	btn($infoLight, 'darken')
+	@media (prefers-color-scheme dark)
+		btn($infoDark, 'lighten')
+
+.success:not(:disabled)
+	btn($successLight, 'darken')
+	@media (prefers-color-scheme dark)
+		btn($successDark, 'lighten')
+
+.error:not(:disabled)
+	btn($errorLight, 'darken')
+	@media (prefers-color-scheme dark)
+		btn($errorDark, 'lighten')
+
+.warning:not(:disabled)
+	btn($warningLight, 'darken')
+	@media (prefers-color-scheme dark)
+		btn($warningDark, 'lighten')
 
 @keyframes ButtonLoading
 	0%
