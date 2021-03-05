@@ -1,6 +1,6 @@
 {
 	"name": "@dzeio/components",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"license": "MIT",
 	"main": "./index.js",
 	"module": "./module/index.js",
@@ -11,10 +11,7 @@
 		"@babel/preset-env": "^7.12.16",
 		"@babel/preset-react": "^7.12.13",
 		"@rollup/plugin-typescript": "^8.2.0",
-		"@storybook/addon-actions": "^6.1.14",
 		"@storybook/addon-essentials": "^6.1.14",
-		"@storybook/addon-knobs": "^6.1.14",
-		"@storybook/addon-links": "^6.1.14",
 		"@storybook/cli": "^6.1.14",
 		"@storybook/react": "^6.1.14",
 		"@types/node": "^14.14.28",
@@ -42,7 +39,7 @@
 		"react-feather": "^2.0.9"
 	},
 	"scripts": {
-		"storybook": "start-storybook -p 6006",
+		"storybook": "rm -rf src/dzeio/**/*.js && start-storybook -p 6006",
 		"build-storybook": "build-storybook",
 		"build": "tsc && rollup --config",
 		"prepublishOnly": "yarn build"
