@@ -34,7 +34,7 @@
 			left 16px // input padding-left
 
 			~ label
-				left 16px + 24px + 16px
+				left 16px + 24px + 10px
 
 		&.right
 			right 16px
@@ -68,6 +68,7 @@
 		display flex
 		opacity 0
 		transition all $transition
+		overflow-x hidden
 		pointer-events none
 		// display flex
 		flex-direction column
@@ -109,10 +110,12 @@
 				@media (prefers-color-scheme dark)
 					background lighten(lighten($foregroundDark, 5%), 20%)
 
+	div + .autocomplete
+		top calc(100% - 4px - .9em)
 
-	input:focus + .autocomplete
-	select:focus + .autocomplete
-	textarea:focus + .autocomplete
+	input:focus ~ .autocomplete
+	select:focus ~ .autocomplete
+	textarea:focus ~ .autocomplete
 	.autocomplete:hover
 		opacity 1
 		pointer-events inherit
@@ -122,7 +125,7 @@
 	textarea
 		padding 14px 16px
 		height 56px
-		border 2px solid rgba(black, .3)
+		border 2px solid $grayDark
 		border-radius 4px
 		max-width 100%
 		box-sizing border-box
@@ -132,19 +135,8 @@
 		transition all $transition
 		color black
 		@media (prefers-color-scheme dark)
-			border-color rgba(white, .3)
+			border-color $grayLight
 			color white
-
-		&:not(:disabled):hover
-			border-color black
-			@media (prefers-color-scheme dark)
-				border-color white
-
-			+ svg
-				color black
-
-				@media (prefers-color-scheme dark)
-					color white
 
 		&:not(:placeholder-shown)
 		&:focus
@@ -168,27 +160,47 @@
 			~ label
 				color #999
 
-		&:invalid
-			border-color $danger
+		&:not(:disabled)
+			&:hover
+				border-color black
+				@media (prefers-color-scheme dark)
+					border-color white
 
-			~ label
-				color @border-color
+				+ svg
+					color black
 
-			~ svg
-				color @border-color
-		&:focus
-			border-color $default
+					@media (prefers-color-scheme dark)
+						color white
+			&:focus
+				border-color $main
 
-			~ label
-				color @border-color
+				~ label
+					color @border-color
 
-			~ svg
-				color @border-color
+				~ svg
+					color @border-color
+			&:invalid
+				border-color $errorLight
+
+				~ label
+					color @border-color
+
+				~ svg
+					color @border-color
+				@media (prefers-color-scheme dark)
+					border-color $errorDark
+
+					~ label
+						color @border-color
+
+					~ svg
+						color @border-color
+
 
 		&.iconLeft
-			padding-left 16px + 24px + 16px
+			padding-left 16px + 24px + 10px
 		&.iconRight
-			padding-right 16 + 24 + 16px
+			padding-right 16 + 24 + 10px
 		&.filled
 			border none
 			background rgba(gray, .1)
@@ -235,12 +247,12 @@
 					padding 0
 					font-size .75rem
 				~ svg.left ~ label
-					left 16px + 24px + 16px // .input/padding-left label/padding-left
+					left 16px + 24px + 10px // .input/padding-left label/padding-left
 		~ svg.rotate
 			transform rotateX(0)
 			transition $transition
 
-		&:hover:focus ~ svg.rotate, ~.autocomplete:hover ~ svg.rotate
+		&:focus ~ svg.rotate, ~.autocomplete:hover ~ svg.rotate
 			transform rotateX(180deg)
 	div
 		display flex

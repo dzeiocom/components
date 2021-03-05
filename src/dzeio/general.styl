@@ -27,13 +27,16 @@ a
 }
 
 /* Track */
+::-webkit-scrollbar-corner
 ::-webkit-scrollbar-track
 	background $foregroundLight
+	transition $transition
 	@media (prefers-color-scheme dark)
 		background $foregroundDark
 
 ::-webkit-scrollbar-thumb
 	background: darken($foregroundLight, 16%)
+	transition $transition
 	@media (prefers-color-scheme dark)
 		background lighten($foregroundDark, 16%)
 	&:hover

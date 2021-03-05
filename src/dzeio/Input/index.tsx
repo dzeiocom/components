@@ -5,6 +5,7 @@ import Text from '../Text'
 import { IconProps } from '../interfaces'
 import { buildClassName } from '../Util'
 import css from './Input.module.styl'
+import Row from '../Row'
 
 interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
 	id?: string
@@ -37,6 +38,8 @@ interface States {
 
 export default class Input extends React.Component<Props, States> {
 
+	public state: States = {}
+
 	// any because f*ck types
 	private inputRef: React.RefObject<any> = React.createRef()
 	private parentRef: React.RefObject<HTMLDivElement> = React.createRef()
@@ -50,11 +53,14 @@ export default class Input extends React.Component<Props, States> {
 		}
 		if (this.props.autocomplete) {
 			window.addEventListener('scroll', this.parentScroll)
+			this.parentScroll()
 		}
 	}
 
 	public componentWillUnmount() {
-		window.removeEventListener('scroll', this.parentScroll)
+		if (this.props.autocomplete) {
+			window.removeEventListener('scroll', this.parentScroll)
+		}
 	}
 
 	public render() {
@@ -65,7 +71,9 @@ export default class Input extends React.Component<Props, States> {
 		delete props.opaque
 		delete props.helper
 		delete props.infinityText
+		delete props.autocomplete
 		delete props.filled
+		delete props.iconRight
 		delete props.inputRef
 		delete props.selectRef
 		delete props.block
@@ -77,7 +85,7 @@ export default class Input extends React.Component<Props, States> {
 			ref: this.props.inputRef || this.inputRef,
 			className: buildClassName(
 				[css.iconLeft, this.props.icon],
-				[css.iconRight, this.props.iconRight],
+				[css.iconRight, this.props.iconRight || this.props.autocomplete],
 				[css.filled, this.props.filled],
 				[css.opaque, this.props.opaque]
 			),
@@ -94,7 +102,7 @@ export default class Input extends React.Component<Props, States> {
 			input = (
 				<select
 					ref={this.props.selectRef || this.inputRef}
-					{...this.props as React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>}
+					{...props as React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>}
 					className={buildClassName(
 						[css.iconLeft, this.props.icon],
 						[css.iconRight, !this.props.disabled || this.props.iconRight],
@@ -138,12 +146,6 @@ export default class Input extends React.Component<Props, States> {
 			>
 				{input}
 
-				{this.props.autocomplete && this.props.autocomplete.indexOf(this.state?.value || '') === -1 && (
-					<ul className={buildClassName(css.autocomplete, [css.reverse, !this.state?.isInFirstPartOfScreen])}>
-						{this.props.autocomplete.filter((item) => item.includes(this.state?.value || '')).map((item) => (<li key={item} onClick={this.onAutoCompleteClick(item)}><Text>{item}</Text></li>))}
-					</ul>
-				)}
-
 				{/* Process Icon */}
 				{this.props.icon && (
 					<this.props.icon className={css.left} />
@@ -167,6 +169,12 @@ export default class Input extends React.Component<Props, States> {
 						)}
 					</div>
 				)}
+
+				{this.props.autocomplete && this.props.autocomplete.indexOf(this.state?.value || '') === -1 && (
+					<ul className={buildClassName(css.autocomplete, [css.reverse, !this.state.isInFirstPartOfScreen])}>
+						{this.props.autocomplete.filter((item) => item.includes(this.state?.value || '')).map((item) => (<li key={item} onClick={this.onAutoCompleteClick(item)}><Text>{item}</Text></li>))}
+					</ul>
+				)}
 			</div>
 		)
 	}
@@ -175,6 +183,7 @@ export default class Input extends React.Component<Props, States> {
 		const div = this.parentRef.current
 		if (!div) {return}
 		const result = !(div.offsetTop - window.scrollY >= window.innerHeight / 2)
+		console.log(result, div, this.state.isInFirstPartOfScreen)
 		if (this.state.isInFirstPartOfScreen !== result) {
 			this.setState({isInFirstPartOfScreen: result})
 		}
