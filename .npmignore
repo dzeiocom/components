@@ -1,11 +1,10 @@
 .storybook/
+node_modules/
 src/
-storybook-static/
+.gitattributes
 .gitignore
 .npmignore
 rollup.config.js
 tsconfig.json
 yarn.lock
-yarn-error.log
-tsconfig.json
 yarn-error.log
