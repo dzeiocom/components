@@ -24,13 +24,3 @@ export function buildClassName(...classes: Array<Array<any> | string | undefined
 	}
 	return classesFinal.join(' ')
 }
-
-export const colors = {
-	default: '#3949AB', // This color should never appear
-	primary: '#3949AB',
-	secondary: '#FCFCFC',
-	info: '#03A9F4',
-	success: '#2DCE89',
-	danger: '#F5365C',
-	warning: '#FB6340'
-}
