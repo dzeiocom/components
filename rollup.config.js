@@ -1,4 +1,4 @@
-import typescript from '@rollup/plugin-typescript';
+import typescript from 'rollup-plugin-typescript2';
 import styles from 'rollup-plugin-styles'
 import pkg from './package.json';
 
@@ -14,7 +14,7 @@ export default [
 				mode: 'extract',
 
 			}),
-			typescript(), // so Rollup can convert TypeScript to JavaScript
+			typescript({useTsconfigDeclarationDir: true}), // so Rollup can convert TypeScript to JavaScript
 		],
 		output: [
 			{

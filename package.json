@@ -4,13 +4,11 @@
 	"license": "MIT",
 	"main": "./index.js",
 	"module": "./module/index.js",
-	"types": "./types/index.d.ts",
-	"dependencies": {},
+	"types": "./module/index.d.ts",
 	"devDependencies": {
 		"@babel/core": "^7.12.16",
 		"@babel/preset-env": "^7.12.16",
 		"@babel/preset-react": "^7.12.13",
-		"@rollup/plugin-typescript": "^8.2.0",
 		"@storybook/addon-essentials": "^6.1.14",
 		"@storybook/cli": "^6.1.14",
 		"@storybook/react": "^6.1.14",
@@ -25,6 +23,7 @@
 		"react-feather": "^2.0.9",
 		"rollup": "^2.39.0",
 		"rollup-plugin-styles": "^3.14.1",
+		"rollup-plugin-typescript2": "^0.30.0",
 		"style-loader": "^2.0.0",
 		"stylus": "^0.54.8",
 		"stylus-loader": "^4.3.3",
@@ -41,7 +40,7 @@
 	"scripts": {
 		"storybook": "rm -rf src/dzeio/**/*.js && start-storybook -p 6006",
 		"build-storybook": "build-storybook",
-		"build": "tsc && rollup --config",
+		"build": "rollup --config",
 		"prepublishOnly": "yarn build"
 	}
 }

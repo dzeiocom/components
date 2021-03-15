@@ -18,7 +18,7 @@ module.exports = {
 		});
 		newConfig.resolve.extensions.push('.ts', '.tsx');
 
-		// SCSS
+		// Stylus
 		newConfig.module.rules.push({
 		test: /\.styl$/,
 		use: ['style-loader', {
