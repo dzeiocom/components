@@ -7,9 +7,10 @@ import Container from './dzeio/Container'
 import Fieldset from './dzeio/Fieldset'
 import Footer from './dzeio/Footer'
 import GradientBackground from './dzeio/GradientBackground'
-import Input from './dzeio/Input'
 import Image from './dzeio/Image'
+import Input from './dzeio/Input'
 import Link from './dzeio/Link'
+import Loader from './dzeio/Loader'
 import Menu from './dzeio/Menu'
 import Navbar from './dzeio/Navbar'
 import NavbarSpace from './dzeio/Navbar/NavbarSpace'
@@ -40,6 +41,7 @@ export {
 	Image,
 	Input,
 	Link,
+	Loader,
 	Menu,
 	Navbar,
 	NavbarSpace,
