@@ -11,21 +11,15 @@ export interface Props {
 	title?: string
 	titleColSize?: number
 	subtitle?: string
-	delimiter?: boolean
 	titleClassName?: string
-	// image?: ImageProps
 }
 
 export default class BoxHeader extends React.Component<Props> {
 
 	public render = () => (
 		<>
-			{/* {this.props.image && (
-				<Image {...this.props.image} />
-			)} */}
 			<div className={buildClassName(
-				[css.header],
-				[css.delimiter, this.props.delimiter]
+				css.header
 			)}>
 				<Row>
 					<Col size={this.props.titleColSize as 1 || 8}>

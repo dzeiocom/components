@@ -19,7 +19,6 @@ import Popup from './dzeio/Popup'
 import Row from './dzeio/Row'
 import SidebarContainer from './dzeio/SidebarContainer'
 import Table from './dzeio/Table'
-import Tag from './dzeio/Tag'
 import Text from './dzeio/Text'
 import * as Util from './dzeio/Util'
 
@@ -50,7 +49,6 @@ export {
 	Row,
 	SidebarContainer,
 	Table,
-	Tag,
 	Text,
 	Util
 }

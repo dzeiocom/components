@@ -32,7 +32,6 @@ export default class Box extends React.Component<Props> {
 					title={this.props.title}
 					titleColSize={this.props.titleColSize}
 					subtitle={this.props.subtitle}
-					delimiter={this.props.delimiter}
 					titleClassName={this.props.titleClassName}
 				>
 					{this.props.headerButtons}

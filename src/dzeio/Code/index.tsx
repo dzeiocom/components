@@ -19,7 +19,7 @@ export default class Code extends React.Component<Props> {
 		}
 
 		return (
-			<pre>
+			<pre className={css.pre}>
 				{code}
 			</pre>
 		)

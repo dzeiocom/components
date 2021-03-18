@@ -1,21 +1,12 @@
 @import "../../config"
 
 .box
-	background white
+	background $foregroundLight
+	@media (prefers-color-scheme dark)
+		background $foregroundDark
 	border-radius 8px
-	box-shadow 0px 2px 4px 0px rgba(black, .33)
-	transition all $transition
 
 .outline
-	border 2px solid #E0E0E0
-	box-shadow none
-	transition border-color $transition
-
-	&:hover
-		border-color darken(@border[2], 20%)
-
-@media (prefers-color-scheme dark)
-	.box
-		background #202020
-	.outline
-		border-color #1F1F1F
+	border 2px solid $grayDark
+	@media (prefers-color-scheme dark)
+		border-color $grayLight

@@ -3,22 +3,27 @@ import NextLink from 'next/link'
 import { ExternalLink } from 'react-feather'
 
 import css from './Link.module.styl'
+import { buildClassName } from '../Util'
 
 interface Props {
 	href: string
 	children?: React.ReactNode
 	className?: string
-	forceNewTab?: boolean
+	/**
+	 * Override external detection system
+	 */
+	external?: boolean
 }
 
 export default class Link extends React.Component<Props> {
 
 	public render() {
-		if (!this.props.href.startsWith('/')) {
+		const external = this.props.external ?? !this.props.href.startsWith('/')
+		if (external) {
 			// external link
 			return (
 				<a
-					className={this.props.className}
+					className={buildClassName(this.props.className, css.link)}
 					href={this.props.href}
 					rel="noreferrer nofollow"
 					target="_blank"
@@ -30,9 +35,7 @@ export default class Link extends React.Component<Props> {
 		return (
 			<NextLink href={this.props.href}>
 				<a
-					className={this.props.className}
-					target={this.props.forceNewTab ? '_blank' : undefined}
-					rel={this.props.forceNewTab ? 'noreferrer nofollow' : undefined}
+					className={buildClassName(this.props.className, css.link)}
 				>{this.props.children}</a>
 			</NextLink>
 		)

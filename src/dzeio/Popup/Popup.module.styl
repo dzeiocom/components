@@ -6,22 +6,38 @@
 	width 100%
 	top 0
 	left 0
-	background rgba(black, .3)
+	background rgba($backgroundLight, .7)
+	@media (prefers-color-scheme dark)
+		background rgba($backgroundDark, .7)
 	cursor pointer
-	z-index 1000
+	z-index 200
+	animation fadeIn .3s ease-in-out 1 forwards
+
+@keyframes fadeIn
+	from
+		opacity 0
+	to
+		opacity 1
+
 
 .popupChild
 	cursor initial
-	z-index 1001
+	z-index 201
 
 	min-width 50%
+	animation popin .3s ease-in-out 1
 
 	@media (max-width $tablet)
 		min-width 70%
 
 	@media (max-width $mobile)
 		min-width 90%
-	// min-height 50vh
+
+@keyframes popin
+	from
+		margin-top 50px
+	to
+		margin-top 0
 
 .exit
 	cursor pointer
