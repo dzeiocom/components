@@ -1,10 +1,10 @@
 {
 	"name": "@dzeio/components",
-	"version": "0.3.1",
+	"version": "0.4.0",
 	"license": "MIT",
 	"main": "./index.js",
-	"module": "./module/index.js",
-	"types": "./module/index.d.ts",
+	"module": "./src/index.js",
+	"types": "./src/index.d.ts",
 	"devDependencies": {
 		"@babel/core": "^7.12.16",
 		"@babel/preset-env": "^7.12.16",
@@ -40,7 +40,7 @@
 	"scripts": {
 		"storybook": "rm -rf src/dzeio/**/*.js && start-storybook -p 6006",
 		"build-storybook": "build-storybook",
-		"build": "rollup --config",
+		"build": "tsc && rollup --config",
 		"prepublishOnly": "yarn build"
 	}
 }
