@@ -39,6 +39,7 @@
 
 		&.active
 			background $mainGradient
+			color $textOnMain
 
 	.userSpace
 
@@ -119,6 +120,7 @@
 
 				&.active
 					background $mainGradient
+					color $textOnMain
 
 	.userSpace
 		cursor pointer
@@ -167,12 +169,13 @@
 
 	.header
 		min-height 70px
-		> div
-			padding 0
-			&:first-child
-				padding-left 16px
-		p > div
+		padding 0
+		margin 0
+		> div p > div
+		> div:first-child
 			padding 16px
+		> div:last-child
+			padding 0
 
 	hr
 		margin 0
@@ -198,7 +201,7 @@
 					background-image $mainGradient
 				&:hover
 				&.active
-					color white
+					color $textOnMain
 					&::before
 						opacity 1
 				svg
@@ -213,9 +216,7 @@
 		margin 0
 		padding 0
 
-.userMenu
-		padding-bottom 16px
-		a
+.userMenu a
 			padding 16px 0
 
 

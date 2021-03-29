@@ -3,14 +3,12 @@
 .row
 	display flex
 	flex-wrap wrap
+	margin (0 - $gapSize) 0 0 (0 - $gapSize)
+	padding $gapSize
 
-	&:not(.nomargin)
-		margin (0 - $gapSize) 0 0
-		padding 0 $gapSize * 2 0 $gapSize
-
-		.row:not(.nomargin)
-			padding 0
-			margin (0 - $gapSize) 0 0 (0 - $gapSize)
+	&.nomargin
+	.row
+		padding 0
 
 .nowrap
 	flex-wrap nowrap

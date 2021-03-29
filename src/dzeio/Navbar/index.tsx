@@ -30,7 +30,7 @@ interface Props {
 	}
 	items: Array<{
 		path: string
-		icon: FC
+		icon?: FC
 		name: string
 	}>
 	mobileMenu?: () => void
@@ -122,7 +122,7 @@ export default class Navbar extends React.Component<Props, State> {
 	public render = () => (
 		<>
 			<nav className={buildClassName(css[this.getType()], [css.short, this.state.short && !this.props.mobileMenu], [css.mobile, this.props.mobileMenu])}>
-				<Row nowrap nomargin={this.getType() === 'sidebar'} className={css.header} align="center">
+				<Row nowrap className={css.header} align="center">
 					<Col className={css.imgContainer}><Link href="/"><Image {...this.props.logo} height={34} width={this.props.logo.width*34/this.props.logo.height} /></Link></Col>
 					{this.getType() === 'sidebar' && (
 						<Col nogrow><Text><div onClick={this.onSidebarButton}>
@@ -141,7 +141,7 @@ export default class Navbar extends React.Component<Props, State> {
 					{!this.state.isMobile && this.props.items.map((item) => (
 						<li key={item.path}><Link noStyle href={item.path}><a>
 							<Text className={buildClassName([css.active, this.state.path?.startsWith(item.path)])}>
-								{this.getType() === 'sidebar' && (
+								{this.getType() === 'sidebar' && item.icon && (
 									<item.icon />
 								)}
 								<span>{item.name}</span>
@@ -156,8 +156,6 @@ export default class Navbar extends React.Component<Props, State> {
 						<div onClick={() => this.setState({menuActive: !this.state.menuActive})} className={css.userSpace}>
 							<Text>
 								<Menu size={38} className={css.mainGradient} />
-								{/* {this.props.user.name} */}
-								{/* <ChevronDown className={buildClassName([css.menuActive, this.state.menuActive])} /> */}
 							</Text>
 						</div>
 					</div>
@@ -179,7 +177,7 @@ export default class Navbar extends React.Component<Props, State> {
 							</div>
 						</div>
 						<div className={buildClassName(css.userMenu, [css.menuActive, !this.state.isMobile && this.state.menuActive])}>
-							<Row nomargin>
+							<Row>
 								{this.props.user.menu?.informations && (
 									<Col>{this.props.user.menu?.informations}</Col>
 								)}
