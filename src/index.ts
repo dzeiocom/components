@@ -13,7 +13,6 @@ import Link from './dzeio/Link'
 import Loader from './dzeio/Loader'
 import Menu from './dzeio/Menu'
 import Navbar from './dzeio/Navbar'
-import NavbarSpace from './dzeio/Navbar/NavbarSpace'
 import Overflow from './dzeio/Overflow'
 import Popup from './dzeio/Popup'
 import Row from './dzeio/Row'
@@ -38,7 +37,6 @@ export {
 	Loader,
 	Menu,
 	Navbar,
-	NavbarSpace,
 	Overflow,
 	Popup,
 	Row,
