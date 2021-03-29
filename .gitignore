@@ -1,6 +1,9 @@
 module/
 node_modules/
+*.mjs
 *.js
+*.d.ts
+!src/stylus.d.ts
 !.storybook/*.js
 style.css
 yarn-error.log

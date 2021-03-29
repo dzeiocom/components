@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
 	"stories": [
-		"../src/dzeio/**/*.stories.@(js|jsx|ts|tsx)",
+		"../src/dzeio/**/*.stories.@(ts|tsx)",
 	],
 	"addons": [
 		"@storybook/addon-essentials"

@@ -3,7 +3,7 @@ import Row from '../Row'
 
 import css from './DebugCols.module.styl'
 
-import Col from '.'
+import Col from '../Col'
 
 enum Breakpoint {
 	MOBILE,

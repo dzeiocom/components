@@ -1,4 +1,4 @@
-import Box, { BoxBody, BoxHeader, BoxWrapper } from './dzeio/Box'
+import Box from './dzeio/Box'
 import Button from './dzeio/Button'
 import Checkbox from './dzeio/Checkbox'
 import Code from './dzeio/Code'
@@ -22,13 +22,8 @@ import Table from './dzeio/Table'
 import Text from './dzeio/Text'
 import * as Util from './dzeio/Util'
 
-import './dzeio/general.styl'
-
 export {
 	Box,
-	BoxBody,
-	BoxHeader,
-	BoxWrapper,
 	Button,
 	Checkbox,
 	Code,

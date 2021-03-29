@@ -52,3 +52,9 @@ $success = $successLight
 $danger = $errorLight
 $warning = $warningLight
 $darkBackground = $backgroundDark
+
+
+// See https://github.com/stylus/stylus/issues/1872#issuecomment-86553717
+use('stylusUtils.js')
+
+@import '../../../../../../theme' if file-exists('../../../../../../theme.styl')

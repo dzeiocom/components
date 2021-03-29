@@ -1,6 +1,6 @@
 .storybook/
 node_modules/
-src/
+*.stories.js
 .gitattributes
 .gitignore
 .npmignore
