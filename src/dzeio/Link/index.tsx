@@ -12,6 +12,7 @@ interface Props {
 	/**
 	 * Override external detection system
 	 */
+	noStyle?: boolean
 	external?: boolean
 }
 
@@ -23,7 +24,7 @@ export default class Link extends React.Component<Props> {
 			// external link
 			return (
 				<a
-					className={buildClassName(this.props.className, css.link)}
+					className={buildClassName(this.props.className, [css.link, !this.props.noStyle])}
 					href={this.props.href}
 					rel="noreferrer nofollow"
 					target="_blank"
@@ -35,7 +36,7 @@ export default class Link extends React.Component<Props> {
 		return (
 			<NextLink href={this.props.href}>
 				<a
-					className={buildClassName(this.props.className, css.link)}
+					className={buildClassName(this.props.className, [css.link, !this.props.noStyle])}
 				>{this.props.children}</a>
 			</NextLink>
 		)
