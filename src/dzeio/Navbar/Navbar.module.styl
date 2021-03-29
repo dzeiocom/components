@@ -1,11 +1,68 @@
 @import '../config'
 
-.body
-	margin-left 300px
-	transition margin-left $transition
+// $transition = 10s linear
+// $transitionTime = 10s
+// $transitionFunction = linear
+.body-sidebar
+		margin-left 300px
+		transition margin-left $transition
+		&.short
+			margin-left 56px
 
-	&.short
-		margin-left 56px
+.body-navbar
+		margin-top 70px
+
+.navbar
+	background $foregroundLight
+	@media (prefers-color-scheme dark)
+		background $foregroundDark
+	position fixed
+	left 0
+	top 0
+	height 70px
+	width 100%
+	z-index 100
+	display flex
+	padding 16px
+
+	> ul, .userSpaceParent ul
+		display flex
+
+		li:first-child p
+			margin-left 0
+
+	> ul p, .userSpaceParent > ul p
+		padding 8px
+
+		margin-left 16px
+		border-radius 4px
+
+		&.active
+			background $mainGradient
+
+	.userSpace
+
+		height 100%
+		display flex
+		align-items center
+		cursor pointer
+		user-select none
+		svg
+			margin-left 16px
+			vertical-align top
+
+	.userMenu
+		position fixed
+		top 70px
+		right 0
+		padding 16px
+		border-bottom-left-radius 4px
+		transform translateX(100%)
+		background inherit
+		transition transform $transition
+		&.menuActive
+			transform translateX(0%)
+
 
 .sidebar
 	background $foregroundLight
@@ -19,6 +76,11 @@
 	z-index 100
 	display flex
 	flex-direction column
+
+	&.mobile
+		width 100%
+		z-index 101
+
 	&
 		transition width $transition
 	.header
@@ -33,11 +95,30 @@
 	> ul span
 		width calc(100% - 40px)
 		max-width 100%
+	.header p
+		cursor pointer
 
 	.userSpaceParent
 		background $backgroundLight
 		@media (prefers-color-scheme dark)
 			background $backgroundDark
+
+		> ul, .userSpaceParent ul
+				display flex
+				padding 16px
+				justify-content center
+
+				li:first-child p
+					margin-left 0
+
+			> ul p, .userSpaceParent > ul p
+				padding 8px
+
+				margin-left 16px
+				border-radius 4px
+
+				&.active
+					background $mainGradient
 
 	.userSpace
 		cursor pointer
@@ -45,9 +126,10 @@
 		padding 16px
 		width 100%
 		max-width 100%
-		min-height 56px
+		min-height 86px
 		p
 			overflow hidden
+			white-space nowrap
 		p:last-child:not(:first-child)
 			margin-top 8px
 			font-style italic
@@ -65,11 +147,6 @@
 		max-height 0px
 		transition all $transition
 
-		ul
-			padding-bottom 16px
-			a
-				padding 16px 0
-
 		&.menuActive
 			// TODO find better way to animate this shit
 			max-height 100%
@@ -82,26 +159,23 @@
 		.userSpace
 		> ul span
 			width 0
-			padding 0
+			padding-left 0
+			padding-right 0
 			margin 0
 			max-width 0
+
 
 	.header
 		min-height 70px
 		> div
 			padding 0
 			&:first-child
-				padding 16px
+				padding-left 16px
 		p > div
 			padding 16px
 
 	hr
 		margin 0
-
-	ul
-		list-style none
-		margin 0
-		padding 0
 
 	> ul li
 			width 100%
@@ -109,16 +183,48 @@
 				padding 16px 0
 				display flex
 				align-items center
-				// TODO Currently Gradient aren't supported by Transition
-				// transition-property background-image, color
-				// transition-duration $transitionTime
-				// transition-timing-function $transitionFunction
+				z-index 111
+				position relative
+
+				// Temporary fix the transition for linear-gradient
+				&::before
+					transition opacity $transition
+					opacity 0
+					width 100%
+					height 100%
+					content " "
+					position absolute
+					z-index -1
+					background-image $mainGradient
 				&:hover
 				&.active
-					background-image $mainGradient
 					color white
+					&::before
+						opacity 1
 				svg
 					margin-left 16px
 				span
 					padding-left 16px
 					height inherit
+
+.navbar, .sidebar
+	ul
+		list-style none
+		margin 0
+		padding 0
+
+.userMenu
+		padding-bottom 16px
+		a
+			padding 16px 0
+
+
+.mobileMenu
+	opacity 0
+	transition opacity $transition
+	&.shown
+		opacity 1
+
+.mainGradient
+	//WIP
+	fill $mainGradient

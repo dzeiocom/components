@@ -2,7 +2,7 @@ import Router from 'next/router'
 
 import Image, { ImageProps } from 'next/image'
 import React, { FC } from 'react'
-import { ChevronDown, ChevronsRight, X } from 'react-feather'
+import { ChevronDown, ChevronsRight, Menu, X } from 'react-feather'
 import Text from '../Text'
 import Col from '../Col'
 import Row from '../Row'
@@ -13,7 +13,9 @@ import css from './Navbar.module.styl'
 
 interface Props {
 	type: 'navbar' | 'sidebar'
-	logo: ImageProps
+	logo: ImageProps & {height: number, width: number}
+	loginUrl?: string
+	registerUrl?: string
 	user?: {
 		name: string
 		description?: string
@@ -31,11 +33,13 @@ interface Props {
 		icon: FC
 		name: string
 	}>
+	mobileMenu?: () => void
 }
 
 interface State {
 	path?: string
 	short: boolean
+	isMobile: boolean
 	menuActive: boolean
 }
 
@@ -43,86 +47,182 @@ export default class Navbar extends React.Component<Props, State> {
 
 	public state: State = {
 		short: false,
+		isMobile: false,
 		menuActive: false
 	}
 
 	public componentDidMount() {
-		this.setState({path: Router.asPath})
-		Router.events.on('routeChangeComplete', () => {
-			this.setState({path: Router.asPath})
+		this.setState({
+			path: Router.asPath,
+			menuActive: !!this.props.mobileMenu
 		})
-		document.body.classList.add(css.body)
-		if (this.state.short) {
-			document.body.classList.add(css.short)
+		Router.events.on('routeChangeComplete', () => {
+			this.setState({path: Router.asPath, menuActive: false})
+		})
+		Router.events.on('routeChangeError', () => {
+			this.setState({path: Router.asPath, menuActive: false})
+		})
+		if (!this.props.mobileMenu) {
+			window.addEventListener('resize', this.onResize)
+			this.onResize()
+		}
+	}
+
+	public onResize = () => {
+		const isMobile = window.innerWidth <= 768
+		if (this.state.isMobile !== isMobile) {
+			this.setState({isMobile})
 		}
 	}
 
 	public componentDidUpdate() {
-		if (this.state.short) {
-			document.body.classList.add(css.short)
-		} else {
-			document.body.classList.remove(css.short)
-
+		if (!this.props.mobileMenu) {
+			if (this.state.short) {
+				document.body.classList.add(css.short)
+			} else {
+				document.body.classList.remove(css.short)
+			}
+			if (this.getType() === 'sidebar') {
+				document.body.classList.add(css['body-sidebar'])
+				document.body.classList.remove(css['body-navbar'])
+			} else {
+				document.body.classList.remove(css['body-sidebar'])
+				document.body.classList.add(css['body-navbar'])
+			}
 		}
+
 	}
 
 	public componentWillUnmount() {
-		document.body.classList.remove(css.body, css.short)
+		if (!this.props.mobileMenu) {
+			document.body.classList.remove(css.short, css[`body-${this.getType()}`])
+			window.removeEventListener('resize', this.onResize)
+		}
+	}
+
+	public onSidebarButton = () => {
+		if (!this.props.mobileMenu) {
+			this.setState({short: !this.state.short, menuActive: false})
+		} else {
+			this.props.mobileMenu()
+		}
+	}
+
+	public menuCloseCallback = () => {
+		this.setState({menuActive: false})
+	}
+
+	public getType(): 'sidebar' | 'navbar' {
+		if (this.props.mobileMenu) {
+			return 'sidebar'
+		}
+		return this.state.isMobile ? 'navbar' : this.props.type
 	}
 
 	public render = () => (
-		<nav className={buildClassName(css.sidebar, [css.short, this.state.short])}>
-			<Row nomargin className={css.header} align="center">
-				<Col className={css.imgContainer}><Link href="/"><Image {...this.props.logo} /></Link></Col>
-				<Col nogrow><Text><div onClick={() => this.setState({short: !this.state.short, menuActive: false})}>
-					{this.state.short ? (
-						<ChevronsRight size={30} />
-					) : (
-						<X size={30} />
+		<>
+			<nav className={buildClassName(css[this.getType()], [css.short, this.state.short && !this.props.mobileMenu], [css.mobile, this.props.mobileMenu])}>
+				<Row nowrap nomargin={this.getType() === 'sidebar'} className={css.header} align="center">
+					<Col className={css.imgContainer}><Link href="/"><Image {...this.props.logo} height={34} width={this.props.logo.width*34/this.props.logo.height} /></Link></Col>
+					{this.getType() === 'sidebar' && (
+						<Col nogrow><Text><div onClick={this.onSidebarButton}>
+							{this.state.short ? (
+								<ChevronsRight size={30} />
+							) : (
+								<X size={30} />
+							)}
+						</div></Text></Col>
 					)}
-				</div></Text></Col>
-			</Row>
-			<hr/>
-			<ul>
-				{this.props.items.map((item) => (
-					<li key={item.path}><Link href={item.path}><a>
-						<Text className={buildClassName([css.active, this.state.path?.startsWith(item.path)])} >
-							<item.icon />
-							<span>{item.name}</span>
-						</Text>
-					</a></Link></li>
-				))}
-			</ul>
-			<div style={{flex: 1}}></div>
-			{/* Spacer */}
-			{this.props.user && (
-				<>
+				</Row>
+				{this.getType() === 'sidebar' && (
+					<hr/>
+				)}
+				<ul>
+					{!this.state.isMobile && this.props.items.map((item) => (
+						<li key={item.path}><Link noStyle href={item.path}><a>
+							<Text className={buildClassName([css.active, this.state.path?.startsWith(item.path)])}>
+								{this.getType() === 'sidebar' && (
+									<item.icon />
+								)}
+								<span>{item.name}</span>
+							</Text>
+						</a></Link></li>
+					))}
+				</ul>
+				<div style={{flex: 1}}></div>
+				{/* Spacer */}
+				{this.state.isMobile && (
 					<div className={css.userSpaceParent}>
-						<hr/>
 						<div onClick={() => this.setState({menuActive: !this.state.menuActive})} className={css.userSpace}>
 							<Text>
-								{this.props.user.name}
-								<ChevronDown className={buildClassName([css.menuActive, this.state.menuActive])} />
+								<Menu size={38} className={css.mainGradient} />
+								{/* {this.props.user.name} */}
+								{/* <ChevronDown className={buildClassName([css.menuActive, this.state.menuActive])} /> */}
 							</Text>
-							{this.props.user.description && (
-								<Text>{this.props.user.description}</Text>
-							)}
 						</div>
 					</div>
-					<div className={buildClassName(css.userMenu, [css.menuActive, this.state.menuActive])}>
-						<Row nomargin>
-							<Col></Col>
-							<Col>
-								<ul>
-									{this.props.user.menu?.links.map((l) => (
-										<li key={l.path}><Text><Link href={l.path}>{l.name}</Link></Text></li>
-									))}
-								</ul>
-							</Col>
-						</Row>
+				)}
+				{!this.state.isMobile && this.props.user ? (
+					<>
+						<div className={css.userSpaceParent}>
+							{this.getType() === 'sidebar' && (
+								<hr/>
+							)}
+							<div onClick={() => this.setState({menuActive: !this.state.menuActive})} className={css.userSpace}>
+								<Text>
+									{this.props.user.name}
+									<ChevronDown className={buildClassName([css.menuActive, this.state.menuActive])} />
+								</Text>
+								{this.getType() === 'sidebar' && this.props.user.description && (
+									<Text>{this.props.user.description}</Text>
+								)}
+							</div>
+						</div>
+						<div className={buildClassName(css.userMenu, [css.menuActive, !this.state.isMobile && this.state.menuActive])}>
+							<Row nomargin>
+								{this.props.user.menu?.informations && (
+									<Col>{this.props.user.menu?.informations}</Col>
+								)}
+								<Col>
+									<ul>
+										{this.props.user.menu?.links.map((l) => (
+											<li key={l.path}><Text><Link noStyle href={l.path}>{l.name}</Link></Text></li>
+										))}
+									</ul>
+								</Col>
+							</Row>
+						</div>
+					</>
+				) : !this.state.isMobile ? (
+					<div className={css.userSpaceParent}>
+						{this.getType() === 'sidebar' && (
+							<hr/>
+						)}
+						<ul>
+							{this.props.registerUrl && (
+								<li><Link noStyle href={this.props.registerUrl}><a>
+									<Text className={buildClassName(css.active)}>
+										<span>Register</span>
+									</Text>
+								</a></Link></li>
+							)}
+							{this.props.loginUrl && (
+								<li><Link noStyle href={this.props.loginUrl}><a>
+									<Text>
+										<span>Login</span>
+									</Text>
+								</a></Link></li>
+							)}
+						</ul>
 					</div>
-				</>
+				) : undefined}
+			</nav>
+
+			{!this.props.mobileMenu && this.state.isMobile && (
+				<div className={buildClassName(css.mobileMenu, [css.shown, this.state.menuActive])}>
+					<Navbar {...this.props} type="sidebar" mobileMenu={this.menuCloseCallback} />
+				</div>
 			)}
-		</nav>
+		</>
 	)
 }
