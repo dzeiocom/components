@@ -4,6 +4,5 @@ node_modules/
 .gitattributes
 .gitignore
 .npmignore
-tsconfig.json
 yarn.lock
 yarn-error.log
