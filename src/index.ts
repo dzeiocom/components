@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2021
+ *
+ * @summary DZEIO Component Library
+ */
+
 import Box from './dzeio/Box'
 import Button from './dzeio/Button'
 import Checkbox from './dzeio/Checkbox'
