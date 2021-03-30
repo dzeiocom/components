@@ -1,9 +1,9 @@
 {
 	"name": "@dzeio/components",
-	"version": "0.5.4",
+	"version": "0.7.0",
 	"license": "MIT",
-	"main": "./src/index.mjs",
-	"types": "./src/index.d.ts",
+	"main": "./index.mjs",
+	"types": "./types/index.d.ts",
 	"devDependencies": {
 		"@babel/core": "^7.12.16",
 		"@babel/preset-env": "^7.12.16",
@@ -24,18 +24,27 @@
 		"stylus": "^0.54.8",
 		"stylus-loader": "^4.3.3",
 		"ts-loader": "^8.0.17",
-		"typescript": "^4.1.3",
+		"typescript": "^4.2.3",
 		"webpack": "^4.44.2"
 	},
 	"peerDependencies": {
 		"next": "^10.0.5",
 		"react": "^17.0.1",
 		"react-dom": "^17.0.1",
-		"react-feather": "^2.0.9"
+		"react-feather": "^2.0.9",
+		"stylus": "^0.54.8",
+		"typescript": "^4.2.3"
 	},
 	"scripts": {
-		"storybook": "rm -rf src/dzeio/**/*.js && start-storybook -p 6006",
-		"build": "tsc && mv src/index.js src/index.mjs",
-		"prepublishOnly": "yarn build"
+		"dev": "rm -rf src/dzeio/**/*.js && start-storybook -p 6006",
+		"build": "rollup --config",
+		"prepublishOnly": "yarn build",
+		"postinstall": "rollup --config"
+	},
+	"dependencies": {
+		"rollup": "^2.44.0",
+		"rollup-plugin-styles": "^3.14.1",
+		"rollup-plugin-typescript2": "^0.30.0",
+		"tslib": "^2.1.0"
 	}
 }

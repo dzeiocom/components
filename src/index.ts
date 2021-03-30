@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2021
+ *
+ * @summary DZEIO Component Library
+ */
+
 import Box from './dzeio/Box'
 import Button from './dzeio/Button'
 import Checkbox from './dzeio/Checkbox'
@@ -16,7 +22,6 @@ import Navbar from './dzeio/Navbar'
 import Overflow from './dzeio/Overflow'
 import Popup from './dzeio/Popup'
 import Row from './dzeio/Row'
-import SidebarContainer from './dzeio/SidebarContainer'
 import Table from './dzeio/Table'
 import Text from './dzeio/Text'
 import * as Util from './dzeio/Util'
@@ -40,7 +45,6 @@ export {
 	Overflow,
 	Popup,
 	Row,
-	SidebarContainer,
 	Table,
 	Text,
 	Util

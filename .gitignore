@@ -4,6 +4,8 @@ node_modules/
 *.js
 !src/dzeio/stylusUtils.js
 *.d.ts
+types/
+!rollup.config.js
 !src/stylus.d.ts
 !.storybook/*.js
 style.css

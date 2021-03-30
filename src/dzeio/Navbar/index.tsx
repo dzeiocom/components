@@ -12,27 +12,64 @@ import { buildClassName } from '../Util'
 import css from './Navbar.module.styl'
 
 interface Props {
+	/**
+	 * Type of Navbar
+	 * _note: when in mobile it is not listened_
+	 */
 	type: 'navbar' | 'sidebar'
+
+	/**
+	 * Logo to display
+	 */
 	logo: ImageProps & {height: number, width: number}
+	/**
+	 * Login URL
+	 */
 	loginUrl?: string
+	/**
+	 * Login URL
+	 */
 	registerUrl?: string
+	/**
+	 * User Informations if loggedin
+	 */
 	user?: {
+		/**
+		 * Username
+		 */
 		name: string
+		/**
+		 * User Short description
+		 */
 		description?: string
-		settings?: string
+		/**
+		 * User Menu
+		 */
 		menu?: {
+			/**
+			 * Menu links
+			 */
 			links: Array<{
 				path: string
 				name: string
 			}>
+			/**
+			 * Custom informations shown next to the links
+			 */
 			informations?: JSX.Element
 		}
 	}
+	/**
+	 * Links to display
+	 */
 	items: Array<{
 		path: string
 		icon?: FC
 		name: string
 	}>
+	/**
+	 * Internal Use don't use it !
+	 */
 	mobileMenu?: () => void
 }
 
@@ -43,6 +80,10 @@ interface State {
 	menuActive: boolean
 }
 
+/**
+ * Navbar/Sidebar Component
+ * @version 1.0.0
+ */
 export default class Navbar extends React.Component<Props, State> {
 
 	public state: State = {
@@ -123,7 +164,11 @@ export default class Navbar extends React.Component<Props, State> {
 		<>
 			<nav className={buildClassName(css[this.getType()], [css.short, this.state.short && !this.props.mobileMenu], [css.mobile, this.props.mobileMenu])}>
 				<Row nowrap className={css.header} align="center">
-					<Col className={css.imgContainer}><Link href="/"><Image {...this.props.logo} height={34} width={this.props.logo.width*34/this.props.logo.height} /></Link></Col>
+					<Col className={css.imgContainer}>
+						<Link href="/">
+							<Image {...this.props.logo} height={34} width={this.props.logo.width*34/this.props.logo.height} />
+						</Link>
+					</Col>
 					{this.getType() === 'sidebar' && (
 						<Col nogrow><Text><div onClick={this.onSidebarButton}>
 							{this.state.short ? (
