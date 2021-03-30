@@ -6,13 +6,18 @@ import css from './Link.module.styl'
 import { buildClassName } from '../Util'
 
 interface Props {
+	linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>
 	href: string
 	children?: React.ReactNode
 	className?: string
 	/**
-	 * Override external detection system
+	 * Remove styling
 	 */
 	noStyle?: boolean
+
+	/**
+	 * Override external detection system
+	 */
 	external?: boolean
 }
 
@@ -24,6 +29,7 @@ export default class Link extends React.Component<Props> {
 			// external link
 			return (
 				<a
+					{...this.props.linkProps}
 					className={buildClassName(this.props.className, [css.link, !this.props.noStyle])}
 					href={this.props.href}
 					rel="noreferrer nofollow"
@@ -36,6 +42,7 @@ export default class Link extends React.Component<Props> {
 		return (
 			<NextLink href={this.props.href}>
 				<a
+					{...this.props.linkProps}
 					className={buildClassName(this.props.className, [css.link, !this.props.noStyle])}
 				>{this.props.children}</a>
 			</NextLink>
