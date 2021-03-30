@@ -1,6 +1,6 @@
 {
 	"name": "@dzeio/components",
-	"version": "0.6.1",
+	"version": "0.6.2",
 	"license": "MIT",
 	"main": "./index.mjs",
 	"types": "./types/index.d.ts",
