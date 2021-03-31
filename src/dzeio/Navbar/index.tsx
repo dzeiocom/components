@@ -21,7 +21,7 @@ interface Props {
 	/**
 	 * Logo to display
 	 */
-	logo: ImageProps & {height: number, width: number}
+	logo?: ImageProps & {height: number, width: number}
 	/**
 	 * Login URL
 	 */
@@ -82,7 +82,7 @@ interface State {
 
 /**
  * Navbar/Sidebar Component
- * @version 1.0.0
+ * @version 1.0.1
  */
 export default class Navbar extends React.Component<Props, State> {
 
@@ -164,11 +164,13 @@ export default class Navbar extends React.Component<Props, State> {
 		<>
 			<nav className={buildClassName(css[this.getType()], [css.short, this.state.short && !this.props.mobileMenu], [css.mobile, this.props.mobileMenu])}>
 				<Row nowrap className={css.header} align="center">
-					<Col className={css.imgContainer}>
-						<Link href="/">
-							<Image {...this.props.logo} height={34} width={this.props.logo.width*34/this.props.logo.height} />
-						</Link>
-					</Col>
+					{this.props.logo && (
+						<Col className={css.imgContainer}>
+							<Link href="/">
+								<Image {...this.props.logo} height={34} width={this.props.logo.width*34/this.props.logo.height} />
+							</Link>
+						</Col>
+					)}
 					{this.getType() === 'sidebar' && (
 						<Col nogrow><Text><div onClick={this.onSidebarButton}>
 							{this.state.short ? (
