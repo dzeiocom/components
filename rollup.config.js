@@ -12,7 +12,9 @@ export default [
 				url: false,
 				autoModules: true,
 				mode: 'extract',
-
+				modules: {
+					generateScopedName: '[hash:8]'
+				}
 			}),
 			typescript({useTsconfigDeclarationDir: true}), // so Rollup can convert TypeScript to JavaScript
 		],
