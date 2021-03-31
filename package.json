@@ -2,7 +2,7 @@
 	"name": "@dzeio/components",
 	"version": "0.7.1",
 	"license": "MIT",
-	"main": "./index.mjs",
+	"main": "./index.js",
 	"types": "./types/index.d.ts",
 	"devDependencies": {
 		"@babel/core": "^7.12.16",
