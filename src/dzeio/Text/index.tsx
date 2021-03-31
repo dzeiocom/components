@@ -12,7 +12,6 @@ interface Props {
 
 export default class Text extends React.Component<Props> {
 
-
 	public render() {
 		const classes = buildClassName(
 			css.text,
@@ -23,16 +22,10 @@ export default class Text extends React.Component<Props> {
 			this.props.className
 		)
 
-		switch (this.props.type || 'p') {
-		case 'h1': return (<h1 className={classes}>{this.props.children}</h1>)
-		case 'h2': return (<h2 className={classes}>{this.props.children}</h2>)
-		case 'h3': return (<h3 className={classes}>{this.props.children}</h3>)
-		case 'h4': return (<h4 className={classes}>{this.props.children}</h4>)
-		case 'h5': return (<h5 className={classes}>{this.props.children}</h5>)
-		case 'h6': return (<h6 className={classes}>{this.props.children}</h6>)
-		case 'em': return (<p className={classes}><em>{this.props.children}</em></p>)
-		case 'span': return (<span className={classes}>{this.props.children}</span>)
-		default: return (<p className={classes}>{this.props.children}</p>)
+		if (this.props.type === 'em') {
+			return (<p className={classes}><em>{this.props.children}</em></p>)
 		}
+
+		return React.createElement(this.props.type || 'p', {className: classes})
 	}
 }

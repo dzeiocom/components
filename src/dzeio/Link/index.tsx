@@ -24,7 +24,7 @@ interface Props {
 export default class Link extends React.Component<Props> {
 
 	public render() {
-		const external = this.props.external ?? !this.props.href.startsWith('/')
+		const external = this.props.external ?? this.props.href.startsWith('http')
 		if (external) {
 			// external link
 			return (
