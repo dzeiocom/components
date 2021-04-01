@@ -4,6 +4,8 @@
  * @summary DZEIO Component Library
  */
 
+import './dzeio/general.styl'
+
 import Box from './dzeio/Box'
 import Button from './dzeio/Button'
 import Checkbox from './dzeio/Checkbox'

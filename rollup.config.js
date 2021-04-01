@@ -12,14 +12,16 @@ export default [
 				url: false,
 				autoModules: true,
 				mode: 'extract',
-
+				modules: {
+					generateScopedName: '[local][hash:5]'
+				}
 			}),
 			typescript({useTsconfigDeclarationDir: true}), // so Rollup can convert TypeScript to JavaScript
 		],
 		output: [
 			{
 				file: pkg.main,
-				format: 'es',
+				format: 'cjs',
 				assetFileNames: 'style.css'
 			}
 		]
