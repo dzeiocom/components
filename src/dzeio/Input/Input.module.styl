@@ -6,7 +6,7 @@
 	max-width 100%
 	display inline-block
 
-	+ .parent
+	&:not(.block) + .parent:not(.block)
 		margin-left 16px
 
 	label
