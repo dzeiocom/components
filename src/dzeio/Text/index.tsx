@@ -26,6 +26,6 @@ export default class Text extends React.Component<Props> {
 			return (<p className={classes}><em>{this.props.children}</em></p>)
 		}
 
-		return React.createElement(this.props.type || 'p', {className: classes})
+		return React.createElement(this.props.type || 'p', {className: classes, children: this.props.children})
 	}
 }
