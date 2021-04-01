@@ -37,9 +37,11 @@ export default class Box extends React.Component<Props> {
 					{this.props.headerButtons}
 				</BoxHeader>
 			)}
-			<BoxBody noPadding={this.props.noPadding}>
-				{this.props.children}
-			</BoxBody>
+			{this.props.children && (
+				<BoxBody noPadding={this.props.noPadding}>
+					{this.props.children}
+				</BoxBody>
+			)}
 		</BoxWrapper>
 	)
 }
