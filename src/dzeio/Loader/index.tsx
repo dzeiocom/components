@@ -4,9 +4,22 @@ import { buildClassName } from '../Util'
 import css from './Loader.module.styl'
 
 interface Props {
+	/**
+	 * The new Percentage (if you calculate it yourself)
+	 */
 	percent?: number
+
+	/**
+	 * Auto random loader
+	 */
 	auto?: {
+		/**
+		 * the minimum and maximum interval between two increment
+		 */
 		interval: [number, number]
+		/**
+		 * the minimum and maximum incrementation (MUST be an integer)
+		 */
 		increment: [number, number]
 	}
 }
@@ -15,6 +28,11 @@ interface State {
 	percent?: number
 }
 
+/**
+ * Display a simple loading animation at the top of the page
+ * 
+ * @version 1.0.0
+ */
 export default class Loader extends React.Component<Props, State> {
 
 	public state: State = {}
