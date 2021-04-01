@@ -26,5 +26,5 @@ Basic.args = {
 			}]
 		}
 	},
-	logo: {src: '/assets/logo.svg', width: 90, height: 38}
+	logo: {src: '/90-38.svg', width: 90, height: 38}
 }
