@@ -82,7 +82,7 @@ interface State {
 
 /**
  * Navbar/Sidebar Component
- * @version 1.0.1
+ * @version 1.0.2
  */
 export default class Navbar extends React.Component<Props, State> {
 
@@ -224,7 +224,7 @@ export default class Navbar extends React.Component<Props, State> {
 							</div>
 						</div>
 						<div className={buildClassName(css.userMenu, [css.menuActive, !this.state.isMobile && this.state.menuActive])}>
-							<Row>
+							<Row nomargin={this.getType() === 'navbar'}>
 								{this.props.user.menu?.informations && (
 									<Col>{this.props.user.menu?.informations}</Col>
 								)}
