@@ -7,38 +7,32 @@ import css from './Checkbox.module.styl'
 import Text from '../Text'
 
 interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-	label?: string
-	id: string
-	type?: undefined
-	radio?: boolean
-	switch?: boolean
-	color?: ColorType
+	label: string
+	type?: 'checkbox' | 'radio' | 'switch'
 }
 
 export default class Checkbox extends React.Component<Props> {
 
 	public render() {
-		const props: Props = Object.assign({}, this.props)
+		const props: Partial<Props> = Object.assign({}, this.props)
 		delete props.label
 		delete props.type
-		delete props.color
-		delete props.switch
-		delete props.radio
 
-		const realType = this.props.radio ? 'radio' : 'checkbox'
+		const realType = this.props.type ?? 'checkbox'
 
 		return (
-			<label htmlFor={this.props.id} className={buildClassName(
+			<label htmlFor={this.props.id ?? this.props.label} className={buildClassName(
 				[css.label],
 				[css.radio, realType === 'radio'],
-				[css.switch, this.props.switch],
+				[css.switch, realType === 'switch'],
 				[css[this.props.color as string], this.props.color]
 			)}>
 				<input {...props}
-					type={realType}
+					id={this.props.id ?? this.props.label}
+					type={realType === 'switch' ? 'checkbox' : realType}
 				/>
 				<span>
-					{realType === 'checkbox' && ! this.props.switch && (
+					{realType === 'checkbox' && (
 						<Check strokeWidth={4} size={16}/>
 					)}
 				</span>
