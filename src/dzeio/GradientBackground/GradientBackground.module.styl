@@ -1,6 +1,6 @@
 @import "../config"
 
-$transparent = 15%
+$percent = 15%
 
 .back
 	transition all $transition
@@ -10,21 +10,22 @@ $transparent = 15%
 		min-height 100vh
 
 .info
-	$color = $info
-	background linear-gradient(to left, $color, lighten($color, $transparent))
+	background linear-gradient(to right, $infoLight, lighten($infoLight, $percent))
+	@media (prefers-color-scheme dark)
+		background linear-gradient(to right, $infoDark, darken($infoDark, $percent))
+		
 
 .success
-	$color = $success
-	background linear-gradient(to left, $color, lighten($color, $transparent))
+	background linear-gradient(to right, $successLight, lighten($successLight, $percent))
+	@media (prefers-color-scheme dark)
+		background linear-gradient(to right, $successDark, darken($successDark, $percent))
 
-.danger
-	$color = $danger
-	background linear-gradient(to left, $color, lighten($color, $transparent))
+.error
+	background linear-gradient(to right, $errorLight, lighten($errorLight, $percent))
+	@media (prefers-color-scheme dark)
+		background linear-gradient(to right, $errorDark, darken($errorDark, $percent))
 
 .warning
-	$color = $warning
-	background linear-gradient(to left, $color, lighten($color, $transparent))
-
-@media (prefers-color-scheme dark)
-	.back
-		background $darkBackground
+	background linear-gradient(to right, $warningLight, lighten($warningLight, $percent))
+	@media (prefers-color-scheme dark)
+		background linear-gradient(to right, $warningDark, darken($warningDark, $percent))

@@ -14,12 +14,12 @@ interface Props {
 /**
  * Make the background a linear-gradient
  * 
- * @version 1.0.0
+ * @version 1.0.1
  */
 export default class GradientBackground extends React.Component<Props> {
 
 	public render = () => (
-		<div className={buildClassName(css.back, [css[this.props.color as string], this.props.color], this.props.className)}>
+		<div className={buildClassName(css.back, [css[this.props.color as string], this.props.color], this.props.className, [css.fullscreen, this.props.fullscreen])}>
 			{this.props.children}
 		</div>
 	)
