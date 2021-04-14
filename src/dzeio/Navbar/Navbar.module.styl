@@ -56,7 +56,6 @@
 		position fixed
 		top 70px
 		right 0
-		padding 16px
 		border-bottom-left-radius 4px
 		transform translateX(100%)
 		background inherit
@@ -216,15 +215,20 @@
 		margin 0
 		padding 0
 
-.userMenu a
-			padding 16px 0
+.userMenu
+	padding 8px 16px
+	a
+		display inline-block
+		padding-bottom 16px
 
 
 .mobileMenu
 	opacity 0
 	transition opacity $transition
+	pointer-events none
 	&.shown
 		opacity 1
+		pointer-events initial
 
 .mainGradient
 	//WIP

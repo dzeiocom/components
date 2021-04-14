@@ -82,7 +82,7 @@ interface State {
 
 /**
  * Navbar/Sidebar Component
- * @version 1.0.2
+ * @version 1.0.3
  */
 export default class Navbar extends React.Component<Props, State> {
 
@@ -186,14 +186,14 @@ export default class Navbar extends React.Component<Props, State> {
 				)}
 				<ul>
 					{!this.state.isMobile && this.props.items.map((item) => (
-						<li key={item.path}><Link noStyle href={item.path}><a>
+						<li key={item.path}><Link noStyle href={item.path}>
 							<Text className={buildClassName([css.active, this.state.path?.startsWith(item.path)])}>
 								{this.getType() === 'sidebar' && item.icon && (
 									<item.icon />
 								)}
 								<span>{item.name}</span>
 							</Text>
-						</a></Link></li>
+						</Link></li>
 					))}
 				</ul>
 				<div style={{flex: 1}}></div>
@@ -224,7 +224,7 @@ export default class Navbar extends React.Component<Props, State> {
 							</div>
 						</div>
 						<div className={buildClassName(css.userMenu, [css.menuActive, !this.state.isMobile && this.state.menuActive])}>
-							<Row nomargin={this.getType() === 'navbar'}>
+							<Row nomargin>
 								{this.props.user.menu?.informations && (
 									<Col>{this.props.user.menu?.informations}</Col>
 								)}
