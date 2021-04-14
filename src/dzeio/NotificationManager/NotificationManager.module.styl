@@ -1,0 +1,38 @@
+@import '../config.styl'
+
+.section
+	position fixed
+	bottom 0
+	left 0
+	padding 0 16px
+	max-width 25%
+	@media (max-width $tablet)
+		max-width 50%
+	@media (max-width $mobile)
+		width 100%
+		max-width 100%
+	> div
+		margin-bottom 16px
+		animation spawn 1 forwards ease-in-out .3s
+
+		&.remove
+			animation despawn 1 both ease-in-out .3s
+
+	.title
+		font-weight normal
+		margin 0
+@keyframes spawn
+	from
+		opacity 0
+		transform translateY(100%)
+	to
+		opacity 1
+		transform translateY(0)
+
+@keyframes despawn
+	from
+		opacity 1
+		transform translateY(0)
+	to
+		opacity 0
+		transform translateY(100%)

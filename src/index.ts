@@ -20,6 +20,7 @@ import Input from './dzeio/Input'
 import Link from './dzeio/Link'
 import Loader from './dzeio/Loader'
 import Navbar from './dzeio/Navbar'
+import NotificationManager from './dzeio/NotificationManager'
 import Overflow from './dzeio/Overflow'
 import Popup from './dzeio/Popup'
 import Row from './dzeio/Row'
@@ -41,8 +42,8 @@ export {
 	Input,
 	Link,
 	Loader,
-	Menu,
 	Navbar,
+	NotificationManager,
 	Overflow,
 	Popup,
 	Row,
