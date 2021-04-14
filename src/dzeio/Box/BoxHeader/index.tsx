@@ -18,19 +18,25 @@ export default class BoxHeader extends React.Component<Props> {
 
 	public render = () => (
 		<>
-			<div className={buildClassName(
+			<div data-t="true" className={buildClassName(
 				css.header
 			)}>
-				<Row>
-					<Col size={this.props.titleColSize as 1 || 8}>
-						<Text className={buildClassName(css.title, this.props.titleClassName)}>{this.props.title}</Text>
-						<Text className={css.subtitle}>{this.props.subtitle}</Text>
-					</Col>
+				<Row nomargin justify="space-between">
 					<Col>
-						<Row justify="flex-end">
-							{this.props.children}
-						</Row>
+						{this.props.title && (
+							<Text className={buildClassName(css.title, this.props.titleClassName)}>{this.props.title}</Text>
+						)}
+						{this.props.subtitle && (
+							<Text className={css.subtitle}>{this.props.subtitle}</Text>
+						)}
 					</Col>
+					{this.props.children && (
+						<Col nogrow>
+							<Row justify="flex-end">
+								{this.props.children}
+							</Row>
+						</Col>
+					)}
 				</Row>
 			</div>
 		</>
