@@ -3,7 +3,7 @@ const webpack = require('webpack')
 
 module.exports = {
 	"stories": [
-		"../src/dzeio/**/*.stories.@(ts|tsx)",
+		"../src/dzeio/**/*.stories.tsx",
 	],
 	"addons": [
 		"@storybook/addon-essentials"

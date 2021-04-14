@@ -15,6 +15,7 @@
 	border-radius 4px
 	border none
 	justify-content center
+	align-items center
 	color $textOnMain
 	background-color $main
 
@@ -23,9 +24,6 @@
 
 	// Link specific
 	text-decoration none
-
-	&.nomargintop
-		margin-top 0
 
 	&.outline
 		border 2px solid @background-color
@@ -36,7 +34,7 @@
 		&:hover
 		&:active
 		&:focus
-			color @color
+			color $textOnMain
 
 	&:hover
 		background-color @background-color
@@ -46,6 +44,12 @@
 	&:active
 	&:focus
 		background-color darken(@background-color, 30%)
+	
+	&.block
+		display flex
+		width 100%
+		margin 0
+		margin-top 8px
 
 	&.large
 		padding 15px 30px
@@ -61,11 +65,8 @@
 		&.outline
 			padding 3px 8px // @padding - @border
 
-	&.block
-		display flex
-		width 100%
-		margin 0
-		margin-top 8px
+	&.nomargintop
+		margin-top 0
 
 	&:disabled
 		background $grayLight
@@ -124,11 +125,17 @@ btn($color, $theme)
 	&.outline
 		color @background-color
 		border-color @background-color
+		// background none
 
 		&:hover
 		&:active
 		&:focus
-			color @color
+			color $textColor
+
+		if $theme is 'darken'
+			&:active
+			&:focus
+				background-color darken(@color, 30%)
 
 	&:hover
 		background-color @background-color

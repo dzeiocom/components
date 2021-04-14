@@ -14,7 +14,8 @@ interface Props {
 	color?: ColorType
 	children?: React.ReactNode
 	icon?: FC<IconProps> | string
-	size?: 'large' | 'small' | 'block'
+	size?: 'large' | 'small'
+	block?: boolean
 	href?: string
 	as?: string
 	disabled?: boolean
@@ -33,9 +34,9 @@ export default class Button extends React.Component<Props> {
 			inner = (
 				<>
 					{typeof Icon === 'string' ? (
-						<Image className={css.img} src={Icon} width={16} height={16} />
+						<Image parentClassName={css.img} src={Icon} width={16} height={16} />
 					) : (
-						<Icon size={16} />
+						<Icon size={this.props.size === 'large' ? 20 : this.props.size === 'small' ? 14 : 16} />
 					)}
 					{this.props.children && (
 						<span className={css.textInner}>{this.props.children}</span>
@@ -48,6 +49,7 @@ export default class Button extends React.Component<Props> {
 			[css.button],
 			[css[this.props.color as string], this.props.color],
 			[css.outline, this.props.outline],
+			[css.block, this.props.block],
 			[css[this.props.size as string], this.props.size],
 			[css.nomargintop, this.props.nomargintop],
 			[css.loading, this.props.loading]

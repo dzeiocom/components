@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/react/types-6-0'
 import React from 'react'
+import { Zap } from 'react-feather'
 import Component from '.'
 
 export default {
@@ -8,3 +9,19 @@ export default {
 } as Meta
 
 export const Basic = (args: any) => <Component {...args}>Button</Component>
+Basic.args = {
+	nomargintop: true,
+	icon: Zap,
+	size: 'small',
+	href: '/pouet',
+	block: true
+}
+
+export const WithImg = (args: any) => <Component {...args}>Button</Component>
+WithImg.args = {
+	nomargintop: true,
+	icon: '/16-16.svg',
+	size: 'small',
+	href: '/pouet',
+	block: true
+}
