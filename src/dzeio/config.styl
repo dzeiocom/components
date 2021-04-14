@@ -1,6 +1,7 @@
 
 $main = #4285F4
 $textOnMain = white
+$mainGradient = linear-gradient(to right, $main, lighten($main, 20%))
 
 $infoDark = #01579B
 $infoLight = #29B6F6
@@ -44,14 +45,7 @@ rem($a)
 	($a / 16)rem
 
 // @deprecated colors
-$primary = $main
 $default = $main
-$secondary = $main
-$info = $infoLight
-$success = $successLight
-$danger = $errorLight
-$warning = $warningLight
-$darkBackground = $backgroundDark
 
 
 // See https://github.com/stylus/stylus/issues/1872#issuecomment-86553717
