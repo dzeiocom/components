@@ -180,7 +180,7 @@
 				~ svg
 					color @border-color
 			&:invalid
-				border-color $errorLight
+				border-color $errorDark
 
 				~ label
 					color @border-color
@@ -188,7 +188,7 @@
 				~ svg
 					color @border-color
 				@media (prefers-color-scheme dark)
-					border-color $errorDark
+					border-color $errorLight
 
 					~ label
 						color @border-color
@@ -229,7 +229,7 @@
 						background #1c1c1c
 			&:focus
 				background rgba(gray, .3)
-				border-bottom 2px solid $default
+				border-bottom 2px solid $main
 
 				&.opaque
 					background white
