@@ -1,9 +1,11 @@
 import React from 'react'
 
-import BoxHeader from './BoxHeader'
 import { buildClassName } from '../Util'
 
 import css from './Box.module.styl'
+import Row from '../Row'
+import Col from '../Col'
+import Text from '../Text'
 
 interface Props {
 
@@ -37,14 +39,27 @@ export default class Box extends React.Component<Props> {
 			className={buildClassName(css.box, this.props.className, [css.outline, this.props.outline])}
 		>
 			{(this.props.headerButtons || this.props.title || this.props.titleColSize || this.props.subtitle || this.props.delimiter || this.props.titleClassName) && (
-				<BoxHeader
-					title={this.props.title}
-					titleColSize={this.props.titleColSize}
-					subtitle={this.props.subtitle}
-					titleClassName={this.props.titleClassName}
-				>
-					{this.props.headerButtons}
-				</BoxHeader>
+				<div className={buildClassName(
+					css.header
+				)}>
+					<Row nomargin justify="space-between">
+						<Col>
+							{this.props.title && (
+								<Text className={buildClassName(css.title, this.props.titleClassName)}>{this.props.title}</Text>
+							)}
+							{this.props.subtitle && (
+								<Text className={css.subtitle}>{this.props.subtitle}</Text>
+							)}
+						</Col>
+						{this.props.children && (
+							<Col nogrow>
+								<Row justify="flex-end">
+								{this.props.headerButtons}
+								</Row>
+							</Col>
+						)}
+					</Row>
+				</div>
 			)}
 			{this.props.children && (
 				<div className={buildClassName([css.body, !this.props.noPadding])}>
