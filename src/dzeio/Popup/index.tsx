@@ -3,14 +3,13 @@ import { X } from 'react-feather'
 import Text from '../Text'
 import Box from '../Box'
 import Row from '../Row'
-import { Props as HeaderProps } from '../Box/BoxHeader'
 
 import css from './Popup.module.styl'
 
 interface Props {
 	children: React.ReactNode
 	onClose?: () => void
-	header?: HeaderProps
+	header?: Box['props']
 }
 
 export default class Popup extends React.Component<Props> {
