@@ -34,7 +34,7 @@ export default class Footer extends React.Component<Props> {
 			)}
 			{this.props.socials && (
 				<ul className={css.socials}>{this.props.socials.map((l, index) => (
-					<li key={l.href}><Text><Link noStyle href={l.href}>
+					<li key={l.href}><Text><Link hideIcon noStyle href={l.href}>
 						{typeof l.icon === 'string' ? (
 							<Image width={24} height={24} src={l.icon} />
 						) : (

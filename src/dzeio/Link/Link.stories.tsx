@@ -7,7 +7,9 @@ export default {
 	component: Component,
 	argTypes: {
 		href: {control: 'text', defaultValue: 'https://www.dzeio.com'},
-		text: {control: 'text', defaultValue: 'Dzeio'}
+		text: {control: 'text', defaultValue: 'Dzeio'},
+		external: {control: 'boolean'},
+		hideIcon: {control: 'boolean'}
 	}
 } as Meta
 
