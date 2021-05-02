@@ -1,11 +1,17 @@
+@import '../config'
+
 .table
 	border-spacing 0
-	border 2px solid #EEE
+	border 2px solid $grayDark
+	@media (prefers-color-scheme dark)
+		border-color $grayLight
 	border-radius 4px
 	width 100%
 
 	td
-		border-top 1px solid #EEE
+		border-top 1px solid $grayDark
+		@media (prefers-color-scheme dark)
+			border-color $grayLight
 
 	th
 	td
