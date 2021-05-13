@@ -1,43 +1,34 @@
 .parent
-	position relative
-	display inline-flex
+	transition-property padding, width, height, background, top, left
+	transition-duration .3s
+	transition-timing-function ease-in-out
+	cursor pointer
 
-.image
-	transition .3s
-	object-fit contain
-	z-index 2
-
-	&.ph1
-		position fixed
-		transition 0s
-
-
-	&.ph2
-		width 100% !important
-		position fixed
-		max-width 100% !important
-		max-height 100% !important
-		box-sizing border-box
-		padding 5%
-		top 0 !important
-		left 0 !important
+// Animation part 1
+// this is set to move the image from a normal position to a fixed one
+// + one the image itself there is style with position
+.fs1
+	position fixed
+	z-index 1000
+	padding 0
+	> div
+		width 100%
 		height 100%
-		background #000000A0
 
+// Animation part 2
+// this animation move the card from its original pos to a fullscreen one
+.fs2
+	padding 8px
+	width 100% !important
+	height 100vh !important
+	background rgba(black, 50%)
+	// padding 0
+	user-select none
+	top 0 !important
+	left 0 !important
+	> div
+		width 100%
+		height 100%
 
-	&.after
-		background #00000000
-		// height 100%
-		box-sizing border-box
-		position fixed
-		// width 100%
-		z-index 0
-		padding initial
-
-
-.hideOverflow
+.body
 	overflow hidden
-
-
-.none
-	display none
