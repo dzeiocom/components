@@ -170,9 +170,9 @@ export default class Input extends React.Component<Props, States> {
 					</div>
 				)}
 
-				{this.props.autocomplete && this.props.autocomplete.indexOf(this.state?.value || '') === -1 && (
+				{this.props.autocomplete && this.props.autocomplete.indexOf(this.state?.value ?? this.props.value?.toString() ?? '') === -1 && (
 					<ul className={buildClassName(css.autocomplete, [css.reverse, !this.state.isInFirstPartOfScreen])}>
-						{this.props.autocomplete.filter((item) => item.includes(this.state?.value || '')).map((item) => (<li key={item} onClick={this.onAutoCompleteClick(item)}><Text>{item}</Text></li>))}
+						{this.props.autocomplete.filter((item) => item.includes(this.state?.value ?? this.props.value?.toString() ?? '')).map((item) => (<li key={item} onClick={this.onAutoCompleteClick(item)}><Text>{item}</Text></li>))}
 					</ul>
 				)}
 			</div>
@@ -201,7 +201,7 @@ export default class Input extends React.Component<Props, States> {
 			this.setState({textAreaHeight: this.inputRef.current.scrollHeight})
 		})
 
-	private onAutoCompleteClick = (value: string) => () => {
+	private onAutoCompleteClick = (value: string) => async () => {
 		// console.log('test')
 		const item = this.getElement()
 		if (!item) {return}
@@ -216,6 +216,9 @@ export default class Input extends React.Component<Props, States> {
 			valueSetter.call(item, value)
 		}
 		item.dispatchEvent(new Event('input', {bubbles: true}))
+		if (this.props.type === 'textarea') {
+			await this.parentScroll()
+		}
 	}
 
 	private onChange = async (event?: React.FormEvent<HTMLDivElement>) => {
