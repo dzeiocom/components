@@ -183,7 +183,7 @@ export default class Input extends React.Component<Props, States> {
 		const div = this.parentRef.current
 		if (!div) {return}
 		const result = !(div.offsetTop - window.scrollY >= window.innerHeight / 2)
-		console.log(result, div, this.state.isInFirstPartOfScreen)
+		// console.log(result, div, this.state.isInFirstPartOfScreen)
 		if (this.state.isInFirstPartOfScreen !== result) {
 			this.setState({isInFirstPartOfScreen: result})
 		}
@@ -202,7 +202,7 @@ export default class Input extends React.Component<Props, States> {
 		})
 
 	private onAutoCompleteClick = (value: string) => () => {
-		console.log('test')
+		// console.log('test')
 		const item = this.getElement()
 		if (!item) {return}
 		const valueSetter = Object.getOwnPropertyDescriptor(item, 'value')?.set
