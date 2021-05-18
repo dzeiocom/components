@@ -34,7 +34,7 @@ export default class Button extends React.Component<Props> {
 			inner = (
 				<>
 					{typeof Icon === 'string' ? (
-						<Image parentClassName={css.img} src={Icon} width={16} height={16} />
+						<Image imageProps={{src: Icon, width: 16, height: 16, className: css.img}} />
 					) : (
 						<Icon size={this.props.size === 'large' ? 20 : this.props.size === 'small' ? 14 : 16} />
 					)}
