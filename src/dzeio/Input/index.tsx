@@ -172,7 +172,7 @@ export default class Input extends React.Component<Props, States> {
 
 				{this.props.autocomplete && this.props.autocomplete.indexOf(this.state?.value ?? this.props.value?.toString() ?? '') === -1 && (
 					<ul className={buildClassName(css.autocomplete, [css.reverse, !this.state.isInFirstPartOfScreen])}>
-						{this.props.autocomplete.filter((item) => item.includes(this.state?.value ?? this.props.value?.toString() ?? '')).map((item) => (<li key={item} onClick={this.onAutoCompleteClick(item)}><Text>{item}</Text></li>))}
+						{this.props.autocomplete.filter((item) => item.toLowerCase().includes(this.state?.value?.toLowerCase() ?? this.props.value?.toString().toLowerCase() ?? '')).map((item) => (<li key={item} onClick={this.onAutoCompleteClick(item)}><Text>{item}</Text></li>))}
 					</ul>
 				)}
 			</div>
