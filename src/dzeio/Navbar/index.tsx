@@ -2,7 +2,7 @@ import Router from 'next/router'
 
 import Image, { ImageProps } from 'next/image'
 import React, { FC } from 'react'
-import { ChevronDown, ChevronsRight, Menu, X } from 'react-feather'
+import { ChevronDown, ChevronsRight, Menu, X } from 'lucide-react'
 import Text from '../Text'
 import Col from '../Col'
 import Row from '../Row'

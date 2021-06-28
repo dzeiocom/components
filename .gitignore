@@ -9,4 +9,3 @@ types/
 !src/stylus.d.ts
 !.storybook/*.js
 style.css
-yarn-error.log

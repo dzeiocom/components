@@ -1,6 +1,6 @@
 import React from 'react'
 import NextLink from 'next/link'
-import { ExternalLink } from 'react-feather'
+import { ExternalLink } from 'lucide-react'
 
 import css from './Link.module.styl'
 import { buildClassName } from '../Util'

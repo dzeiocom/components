@@ -1,8 +1,7 @@
 import React from 'react'
-import { Check } from 'react-feather'
+import { Check } from 'lucide-react'
 import { buildClassName } from '../Util'
 
-import { ColorType } from '../interfaces'
 import css from './Checkbox.module.styl'
 import Text from '../Text'
 

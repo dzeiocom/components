@@ -2,7 +2,7 @@ import { Meta } from '@storybook/react/types-6-0'
 import { Story } from "@storybook/react"
 import React from 'react'
 import Component from '.'
-import { X } from 'react-feather'
+import { X } from 'lucide-react'
 
 export default {
 	title: 'DZEIO/Input',

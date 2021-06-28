@@ -1,5 +1,5 @@
 import React from 'react'
-import { X } from 'react-feather'
+import { X } from 'lucide-react'
 import Text from '../Text'
 import Box from '../Box'
 import Row from '../Row'

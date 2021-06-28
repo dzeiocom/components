@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/react/types-6-0'
 import React from 'react'
-import { Zap } from 'react-feather'
+import { Zap } from 'lucide-react'
 import Component from '.'
 
 export default {

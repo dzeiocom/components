@@ -5,7 +5,7 @@ import Col from '../Col'
 import Text from '../Text'
 import Router from 'next/router'
 import React from 'react'
-import { X } from 'react-feather'
+import { X } from 'lucide-react'
 
 import css from './NotificationManager.module.styl'
 

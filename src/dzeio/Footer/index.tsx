@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import { Heart } from 'react-feather'
+import { Heart } from 'lucide-react'
 import Link from '../Link'
-import { Icon } from 'react-feather'
+import { LucideProps } from 'lucide-react'
 import Text from '../Text'
 import css from './Footer.module.styl'
 import Image from 'next/image'
@@ -15,7 +15,7 @@ interface Props {
 	}>
 	socials?: Array<{
 		href: string
-		icon: Icon | string
+		icon: FC<LucideProps> | string
 	}>
 }
 

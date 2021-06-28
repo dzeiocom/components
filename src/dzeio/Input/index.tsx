@@ -1,11 +1,10 @@
 import React, { FC } from 'react'
 
-import { ChevronDown } from 'react-feather'
+import { ChevronDown } from 'lucide-react'
 import Text from '../Text'
 import { IconProps } from '../interfaces'
 import { buildClassName } from '../Util'
 import css from './Input.module.styl'
-import Row from '../Row'
 
 interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
 	id?: string
