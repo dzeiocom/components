@@ -30,7 +30,7 @@ interface State {
 
 /**
  * Display a simple loading animation at the top of the page
- * 
+ *
  * @version 1.0.0
  */
 export default class Loader extends React.Component<Props, State> {
@@ -48,8 +48,8 @@ export default class Loader extends React.Component<Props, State> {
 
 	public componentWillUnmount() {
 		if (this.props.auto) {
-			Router.events.off('routechangeComplete', this.routeChangeComplete)
-			Router.events.off('routechangeStart', this.routeChangeStart)
+			Router.events.off('routeChangeComplete', this.routeChangeComplete)
+			Router.events.off('routeChangeStart', this.routeChangeStart)
 		}
 	}
 
