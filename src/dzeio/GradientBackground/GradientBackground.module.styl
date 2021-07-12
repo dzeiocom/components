@@ -6,14 +6,13 @@ $percent = 15%
 	transition all $transition
 	background $mainGradient
 
-	&.fullscreen
+	&.fullscreen > :first-child
 		min-height 100vh
 
 .info
 	background linear-gradient(to right, $infoLight, lighten($infoLight, $percent))
 	@media (prefers-color-scheme dark)
 		background linear-gradient(to right, $infoDark, darken($infoDark, $percent))
-		
 
 .success
 	background linear-gradient(to right, $successLight, lighten($successLight, $percent))

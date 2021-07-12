@@ -13,8 +13,8 @@ interface Props {
 
 /**
  * Make the background a linear-gradient
- * 
- * @version 1.0.1
+ *
+ * @version 1.0.2
  */
 export default class GradientBackground extends React.Component<Props> {
 
