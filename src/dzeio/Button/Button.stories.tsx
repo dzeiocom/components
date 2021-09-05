@@ -25,3 +25,10 @@ WithImg.args = {
 	href: '/pouet',
 	block: true
 }
+
+export const ExternalLinkButton = (args: any) => <Component {...args}>Button</Component>
+ExternalLinkButton.args = {
+	nomargintop: true,
+	href: 'https://example.com',
+	block: true
+}

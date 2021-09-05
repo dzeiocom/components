@@ -30,11 +30,11 @@ export default class Link extends React.Component<Props> {
 
 	public render() {
 		const isExternal = this.props.href.startsWith('http')
-		const externalProps = this.props.external ? {
+		const externalProps = this.props.external ?? isExternal ? {
 			rel: 'noreferrer nofollow',
 			target: '_blank'
 		} : {}
-		
+
 		if (isExternal) {
 			// external link
 			return (

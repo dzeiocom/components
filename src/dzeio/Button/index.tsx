@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import Link from 'next/link'
+import Link from '../Link'
 import { ColorType, IconProps } from '../interfaces'
 import { buildClassName } from '../Util'
 import Image from '../Image'
@@ -57,8 +57,8 @@ export default class Button extends React.Component<Props> {
 
 		if (this.props.href) {
 			return (
-				<Link href={this.props.href} as={this.props.as}>
-					<a onClick={this.props.onClick} className={buildClassName([classes], [css.disabled, this.props.disabled])}>{inner}</a>
+				<Link linkProps={{onClick: this.props.onClick}} hideIcon noStyle href={this.props.href} className={buildClassName([classes], [css.disabled, this.props.disabled])}>
+					{inner}
 				</Link>
 			)
 		}
