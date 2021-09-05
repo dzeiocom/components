@@ -97,7 +97,7 @@ export default class Input extends React.Component<Props, States> {
 			baseProps.onWheel = (ev: React.WheelEvent<HTMLInputElement>) => ev.currentTarget.blur()
 		}
 
-		if (this.props.type === 'select') {
+		if (this.props.type === 'select' && !this.props.readOnly) {
 			input = (
 				<select
 					ref={this.props.selectRef || this.inputRef}
@@ -111,6 +111,15 @@ export default class Input extends React.Component<Props, States> {
 				>
 					{this.props.children}
 				</select>
+			)
+		// select is readonly
+		} else if (this.props.type === 'select') {
+			input = (
+				<input
+					{...props}
+					{...baseProps}
+					type="text"
+				/>
 			)
 		} else if (this.props.type === 'textarea') {
 			delete baseProps.ref
