@@ -12,7 +12,6 @@ import Checkbox from './dzeio/Checkbox'
 import Code from './dzeio/Code'
 import Col from './dzeio/Col'
 import Container from './dzeio/Container'
-import Fieldset from './dzeio/Fieldset'
 import Footer from './dzeio/Footer'
 import GradientBackground from './dzeio/GradientBackground'
 import Image from './dzeio/Image'
@@ -21,7 +20,6 @@ import Link from './dzeio/Link'
 import Loader from './dzeio/Loader'
 import Navbar from './dzeio/Navbar'
 import NotificationManager from './dzeio/NotificationManager'
-import Overflow from './dzeio/Overflow'
 import Popup from './dzeio/Popup'
 import Row from './dzeio/Row'
 import Table from './dzeio/Table'
@@ -35,7 +33,6 @@ export {
 	Code,
 	Col,
 	Container,
-	Fieldset,
 	Footer,
 	GradientBackground,
 	Image,
@@ -44,7 +41,6 @@ export {
 	Loader,
 	Navbar,
 	NotificationManager,
-	Overflow,
 	Popup,
 	Row,
 	Table,

@@ -2,31 +2,17 @@
 
 .parent
 	position relative
-	margin 16px 0
 	max-width 100%
 	display inline-block
 
 	&:not(.block) + .parent:not(.block)
 		margin-left 16px
 
-	label
-		font-size 1rem
-		font-weight 600
-		color black
-		display inline-block
-		margin-bottom .5rem
-		transition all $transition
-		position absolute
-		top 16px
-		pointer-events none
-		left 16px
-
-		@media (prefers-color-scheme dark)
-			color white
-
 	svg
 		position absolute
-		color #AAA
+		color $darkGrayLight
+		@media (prefers-color-scheme dark)
+			color $darkGrayDark
 		transition color $transition
 		pointer-events none
 		top 14px
@@ -78,15 +64,14 @@
 		left 0
 		width 100%
 		z-index 100
-		box-shadow 0 4px 8px rgba(black, .3)
+		box-shadow 0 2px 4px rgba(black, .3)
 		margin 0
 		padding 0
-		background darken($foregroundLight, 5%)
+		background $foregroundLight
 		@media (prefers-color-scheme dark)
-			background lighten($foregroundDark, 5%)
+			background $foregroundDark
 
-		border-bottom-left-radius 4px
-		border-bottom-right-radius 4px
+		border-radius 8px
 		max-height 25vh
 		overflow-y auto
 		@media (max-width $mobile)
@@ -123,32 +108,29 @@
 	input
 	select
 	textarea
-		padding 14px 16px
-		height 56px
-		border 2px solid $grayDark
-		border-radius 4px
+		padding 12px
+		border-radius 8px
 		max-width 100%
-		box-sizing border-box
 		font-size .875rem
 		outline none
-		background transparent
+		background $lightGrayLight
 		transition all $transition
+		border 2px solid $darkGrayLight
 		color black
 		@media (prefers-color-scheme dark)
-			border-color $grayLight
+			background $lightGrayDark
+			border-color $darkGrayDark
 			color white
 
-		&:not(:placeholder-shown)
-		&:focus
-		&:not([placeholder=" "])
-			~ label
-				top -8px
-				left 16px - 4px // .input/padding-left label/padding-left
-				background white
-				padding 0 4px
+		&::placeholder
+			font-weight 700
+			font-size rem(16)
+			transition color $transition
+			opacity 1
+			color $darkGrayLight
+			@media (prefers-color-scheme dark)
+				color $darkGrayDark
 
-				@media (prefers-color-scheme dark)
-					background #202020
 
 		&:disabled
 			border-color #999
@@ -166,7 +148,8 @@
 				@media (prefers-color-scheme dark)
 					border-color white
 
-				+ svg
+				~ svg
+				&::placeholder
 					color black
 
 					@media (prefers-color-scheme dark)
@@ -178,6 +161,7 @@
 					color @border-color
 
 				~ svg
+				&::placeholder
 					color @border-color
 			&:invalid
 				border-color $errorDark
@@ -252,13 +236,13 @@
 			transform rotateX(0)
 			transition $transition
 
-		&:focus ~ svg.rotate, ~.autocomplete:hover ~ svg.rotate
+		&:focus ~ svg.rotate
+		~ .autocomplete:hover ~ svg.rotate
 			transform rotateX(180deg)
-	div
-		display flex
-		justify-content space-between
-		padding 0 16px
-		font-size .9em
+
+	p
+		padding 0 8px
+		font-size rem(14)
 
 	&.block, &.block input, &.block select, &.block textarea
 		width 100%

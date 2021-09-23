@@ -14,14 +14,23 @@ $errorLight = #F44336
 
 $warningDark = #C43E00
 $warningLight = #FF9800
-
-$backgroundDark = #161616
-$backgroundLight = #EEEEEE
+// hsl($main)
+$backgroundDark = darken($main, 92%)
+$backgroundLight = lighten($main, 94%)
 $foregroundDark = #202020
 $foregroundLight = #FFFFFF
 
-$grayDark = #B0B0B0
-$grayLight = #E0E0E0
+// Light theme grays
+$darkGrayLight = #777
+$lightGrayLight = #F4F4F4
+
+// Dark theme grays
+$darkGrayDark = #444
+$lightGrayDark = #AAA
+
+// @deprecated
+$grayLight = $darkGrayLight
+$grayDark  = $lightGrayLight
 
 
 $transitionTime = .15s

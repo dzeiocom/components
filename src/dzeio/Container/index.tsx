@@ -11,9 +11,9 @@ interface Props {
 export default class Container extends React.Component<Props> {
 
 	public render = () => (
-		<div className={buildClassName(css.container, this.props.className)}>
+		<main className={buildClassName(css.container, this.props.className)}>
 			{this.props.children}
-		</div>
+		</main>
 	)
 
 }

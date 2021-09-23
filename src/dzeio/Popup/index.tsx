@@ -16,7 +16,14 @@ export default class Popup extends React.Component<Props> {
 
 	public render = () => (
 		<Row nomargin onClick={this.parentClose} justify="center" align="center" className={css.popup}>
-			<Box {...this.props.header} className={css.popupChild} onClick={(ev) => ev.stopPropagation()} headerButtons={(<Text><X onClick={this.props.onClose} className={css.exit} /></Text>)}>
+			<Box
+				//{...this.props.header as any}
+				className={css.popupChild}
+				onClick={(ev) => ev.stopPropagation()}
+				rightHeader={
+					(<Text><X onClick={this.props.onClose} className={css.exit} /></Text>)
+				}
+			>
 				{this.props.children}
 			</Box>
 		</Row>

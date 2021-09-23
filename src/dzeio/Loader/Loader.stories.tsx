@@ -4,7 +4,7 @@ import { Zap } from 'lucide-react'
 import Component from '.'
 
 export default {
-	title: 'DZEIO/Footer',
+	title: 'DZEIO/Loader',
 	component: Component,
 	parameters: {
 		layout: 'fullscreen'
@@ -15,8 +15,7 @@ export const Basic: Story<any> = (args: any) => <Component {...args} />
 
 let tmp = Basic.bind({})
 tmp.args = {
-	links: [{name: 'test1', path: '/'}, {name: 'test2', path: '/'}, {name: 'test3', path: '/'}],
-	socials: [{icon: Zap, href: '/'}, {icon: '/16-16.svg', href: '/'}, {icon: Zap, href: '/'}]
+	auto: {interval : [10, 100], increment: [0, 5]}
 }
 
-export const Normal = tmp
+export const Auto = tmp

@@ -13,7 +13,6 @@ Basic.args = {
 	nomargintop: true,
 	icon: Zap,
 	size: 'small',
-	href: '/pouet',
 	block: true
 }
 
@@ -22,7 +21,6 @@ WithImg.args = {
 	nomargintop: true,
 	icon: '/16-16.svg',
 	size: 'small',
-	href: '/pouet',
 	block: true
 }
 

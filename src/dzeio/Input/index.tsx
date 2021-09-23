@@ -12,7 +12,6 @@ interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLIn
 	icon?: FC<IconProps>
 	iconRight?: FC<IconProps>
 	helper?: string
-	characterCount?: boolean
 	inputRef?: React.RefObject<HTMLInputElement>
 	selectRef?: React.RefObject<HTMLSelectElement>
 	type?: 'color' | 'text' | 'date' | 'datetime-local' |
@@ -21,15 +20,10 @@ interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLIn
 	// Custom Types
 	'select' | 'textarea'
 	autocomplete?: Array<string>
-	infinityText?: string
-	filled?: boolean
-	opaque?: boolean
-	block?: boolean
 	children?: React.ReactNode
 }
 
 interface States {
-	charCount?: string
 	textAreaHeight?: number
 	value?: string
 	isInFirstPartOfScreen?: boolean
@@ -44,9 +38,6 @@ export default class Input extends React.Component<Props, States> {
 	private parentRef: React.RefObject<HTMLDivElement> = React.createRef()
 
 	public componentDidMount() {
-		if (this.props.characterCount) {
-			this.onChange()
-		}
 		if (this.props.type === 'textarea') {
 			this.textareaHandler()
 		}
@@ -67,26 +58,19 @@ export default class Input extends React.Component<Props, States> {
 		delete props.label
 		delete props.children
 		delete props.icon
-		delete props.opaque
 		delete props.helper
-		delete props.infinityText
 		delete props.autocomplete
-		delete props.filled
 		delete props.iconRight
 		delete props.inputRef
 		delete props.selectRef
-		delete props.block
 		delete props.color
-		delete props.characterCount
 
 		const baseProps: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> = {
-			placeholder: this.props.placeholder || ' ',
+			placeholder: this.props.label || this.props.placeholder || ' ',
 			ref: this.props.inputRef || this.inputRef,
 			className: buildClassName(
 				[css.iconLeft, this.props.icon],
-				[css.iconRight, this.props.iconRight || this.props.autocomplete],
-				[css.filled, this.props.filled],
-				[css.opaque, this.props.opaque]
+				[css.iconRight, this.props.iconRight || this.props.autocomplete]
 			),
 			onInvalid: (ev: React.FormEvent<HTMLInputElement>) => ev.preventDefault(),
 		}
@@ -105,7 +89,6 @@ export default class Input extends React.Component<Props, States> {
 					className={buildClassName(
 						[css.iconLeft, this.props.icon],
 						[css.iconRight, !this.props.disabled || this.props.iconRight],
-						[css.filled, this.props.filled],
 						[css[this.props.color as string], this.props.color]
 					)}
 				>
@@ -146,38 +129,31 @@ export default class Input extends React.Component<Props, States> {
 		return (
 			<div
 				className={buildClassName(
-					[css.parent],
-					[css.block, this.props.block]
+					css.parent
 				)}
 				onChangeCapture={this.onChange}
 				ref={this.parentRef}
 			>
 				{input}
 
-				{/* Process Icon */}
+				{/* Left Icon */}
 				{this.props.icon && (
-					<this.props.icon className={css.left} />
+					<this.props.icon size="18" className={css.left} />
 				)}
 
+				{/* Right Icon */}
 				{this.props.iconRight ? (
-					<this.props.iconRight className={css.right} />
+					<this.props.iconRight size="18" className={css.right} />
 				) : ((this.props.type === 'select' || this.props.autocomplete) && !this.props.disabled) && (
-					<ChevronDown className={buildClassName(css.right, css.rotate)} />
+					<ChevronDown size="18" className={buildClassName(css.right, css.rotate)} />
 				)}
 
-				{/* Input Label */}
-				{this.props.label && (
-					<label className={css.label} htmlFor={this.props.id}>{this.props.label}</label>
-				)}
-				{(this.props.helper || this.props.characterCount) && (
-					<div>
-						<Text type="span">{this.props.helper}</Text>
-						{this.props.characterCount && (
-							<Text type="span">{this.state?.charCount}</Text>
-						)}
-					</div>
+				{/* Helper text */}
+				{(this.props.helper) && (
+					<Text>{this.props.helper}</Text>
 				)}
 
+				{/* List when this is an autocomplete */}
 				{this.props.autocomplete && this.props.autocomplete.indexOf(this.state?.value ?? this.props.value?.toString() ?? '') === -1 && (
 					<ul className={buildClassName(css.autocomplete, [css.reverse, !this.state.isInFirstPartOfScreen])}>
 						{this.props.autocomplete.filter((item) => item.toLowerCase().includes(this.state?.value?.toLowerCase() ?? this.props.value?.toString().toLowerCase() ?? '')).map((item) => (<li key={item} onClick={this.onAutoCompleteClick(item)}><Text>{item}</Text></li>))}
@@ -187,6 +163,9 @@ export default class Input extends React.Component<Props, States> {
 		)
 	}
 
+	/**
+	 * event for autocomplete to detect where on the screen it shoul display
+	 */
 	private parentScroll = async () => {
 		const div = this.parentRef.current
 		if (!div) {return}
@@ -230,15 +209,6 @@ export default class Input extends React.Component<Props, States> {
 	}
 
 	private onChange = async (event?: React.FormEvent<HTMLDivElement>) => {
-		if (this.props.characterCount) {
-			const max = this.props.maxLength || this.props.infinityText || 'Infinity'
-			const baseItem = this.props.value || this.props.defaultValue || ''
-			let currentCount = baseItem.toString().length
-			if (event) {
-				currentCount = (event.target as HTMLInputElement).value.length
-			}
-			this.setState({charCount: `${currentCount}/${max}`})
-		}
 		if (event) {
 			this.setState({value: (event.target as HTMLInputElement).value })
 		}

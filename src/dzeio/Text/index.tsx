@@ -3,7 +3,7 @@ import { buildClassName } from '../Util'
 import css from './Text.module.styl'
 interface Props {
 	color?: 'black' | 'white'
-	type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'em' | 'span'
+	type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'em' | 'span' | 'div'
 	className?: string
 	noDarkTheme?: boolean
 	align?: 'left' | 'right' | 'center'

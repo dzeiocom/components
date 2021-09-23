@@ -2,21 +2,33 @@
 
 .table
 	border-spacing 0
-	border 2px solid $grayDark
-	@media (prefers-color-scheme dark)
-		border-color $grayLight
-	border-radius 4px
 	width 100%
 
-	td
-		border-top 1px solid $grayDark
-		@media (prefers-color-scheme dark)
-			border-color $grayLight
+	tr
+		$radius = 16px
+		td:first-child
+		th:first-child
+			border-top-left-radius $radius
+			border-bottom-left-radius $radius
+
+		td:last-child
+		th:last-child
+			border-top-right-radius $radius
+			border-bottom-right-radius $radius
 
 	th
 	td
-		padding 8px
+		padding 16px
 		text-align left
+		color black
+		@media (prefers-color-scheme dark)
+			color white
+	th
+		background $lightGrayLight
+		color $darkGrayLight
+		@media (prefers-color-scheme dark)
+			background $lightGrayDark
+			color $darkGrayDark
 
 .parent
 	overflow-x auto

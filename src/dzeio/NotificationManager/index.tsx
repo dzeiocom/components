@@ -135,11 +135,8 @@ export default class NotificationManager extends React.Component<Props, State> {
 					>
 						<Box
 							title={el.message}
-							titleClassName={css.title}
-							headerButtons={(
-								<Col nogrow>
-									<Text><X onClick={() => NotificationManager.removeNotification(index)} /></Text>
-								</Col>
+							rightHeader={(
+								<Text><X onClick={() => NotificationManager.removeNotification(index)} /></Text>
 							)}
 						>
 							{el.actions && (

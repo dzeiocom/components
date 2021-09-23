@@ -1,16 +1,19 @@
 import { Meta } from '@storybook/react/types-6-0'
 import React from 'react'
 import Component from '.'
-import Input from '../Input'
+import Text from '../Text'
 
 export default {
-	title: 'DZEIO/Fieldset',
+	title: 'DZEIO/Container',
 	component: Component,
 	argTypes: {
 		title: { control: 'text'}
+	},
+	parameters: {
+		layout: 'fullscreen'
 	}
 } as Meta
 
 export const Basic = (args: any) => (
-	<Component {...args}><Input label="Test" /></Component>
+	<Component {...args}><Text>Test</Text></Component>
 )

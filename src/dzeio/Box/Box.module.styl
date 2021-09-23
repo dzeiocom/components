@@ -4,13 +4,7 @@
 	background $foregroundLight
 	@media (prefers-color-scheme dark)
 		background $foregroundDark
-	border-radius 8px
-
-.outline
-	border 2px solid $grayDark
-	@media (prefers-color-scheme dark)
-		border-color $grayLight
-
+	border-radius 16px
 
 .header
 	padding 16px
@@ -19,15 +13,19 @@
 		padding-top 0
 
 .title
-	font-weight bold
-	font-size rem(18)
-	margin 0 0 8px
-
-.subtitle
+	font-weight 700
 	font-size rem(16)
-	margin 0
-
+	display inline-flex
 
 // BODY
 .body
 	padding 16px
+
+.icon
+	padding 2px
+	width 24px
+	height 24px
+	display inline-block
+	background $main
+	border-radius 4px
+	margin-right 8px
