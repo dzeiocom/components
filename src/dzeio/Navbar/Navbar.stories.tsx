@@ -6,7 +6,10 @@ import Text from '../Text'
 
 export default {
 	title: 'DZEIO/Navbar',
-	component: Component
+	component: Component,
+	parameters: {
+		layout: 'fullscreen'
+	}
 } as Meta
 
 export const Basic: Story<any> = (args: any) => <Component {...args} />

@@ -1,10 +1,10 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { Heart } from 'lucide-react'
 import Link from '../Link'
-import { Icon } from 'lucide-react'
 import Text from '../Text'
 import css from './Footer.module.styl'
 import Image from 'next/image'
+import { Icon } from '../interfaces'
 
 interface Props {
 	text?: string

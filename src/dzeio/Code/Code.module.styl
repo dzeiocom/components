@@ -1,12 +1,14 @@
+@import "../config.styl"
+
 .code
-	background #E8EAF6
-	padding 4px
+.pre
+	background $lightGrayLight
+	padding 4px 8px
 	border-radius 8px
+	@media (prefers-color-scheme dark)
+		background $lightGrayDark
 
 .pre
-	border-radius 8px
-	padding 4px 8px
-	background #E8EAF6
 	display block
 	.code
 		padding 0

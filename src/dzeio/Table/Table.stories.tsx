@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react/types-6-0'
-import { Copyright, Settings } from 'lucide-react'
+import { Settings } from 'lucide-react'
 import React from 'react'
 import Component from '.'
 import Box from '../Box'

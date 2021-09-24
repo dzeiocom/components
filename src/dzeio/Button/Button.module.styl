@@ -31,20 +31,37 @@
 		background transparent
 		color @background-color
 
+		&:not(:disabled)
+			&:hover
+			&:active
+			&:focus
+				color $textOnMain
+
 		&:hover
+			box-shadow none
+
+	&.ghost
+		background transparent
+		color black
+		@media (prefers-color-scheme dark)
+			color white
+
+		&:hover
+			box-shadow none
+			background-color rgba($main, .25)
+
 		&:active
 		&:focus
-			color $textOnMain
+			background-color $main
 
 	&:hover
 		background-color @background-color
-		transform translateY(-2px)
-		box-shadow 0 4px 4px rgba(@background-color,.2)
+		box-shadow 0 0 0 4px rgba(@background-color,.2)
 
 	&:active
 	&:focus
 		background-color darken(@background-color, 30%)
-	
+
 	&.block
 		display flex
 		width 100%
@@ -69,20 +86,22 @@
 		margin-top 0
 
 	&:disabled
-		background $grayLight
-		color $grayDark
+		background $lightGrayLight
+		color $darkGrayLight
 		transform none
 		box-shadow none
 		cursor initial
 
+		@media (prefers-color-scheme dark)
+			background $lightGrayDark
+			color $darkGrayDark
+
 		&.outline
-			border 2px solid @grayDark
+			border 2px solid @color
 			background transparent
-			color @grayDark
 
 			@media (prefers-color-scheme dark)
-				border 2px solid @grayLight
-				color @grayLight
+				border 2px solid $darkGrayDark
 
 	&.loading
 		color transparent
@@ -101,7 +120,13 @@
 			border-radius 100%
 			height 1em
 			box-sizing inherit
-			animation ButtonLoading 1s infinite linear
+			animation ButtonLoading .75s infinite linear
+
+		&:disabled::after
+			border-color transparent transparent $darkGrayLight $darkGrayLight
+			@media (prefers-color-scheme dark)
+				border-color transparent transparent $darkGrayDark $darkGrayDark
+
 
 .textInner
 	margin-left 8px
@@ -136,6 +161,19 @@ btn($color, $theme)
 			&:active
 			&:focus
 				background-color darken(@color, 30%)
+
+
+	&.ghost
+		background transparent
+		color $textColor
+
+		&:hover
+			box-shadow none
+			background-color rgba($color, .25)
+
+		&:active
+		&:focus
+			background-color $color
 
 	&:hover
 		background-color @background-color

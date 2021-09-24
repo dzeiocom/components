@@ -6,8 +6,7 @@ import css from './Box.module.styl'
 import Row from '../Row'
 import Col from '../Col'
 import Text from '../Text'
-import { Icon } from 'lucide-react'
-import { ColorType } from '../interfaces'
+import { Icon } from '../interfaces'
 
 interface Props extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
 	noPadding?: boolean

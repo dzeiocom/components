@@ -161,8 +161,13 @@
 					color @border-color
 
 				~ svg
-				&::placeholder
 					color @border-color
+				&::placeholder
+					color black
+
+					@media (prefers-color-scheme dark)
+						color white
+
 			&:invalid
 				border-color $errorDark
 

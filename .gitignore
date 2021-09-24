@@ -1,11 +1,5 @@
-module/
 node_modules/
-*.mjs
-*.js
-!src/dzeio/stylusUtils.js
-*.d.ts
 types/
-!rollup.config.js
-!src/stylus.d.ts
-!.storybook/*.js
+
+index.js
 style.css

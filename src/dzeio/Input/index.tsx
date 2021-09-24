@@ -2,15 +2,15 @@ import React, { FC } from 'react'
 
 import { ChevronDown } from 'lucide-react'
 import Text from '../Text'
-import { IconProps } from '../interfaces'
+import { Icon } from '../interfaces'
 import { buildClassName } from '../Util'
 import css from './Input.module.styl'
 
 interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
 	id?: string
 	label?: string
-	icon?: FC<IconProps>
-	iconRight?: FC<IconProps>
+	icon?: Icon
+	iconRight?: Icon
 	helper?: string
 	inputRef?: React.RefObject<HTMLInputElement>
 	selectRef?: React.RefObject<HTMLSelectElement>

@@ -14,7 +14,9 @@
 	flex-wrap nowrap
 
 .nogrow > *
+	max-width initial
 	flex-grow 0
+	flex-basis initial
 
 for dir in 'row-reverse' 'column' 'column-reverse'
 	.direction-{dir}

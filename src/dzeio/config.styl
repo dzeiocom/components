@@ -7,14 +7,14 @@ $infoDark = #01579B
 $infoLight = #29B6F6
 
 $successDark = #1B5E20
-$successLight = #4CAF50
+$successLight = #7CB342
 
 $errorDark = #7F0000
 $errorLight = #F44336
 
 $warningDark = #C43E00
 $warningLight = #FF9800
-// hsl($main)
+
 $backgroundDark = darken($main, 92%)
 $backgroundLight = lighten($main, 94%)
 $foregroundDark = #202020
@@ -27,11 +27,6 @@ $lightGrayLight = #F4F4F4
 // Dark theme grays
 $darkGrayDark = #444
 $lightGrayDark = #AAA
-
-// @deprecated
-$grayLight = $darkGrayLight
-$grayDark  = $lightGrayLight
-
 
 $transitionTime = .15s
 $transitionFunction = ease-in-out
@@ -52,10 +47,6 @@ $gapSize = 16px
 
 rem($a)
 	($a / 16)rem
-
-// @deprecated colors
-$default = $main
-
 
 // See https://github.com/stylus/stylus/issues/1872#issuecomment-86553717
 use('stylusUtils.js')

@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/react/types-6-0'
 import React from 'react'
 import { Zap } from 'lucide-react'
+import Box from '../Box'
 import Component from '.'
 
 export default {
@@ -8,7 +9,7 @@ export default {
 	component: Component
 } as Meta
 
-export const Basic = (args: any) => <Component {...args}>Button</Component>
+export const Basic = (args: any) => <Box><Component {...args}>Button</Component></Box>
 Basic.args = {
 	nomargintop: true,
 	icon: Zap,
@@ -16,7 +17,7 @@ Basic.args = {
 	block: true
 }
 
-export const WithImg = (args: any) => <Component {...args}>Button</Component>
+export const WithImg = (args: any) => <Box><Component {...args}>Button</Component></Box>
 WithImg.args = {
 	nomargintop: true,
 	icon: '/16-16.svg',
@@ -24,7 +25,7 @@ WithImg.args = {
 	block: true
 }
 
-export const ExternalLinkButton = (args: any) => <Component {...args}>Button</Component>
+export const ExternalLinkButton = (args: any) => <Box><Component {...args}>Button</Component></Box>
 ExternalLinkButton.args = {
 	nomargintop: true,
 	href: 'https://example.com',

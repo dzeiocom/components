@@ -9,7 +9,7 @@ import css from './Popup.module.styl'
 interface Props {
 	children: React.ReactNode
 	onClose?: () => void
-	header?: Box['props']
+	title?: string
 }
 
 export default class Popup extends React.Component<Props> {
@@ -17,7 +17,7 @@ export default class Popup extends React.Component<Props> {
 	public render = () => (
 		<Row nomargin onClick={this.parentClose} justify="center" align="center" className={css.popup}>
 			<Box
-				//{...this.props.header as any}
+				title={this.props.title}
 				className={css.popupChild}
 				onClick={(ev) => ev.stopPropagation()}
 				rightHeader={
