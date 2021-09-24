@@ -1,7 +1,7 @@
 import Router from 'next/router'
 
 import Image, { ImageProps } from 'next/image'
-import React, { FC } from 'react'
+import React from 'react'
 import { ChevronDown, ChevronsRight, Menu, X } from 'lucide-react'
 import Text from '../Text'
 import Col from '../Col'
@@ -10,6 +10,7 @@ import Link from '../Link'
 import { buildClassName } from '../Util'
 
 import css from './Navbar.module.styl'
+import { Icon } from '../interfaces'
 
 interface Props {
 	/**
@@ -64,7 +65,7 @@ interface Props {
 	 */
 	items: Array<{
 		path: string
-		icon?: FC
+		icon?: Icon
 		name: string
 	}>
 	/**
