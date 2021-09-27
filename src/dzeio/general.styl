@@ -1,8 +1,15 @@
 //@import "_aileron"
 @import "config"
 
-body
+*
+*::before
+*::after
 	box-sizing border-box
+
+	scrollbar-width 16px
+	scrollbar-color darken($foregroundLight, 16%) $foregroundLight
+	@media (prefers-color-scheme dark)
+		scrollbar-color lighten($foregroundDark, 16%) $foregroundDark
 	font-family: ui-system, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif
 
 // Georgia,Cambria,"Times New Roman",Times,serif
@@ -25,9 +32,9 @@ a
 	text-decoration none
 
 /* width */
-::-webkit-scrollbar {
-	width: 16px;
-}
+::-webkit-scrollbar
+	width 16px
+
 
 /* Track */
 ::-webkit-scrollbar-corner

@@ -15,6 +15,9 @@
 			color $darkGrayDark
 		transition color $transition
 		pointer-events none
+		&.iconClickable
+			pointer-events all
+			cursor pointer
 		top 14px
 		&.left
 			left 16px // input padding-left
@@ -51,52 +54,25 @@
 	/* End */
 
 	.autocomplete
-		display flex
 		opacity 0
 		transition all $transition
 		overflow-x hidden
 		pointer-events none
-		// display flex
-		flex-direction column
-		list-style none
 		position absolute
-		top calc(100% - 4px)
+		top calc(100% + 16px)
 		left 0
 		width 100%
 		z-index 100
-		box-shadow 0 2px 4px rgba(black, .3)
-		margin 0
-		padding 0
-		background $foregroundLight
-		@media (prefers-color-scheme dark)
-			background $foregroundDark
-
-		border-radius 8px
 		max-height 25vh
 		overflow-y auto
 		@media (max-width $mobile)
 			max-height 50vh
 		&.reverse
-			flex-direction column-reverse
 			top initial
-			bottom 100%
-			box-shadow 0 -4px 8px rgba(black, .3)
-			border-radius 0
-			border-top-left-radius 4px
-			border-top-right-radius 4px
-		li
-			transition all $transition
-			padding 8px
-			@media (max-width $mobile)
-				padding 24px
-			cursor pointer
-			&:hover
-				background darken(@background, 20%)
-				@media (prefers-color-scheme dark)
-					background lighten(lighten($foregroundDark, 5%), 20%)
+			bottom calc(100% + 16px)
 
 	div + .autocomplete
-		top calc(100% - 4px - .9em)
+		top 100%
 
 	input:focus ~ .autocomplete
 	select:focus ~ .autocomplete
@@ -127,9 +103,13 @@
 			font-size rem(16)
 			transition color $transition
 			opacity 1
-			color $darkGrayLight
+			// color $darkGrayLight
+			// @media (prefers-color-scheme dark)
+			// 	color $darkGrayDark
+
+			color black
 			@media (prefers-color-scheme dark)
-				color $darkGrayDark
+				color white
 
 
 		&:disabled
@@ -162,14 +142,14 @@
 
 				~ svg
 					color @border-color
-				&::placeholder
-					color black
+				// &::placeholder
+				// 	color black
 
-					@media (prefers-color-scheme dark)
-						color white
+				// 	@media (prefers-color-scheme dark)
+				// 		color white
 
 			&:invalid
-				border-color $errorDark
+				border-color $errorLight
 
 				~ label
 					color @border-color
@@ -177,7 +157,7 @@
 				~ svg
 					color @border-color
 				@media (prefers-color-scheme dark)
-					border-color $errorLight
+					border-color $errorDark
 
 					~ label
 						color @border-color
@@ -190,53 +170,7 @@
 			padding-left 16px + 24px + 10px
 		&.iconRight
 			padding-right 16 + 24 + 10px
-		&.filled
-			border none
-			background rgba(gray, .1)
-			border-radius @border-radius @border-radius 0 0
-			border-bottom 2px solid rgba(black,.4)
 
-			@media (prefers-color-scheme dark)
-				background rgba(white, .1)
-				border-bottom 2px solid rgba(white,.4)
-
-			&.opaque
-				background white
-
-				@media (prefers-color-scheme dark)
-					background #202020
-
-			&:hover:not(:disabled)
-				background rgba(gray, .2)
-
-				@media (prefers-color-scheme dark)
-					background rgba(white, .2)
-
-				&.opaque
-					background darken(white, 5%)
-					@media (prefers-color-scheme dark)
-						background #1c1c1c
-			&:focus
-				background rgba(gray, .3)
-				border-bottom 2px solid $main
-
-				&.opaque
-					background white
-
-					@media (prefers-color-scheme dark)
-						background #202020
-
-			&:not(:placeholder-shown)
-			&:focus
-			&:not([placeholder=" "])
-				~ label
-					top 3px
-					left 16px - 4px // .input/padding-left label/padding-left
-					background transparent
-					padding 0
-					font-size .75rem
-				~ svg.left ~ label
-					left 16px + 24px + 10px // .input/padding-left label/padding-left
 		~ svg.rotate
 			transform rotateX(0)
 			transition $transition
@@ -249,6 +183,9 @@
 		padding 0 8px
 		font-size rem(14)
 
-	&.block, &.block input, &.block select, &.block textarea
+	&.block
+	&.block input
+	&.block select
+	&.block textarea
 		width 100%
 		display block

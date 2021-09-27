@@ -12,18 +12,26 @@ export default {
 export const Basic: Story<any> = (args: any) => <Component {...args} />
 
 let tmp = Basic.bind({})
-tmp.args = {label: 'Label', helper: 'Helper', maxLength: 6, characterCount: true, icon: X}
+tmp.args = {label: 'Label', helper: 'Helper', maxLength: 6, iconLeft: {
+	icon: X,
+	transformer: (v: string) => v + 1
+}}
 
 export const Normal = tmp
 
 tmp = Basic.bind({})
-tmp.args = {label: 'Label', filled:true, helper: 'Helper', autocomplete: ['a', 'b', 'cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc'], characterCount: true, icon: X}
+tmp.args = {label: 'Label', filled:true, helper: 'Helper', choices: [
+	'a',
+	'a',
+	'a',
+	'a',
+	'a',
+	'a',
+	'a',
+	'a',
+	'b',
+	{value: 'd', display: 'D'},
+	'cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc'
+], characterCount: true, iconLeft: X}
 
 export const AutoComplete = tmp
-
-export const Select: Story<any> = (args: any) => <Component type="select" {...args}>
-	<option>a</option>
-	<option>b</option>
-	<option>c</option>
-	<option>d</option>
-</Component>

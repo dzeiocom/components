@@ -5,22 +5,28 @@ import Text from '../Text'
 import { Icon } from '../interfaces'
 import { buildClassName } from '../Util'
 import css from './Input.module.styl'
+import Menu from '../Menu'
+import { objectClone } from '@dzeio/object-util'
 
 interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
 	id?: string
 	label?: string
-	icon?: Icon
-	iconRight?: Icon
+	iconLeft?: Icon | {
+		icon: Icon
+		transformer: (value: string) => string
+	}
+	iconRight?: Icon | {
+		icon: Icon
+		transformer: (value: string) => string
+	}
 	helper?: string
 	inputRef?: React.RefObject<HTMLInputElement>
-	selectRef?: React.RefObject<HTMLSelectElement>
 	type?: 'color' | 'text' | 'date' | 'datetime-local' |
 	'email' | 'file' | 'month' | 'number' | 'password' |
 	'range' | 'search' | 'tel' | 'time' | 'url' | 'week' |
 	// Custom Types
-	'select' | 'textarea'
-	autocomplete?: Array<string>
-	children?: React.ReactNode
+	'textarea'
+	choices?: Array<string | {display: string, value: string}>
 }
 
 interface States {
@@ -29,100 +35,78 @@ interface States {
 	isInFirstPartOfScreen?: boolean
 }
 
-export default class Input extends React.Component<Props, States> {
+export default class Input extends React.PureComponent<Props, States> {
 
 	public state: States = {}
 
 	// any because f*ck types
-	private inputRef: React.RefObject<any> = React.createRef()
+	private inputRef: React.RefObject<HTMLInputElement> = React.createRef()
 	private parentRef: React.RefObject<HTMLDivElement> = React.createRef()
 
 	public componentDidMount() {
 		if (this.props.type === 'textarea') {
 			this.textareaHandler()
 		}
-		if (this.props.autocomplete) {
+		if (this.props.choices) {
 			window.addEventListener('scroll', this.parentScroll)
 			this.parentScroll()
 		}
 	}
 
+	public componentDidUpdate() {
+		console.log(this.state)
+	}
+
 	public componentWillUnmount() {
-		if (this.props.autocomplete) {
+		if (this.props.choices) {
 			window.removeEventListener('scroll', this.parentScroll)
 		}
 	}
 
 	public render() {
-		const props: Props = Object.assign({}, this.props)
+		const props: Props = objectClone(this.props)
 		delete props.label
-		delete props.children
-		delete props.icon
-		delete props.helper
-		delete props.autocomplete
+		delete props.iconLeft
 		delete props.iconRight
 		delete props.inputRef
-		delete props.selectRef
-		delete props.color
+		delete props.helper
+		delete props.choices
 
 		const baseProps: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> = {
 			placeholder: this.props.label || this.props.placeholder || ' ',
 			ref: this.props.inputRef || this.inputRef,
 			className: buildClassName(
-				[css.iconLeft, this.props.icon],
-				[css.iconRight, this.props.iconRight || this.props.autocomplete]
+				[css.iconLeft, this.props.iconLeft],
+				[css.iconRight, this.props.iconRight || this.props.choices]
 			),
 			onInvalid: (ev: React.FormEvent<HTMLInputElement>) => ev.preventDefault(),
 		}
 
 		let input: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
-		if (this.props.type === 'number') {
-			baseProps.onWheel = (ev: React.WheelEvent<HTMLInputElement>) => ev.currentTarget.blur()
-		}
-
-		if (this.props.type === 'select' && !this.props.readOnly) {
-			input = (
-				<select
-					ref={this.props.selectRef || this.inputRef}
-					{...props as React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>}
-					className={buildClassName(
-						[css.iconLeft, this.props.icon],
-						[css.iconRight, !this.props.disabled || this.props.iconRight],
-						[css[this.props.color as string], this.props.color]
-					)}
-				>
-					{this.props.children}
-				</select>
-			)
-		// select is readonly
-		} else if (this.props.type === 'select') {
-			input = (
-				<input
-					{...props}
-					{...baseProps}
-					type="text"
-				/>
-			)
-		} else if (this.props.type === 'textarea') {
-			delete baseProps.ref
-			input = (
-				<textarea
-					{...props as React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>}
-					{...baseProps as any}
-					ref={this.inputRef}
-					style={{minHeight: this.state?.textAreaHeight}}
-					onKeyDown={this.textareaHandler}
-					onKeyUp={this.textareaHandler}
-					onFocus={this.textareaHandler}
-				/>
-			)
-		} else {
-			input = (
-				<input
-					{...props}
-					{...baseProps}
-				/>
+		switch (this.props.type) {
+			case 'textarea':
+				delete baseProps.ref
+				input = (
+					<textarea
+						{...props as React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>}
+						{...baseProps as any}
+						ref={this.inputRef}
+						style={{minHeight: this.state?.textAreaHeight}}
+						onKeyDown={this.textareaHandler}
+						onKeyUp={this.textareaHandler}
+						onFocus={this.textareaHandler}
+					/>
+				)
+				break
+			case 'number':
+				baseProps.onWheel = (ev: React.WheelEvent<HTMLInputElement>) => ev.currentTarget.blur()
+			default:
+				input = (
+					<input
+						{...props}
+						{...baseProps}
+					/>
 			)
 		}
 
@@ -134,17 +118,15 @@ export default class Input extends React.Component<Props, States> {
 				onChangeCapture={this.onChange}
 				ref={this.parentRef}
 			>
-				{input}
+				{input as any}
 
 				{/* Left Icon */}
-				{this.props.icon && (
-					<this.props.icon size="18" className={css.left} />
-				)}
+				{this.getIcon('left')}
 
 				{/* Right Icon */}
-				{this.props.iconRight ? (
-					<this.props.iconRight size="18" className={css.right} />
-				) : ((this.props.type === 'select' || this.props.autocomplete) && !this.props.disabled) && (
+				{this.props.iconRight ?
+					this.getIcon('right') :
+					(this.props.choices && !this.props.disabled) && (
 					<ChevronDown size="18" className={buildClassName(css.right, css.rotate)} />
 				)}
 
@@ -154,10 +136,23 @@ export default class Input extends React.Component<Props, States> {
 				)}
 
 				{/* List when this is an autocomplete */}
-				{this.props.autocomplete && this.props.autocomplete.indexOf(this.state?.value ?? this.props.value?.toString() ?? '') === -1 && (
-					<ul className={buildClassName(css.autocomplete, [css.reverse, !this.state.isInFirstPartOfScreen])}>
-						{this.props.autocomplete.filter((item) => item.toLowerCase().includes(this.state?.value?.toLowerCase() ?? this.props.value?.toString().toLowerCase() ?? '')).map((item) => (<li key={item} onClick={this.onAutoCompleteClick(item)}><Text>{item}</Text></li>))}
-					</ul>
+				{this.props.choices && (
+					// <ul className={buildClassName(css.autocomplete, [css.reverse, !this.state.isInFirstPartOfScreen])}>
+					// 	{this.props.choices
+					// 		.map((item, index) => typeof item === 'string' ? ({item: {display: item, value: item}, index}) : {item, index})
+					// 		.filter(
+					// 			(item) => !this.getValue() || [item.item.display.toLowerCase(), item.item.value.toLowerCase()]
+					// 				.includes(this.getValue())
+					// 		)
+					// 		.map((item) => (<li key={item.index} onClick={this.onAutoCompleteClick(item.index)}><Text>{item.item.display}</Text></li>))}
+					// </ul>
+					<Menu
+						outline
+						hideWhenEmpty
+						className={buildClassName(css.autocomplete, [css.reverse, !this.state.isInFirstPartOfScreen])}
+						items={this.buildList()}
+						onClick={this.listSelection}
+					/>
 				)}
 			</div>
 		)
@@ -176,8 +171,56 @@ export default class Input extends React.Component<Props, States> {
 		}
 	}
 
+	private buildList(): Menu['props']['items'] {
+		if (!this.props.choices) {
+			return []
+		}
+		const v = this.getValue().toLowerCase()
+		return this.props.choices
+		.map((item, index) => typeof item === 'string' ? ({item: {display: item, value: item}, index}) : {item, index})
+		.filter(
+			(item) => !v || item.item.display.toLowerCase().includes(v) || item.item.display.toLowerCase().toLowerCase().includes(v)
+		)
+		.map((item) => ({display: item.item.display, value: item.index}))
+	}
+
+	private listSelection: Menu['props']['onClick'] = async (value: number, key) => {
+		const newValue = this.props.choices?.[value]
+		if (!newValue) {
+			return
+		}
+		if (typeof newValue === 'string') {
+			return this.setValue(newValue)
+		}
+		await this.setValue(newValue.display)
+		this.setState({value: newValue.value})
+	}
+
+	private getIcon(icon: 'left' | 'right') {
+		const Icon = icon === 'left' ? this.props.iconLeft : this.props.iconRight
+		if (!Icon) {
+			return undefined
+		}
+		if ('icon' in Icon) {
+			return <Icon.icon size="18" className={buildClassName(css[icon], css.iconClickable)} onClick={() => {
+				const el = this.getElement()
+				console.log(el, 'pouet')
+				if (!el) {
+					return
+				}
+				el.value = Icon.transformer(el.value)
+			}} />
+		}
+
+		return <Icon size="18" className={css[icon]} />
+	}
+
+	private getValue(): string {
+		return this.state?.value?.toLowerCase() ?? this.props.value?.toString().toLowerCase() ?? ''
+	}
+
 	private getElement(): undefined | HTMLInputElement {
-		const item = this.props.inputRef || this.props.selectRef || this.inputRef
+		const item = this.props.inputRef || this.inputRef
 		if (!item || !item.current) {return}
 		return item.current
 	}
@@ -188,8 +231,7 @@ export default class Input extends React.Component<Props, States> {
 			this.setState({textAreaHeight: this.inputRef.current.scrollHeight})
 		})
 
-	private onAutoCompleteClick = (value: string) => async () => {
-		// console.log('test')
+		private async setValue(value: string) {
 		const item = this.getElement()
 		if (!item) {return}
 		const valueSetter = Object.getOwnPropertyDescriptor(item, 'value')?.set

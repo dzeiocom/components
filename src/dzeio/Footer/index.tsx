@@ -5,6 +5,9 @@ import Text from '../Text'
 import css from './Footer.module.styl'
 import Image from 'next/image'
 import { Icon } from '../interfaces'
+import Container from '../Container'
+import Row from '../Row'
+import Col from '../Col'
 
 interface Props {
 	text?: string
@@ -22,27 +25,34 @@ interface Props {
 export default class Footer extends React.Component<Props> {
 	public render = () => (
 		<footer className={css.footer}>
-			{this.props.text ? (
-				<Text align="center">{this.props.text}</Text>
-			) : (
-				<Text align="center">Made with <span className={css.animation}><Heart color={'#E6808A'} fill={'#E6808A'} size={16} fillOpacity={0.5} /></span> by {this.props.company || 'Dzeio'}</Text>
-			)}
-			{this.props.links && (
-				<ul>{this.props.links.map((l, index) => (
-					<li key={l.path}><Text>{index !== 0 && (<>&nbsp;- </>)}<Link href={l.path}>{l.name}</Link></Text></li>
-				))}</ul>
-			)}
-			{this.props.socials && (
-				<ul className={css.socials}>{this.props.socials.map((l, index) => (
-					<li key={l.href}><Text><Link hideIcon noStyle href={l.href}>
-						{typeof l.icon === 'string' ? (
-							<Image width={24} height={24} src={l.icon} />
+			<Container>
+				<Row nomargin>
+					<Col>
+						{this.props.text ? (
+							<Text>{this.props.text}</Text>
 						) : (
-							<l.icon size={24} />
-					)}
-					</Link></Text></li>
-				))}</ul>
-			)}
+							<Text>Made with <span className={css.animation}><Heart color={'#E6808A'} fill={'#E6808A'} size={16} fillOpacity={0.5} /></span> by {this.props.company || 'Dzeio'}</Text>
+						)}
+					</Col>
+					<Col>
+							<ul>
+								{this.props.links && this.props.links.map((l, index) => (
+									<li key={l.path + index}><Text><Link href={l.path} hideIcon>{l.name}</Link></Text></li>
+								))}
+								{this.props.socials && this.props.socials.map((l, index) => (
+									<li key={l.href + index} className={css.icon}><Text><Link hideIcon noStyle href={l.href}>
+										{typeof l.icon === 'string' ? (
+											<Image width={24} height={24} src={l.icon} />
+										) : (
+											<l.icon size={24} />
+									)}
+									</Link></Text></li>
+								))}
+							</ul>
+					</Col>
+				</Row>
+			</Container>
+
 		</footer>
 	)
 }

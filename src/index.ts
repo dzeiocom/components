@@ -1,6 +1,4 @@
 /**
- * Copyright (c) 2021
- *
  * @summary DZEIO Component Library
  */
 
@@ -18,6 +16,7 @@ import Image from './dzeio/Image'
 import Input from './dzeio/Input'
 import Link from './dzeio/Link'
 import Loader from './dzeio/Loader'
+import Menu from './dzeio/Menu'
 import Navbar from './dzeio/Navbar'
 import NotificationManager from './dzeio/NotificationManager'
 import Popup from './dzeio/Popup'
@@ -39,6 +38,7 @@ export {
 	Input,
 	Link,
 	Loader,
+	Menu,
 	Navbar,
 	NotificationManager,
 	Popup,

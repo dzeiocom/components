@@ -1,4 +1,4 @@
-export function buildClassName(...classes: Array<Array<any> | string | undefined>): string|undefined {
+export function buildClassName(...classes: Array<Array<any> | string | undefined>): string | undefined {
 	const classesFinal: Array<string> = []
 	root: for (const classe of classes) {
 		if (typeof classe === 'undefined') {
