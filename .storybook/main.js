@@ -5,6 +5,9 @@ module.exports = {
 	"stories": [
 		"../src/dzeio/**/*.stories.tsx",
 	],
+	core: {
+		builder: "webpack5"
+	},
 	"addons": [
 		"@storybook/addon-essentials"
 	],
