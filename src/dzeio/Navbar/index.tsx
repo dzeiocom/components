@@ -225,7 +225,7 @@ export default class Navbar extends React.Component<Props, State> {
 							</div>
 						</div>
 						<div className={buildClassName(css.userMenu, [css.menuActive, !this.state.isMobile && this.state.menuActive])}>
-							<Row nomargin>
+							<Row>
 								{this.props.user.menu?.informations && (
 									<Col>{this.props.user.menu?.informations}</Col>
 								)}

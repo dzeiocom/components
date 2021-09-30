@@ -5,6 +5,7 @@
 import './dzeio/general.styl'
 
 import Box from './dzeio/Box'
+import BoxHeader from './dzeio/Box/BoxHeader'
 import Button from './dzeio/Button'
 import Checkbox from './dzeio/Checkbox'
 import Code from './dzeio/Code'
@@ -27,6 +28,7 @@ import * as Util from './dzeio/Util'
 
 export {
 	Box,
+	BoxHeader,
 	Button,
 	Checkbox,
 	Code,

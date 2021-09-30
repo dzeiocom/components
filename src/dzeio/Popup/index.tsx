@@ -15,7 +15,7 @@ interface Props {
 export default class Popup extends React.Component<Props> {
 
 	public render = () => (
-		<Row nomargin onClick={this.parentClose} justify="center" align="center" className={css.popup}>
+		<Row onClick={this.parentClose} justify="center" align="center" className={css.popup}>
 			<Box
 				title={this.props.title}
 				className={css.popupChild}

@@ -3,10 +3,9 @@ import React from 'react'
 import { buildClassName } from '../Util'
 
 import css from './Box.module.styl'
-import Row from '../Row'
-import Col from '../Col'
-import Text from '../Text'
 import { Icon } from '../interfaces'
+import { objectOmit } from '@dzeio/object-util'
+import BoxHeader from './BoxHeader'
 
 interface Props extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
 	noPadding?: boolean
@@ -20,29 +19,11 @@ interface Props extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElem
 export default class Box extends React.Component<Props> {
 	public render = () => (
 		<div
-			{...this.props}
+			{...objectOmit<Record<string, any>>(this.props, 'title', 'icon', 'rightHeader', 'noPadding')}
 			className={buildClassName(css.box, this.props?.className)}
 		>
 			{(this.props.rightHeader || this.props.title || this.props.icon) && (
-				<div className={css.header}>
-					<Row nomargin justify="space-between">
-						<Col>
-							<Text className={css.title}>
-								{this.props.icon && (
-									<span className={css.icon}>
-										<this.props.icon strokeWidth="2" fontWeight="800" size="20" color="white" />
-									</span>
-								)}
-								{this.props.title ? this.props.title : undefined}
-							</Text>
-						</Col>
-						{this.props.rightHeader && (
-							<Col nogrow>
-								{this.props.rightHeader}
-							</Col>
-						)}
-					</Row>
-				</div>
+				<BoxHeader title={this.props.title} icon={this.props.icon}>{this.props.rightHeader}</BoxHeader>
 			)}
 			{this.props.children && (
 				<div className={buildClassName([css.body, !this.props.noPadding])}>

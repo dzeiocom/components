@@ -26,7 +26,7 @@ export default class Footer extends React.Component<Props> {
 	public render = () => (
 		<footer className={css.footer}>
 			<Container>
-				<Row nomargin>
+				<Row>
 					<Col>
 						{this.props.text ? (
 							<Text>{this.props.text}</Text>

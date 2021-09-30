@@ -12,7 +12,6 @@ interface Props {
 	nowrap?: boolean
 	nogrow?: boolean
 	className?: string
-	nomargin?: boolean
 	onClick?: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
@@ -28,8 +27,7 @@ export default class Row extends React.Component<Props> {
 				[css[`align-${this.props.align}`], this.props.align],
 				[css.nowrap, this.props.nowrap],
 				[css.nogrow, this.props.nogrow],
-				this.props.className,
-				[css.nomargin, this.props.nomargin]
+				this.props.className
 			)}
 			onClick={this.props.onClick}
 		>
