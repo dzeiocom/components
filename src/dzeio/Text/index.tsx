@@ -27,19 +27,23 @@ const types: Record<Types, {
 	},
 	h1: {
 		size: 28,
-		weight: 'bold'
+		weight: 'bold',
+		tag: 'h1'
 	},
 	h2: {
 		size: 24,
-		weight: 'bold'
+		weight: 'bold',
+		tag: 'h2'
 	},
 	h3: {
 		size: 20,
-		weight: 'bold'
+		weight: 'bold',
+		tag: 'h3'
 	},
 	h4: {
 		size: 18,
-		weight: 'bold'
+		weight: 'bold',
+		tag: 'h4'
 	},
 	text: {},
 	bold: {
@@ -54,10 +58,16 @@ const types: Record<Types, {
 export default class Text extends React.PureComponent<Props> {
 
 	public render() {
-		let data: { weight: Props['weight'], size: Props['size'] } = Object.assign({
+		let data: { weight: Props['weight'], size: Props['size'], tag?: Props['tag'] } = Object.assign({
 			size: 16,
 			weight: 'normal'
 		}, this.props.type ? types[this.props.type] : {})
+		if (this.props.size) {
+			data.size = this.props.size
+		}
+		if (this.props.weight) {
+			data.weight = this.props.weight
+		}
 		const classes = buildClassName(
 			css.text,
 			[css[`weight-${data.weight}`], data.weight !== 'normal'],
@@ -73,6 +83,6 @@ export default class Text extends React.PureComponent<Props> {
 			return (<p className={classes}><em>{this.props.children}</em></p>)
 		}
 
-		return React.createElement(this.props.tag || 'p', {className: classes, children: this.props.children})
+		return React.createElement(this.props.tag ?? data.tag ?? 'p', {className: classes, children: this.props.children})
 	}
 }

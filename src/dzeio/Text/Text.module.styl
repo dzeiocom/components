@@ -1,3 +1,5 @@
+@import "../config"
+
 .text
 	margin 0
 	font-size rem(16)
@@ -16,9 +18,11 @@ for size in 36 28 24 20 18 16 14
 	.size-{size}
 		font-size rem(size)
 
-for weight in 'normal' 'bold' 'light'
+for weight in 'normal' 'bold'
 	.weight-{weight}
 		font-weight unquote(weight)
+.weight-light
+	font-weight 300
 
 .align-center
 	text-align center
