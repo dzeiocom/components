@@ -27,6 +27,11 @@ interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLIn
 	// Custom Types
 	'textarea'
 	choices?: Array<string | {display: string, value: string}>
+
+	/**
+	 * Always display every choices
+	 */
+	displayAllOptions?: boolean
 }
 
 interface States {
@@ -179,7 +184,7 @@ export default class Input extends React.PureComponent<Props, States> {
 		return this.props.choices
 		.map((item, index) => typeof item === 'string' ? ({item: {display: item, value: item}, index}) : {item, index})
 		.filter(
-			(item) => !v || item.item.display.toLowerCase().includes(v) || item.item.display.toLowerCase().toLowerCase().includes(v)
+			(item) => this.props.displayAllOptions || !v || item.item.display.toLowerCase().includes(v) || item.item.display.toLowerCase().toLowerCase().includes(v)
 		)
 		.map((item) => ({display: item.item.display, value: item.index}))
 	}

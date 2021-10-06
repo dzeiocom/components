@@ -3,7 +3,7 @@ const webpack = require('webpack')
 
 module.exports = {
 	"stories": [
-		"../src/dzeio/**/*.stories.tsx",
+		"../src/**/*.stories.tsx",
 	],
 	core: {
 		builder: "webpack5"

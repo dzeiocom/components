@@ -5,7 +5,7 @@ import css from './Text.module.styl'
 type Types = 'hero' | 'h1' | 'h2' | 'h3' | 'h4' | 'text' | 'light' | 'bold'
 
 interface Props {
-	color?: 'black' | 'white'
+	color?: 'black' | 'white' | 'none'
 	type?: Types
 	tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'em' | 'span' | 'div'
 	weight?: 'normal' | 'bold' | 'light'

@@ -1,3 +1,4 @@
+import React from 'react'
 // https://stackoverflow.com/a/64765638/7335674
 
 import * as nextImage from 'next/image'

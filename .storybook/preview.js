@@ -1,4 +1,4 @@
-import '../src/dzeio/general.styl'
+import '../src/general.styl'
 import './mockNextRouter'
 import './mockNextImage'
 

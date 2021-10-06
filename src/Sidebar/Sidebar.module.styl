@@ -1,0 +1,177 @@
+@import '../config'
+
+// $transition = 10s linear
+// $transitionTime = 10s
+// $transitionFunction = linear
+.sidebarBody
+	margin-left 300px
+	transition margin-left $transition
+	&.short
+		margin-left 56px
+
+.sidebar
+	background $foregroundLight
+	@media (prefers-color-scheme dark)
+		background $foregroundDark
+	position fixed
+	left 0
+	top 0
+	padding 24px
+	height 100vh
+	width 300px
+	z-index 100
+	display flex
+	flex-direction column
+	transition width $transition
+
+	.header
+	.userSpace
+	.header .imgContainer
+	> ul span
+		// transition all $transition
+		transition-property width, padding, margin, max-width
+		transition-duration $transitionTime
+		transition-timing-function $transitionFunction
+		overflow hidden
+	> ul span
+		width calc(100% - 40px)
+		max-width 100%
+	.header p
+		cursor pointer
+
+	.userSpace
+		> div
+			transition all $transition
+		p
+			overflow hidden
+			white-space nowrap
+		svg
+			cursor pointer
+
+	&.short
+		width 88px
+		.userSpace > div:first-child
+		.header > div:first-child
+			width 0
+			max-width 0
+		.header
+			margin-left -16px
+			> div:first-child
+				padding-left 0 !important
+
+		.header > div svg
+		.userSpace svg
+				margin 0 8px
+		.header .imgContainer
+		> ul
+			span
+			svg:last-child
+				width 0
+				padding-left 0
+				padding-right 0
+				margin 0 !important
+				max-width 0
+
+
+
+	.header
+		margin-left -8px
+		//min-height 70px
+		svg
+			margin-right 8px
+
+	hr
+		margin 0
+	ul ul
+		padding-left 40px
+		max-height 0
+		opacity 0
+		overflow hidden
+		transition all $transition
+		position relative
+		&::before
+			content " "
+			position absolute
+			background $darkGrayLight
+			@media (prefers-color-theme dark)
+				background $lightGrayDark
+			border-radius 2px
+			width 2px
+			height 100%
+			margin-top 8px
+			left 18px
+	li.activeMenu
+		svg:last-child
+			transform rotateX(180deg)
+		ul
+			opacity 1
+			// not the best but IDK what is better
+			max-height 100vh
+	ul li
+		margin-top 8px
+		div
+			width 100%
+			cursor pointer
+			border-radius 8px
+			transition all $transition
+			color $darkGrayLight
+			@media (prefers-color-scheme dark)
+				color $lightGrayDark
+			&:first-child
+				margin-top 0
+			&:hover
+
+				color black
+				background $lightGrayLight
+				@media (prefers-color-scheme dark)
+					color white
+					background $darkGrayDark
+			&.active
+			&:active
+				color $textOnMain
+				background $main
+			padding 8px
+			display flex
+			align-items center
+			z-index 111
+			position relative
+
+			svg
+				transition color $transition
+				&:first-child + span
+					margin-left 16px
+
+			span
+				display inline-block
+				white-space nowrap
+
+			a
+				width 100%
+				display flex
+				//max-height 24px
+
+.navbar
+.sidebar
+	ul
+		list-style none
+		margin 0
+		padding 0
+
+.userMenu
+	padding 8px 16px
+	a
+		display inline-block
+		padding-bottom 16px
+
+
+.mobileMenu
+	opacity 0
+	transition opacity $transition
+	pointer-events none
+	&.shown
+		opacity 1
+		pointer-events initial
+
+.mainGradient
+	//WIP
+	fill $mainGradient
