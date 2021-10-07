@@ -8,6 +8,6 @@ export default {
 	component: Component
 } as Meta
 
-export const Basic = (args: any) => (
+export const Popup = (args: any) => (
 	<Component><Text>Test</Text></Component>
 )

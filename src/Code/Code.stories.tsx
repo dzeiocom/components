@@ -10,7 +10,7 @@ export default {
 	}
 } as Meta
 
-export const Basic = (args: any) => {
+export const Code = (args: any) => {
 	const content = args.content
 	delete args.content
 

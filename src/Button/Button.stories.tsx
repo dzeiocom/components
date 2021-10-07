@@ -9,10 +9,11 @@ export default {
 	component: Component
 } as Meta
 
-export const Basic = (args: any) => <Box><Component {...args}>Button</Component></Box>
-Basic.args = {
+export const Button = (args: any) => <Box><Component {...args}>Button</Component></Box>
+Button.args = {
 	nomargintop: true,
 	icon: Zap,
+	iconLeft: Zap,
 	size: 'small',
 	block: true
 }

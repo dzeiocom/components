@@ -31,9 +31,10 @@ Sidebar.args = {
 		name: 'With Childs',
 		icon: Zap,
 		subMenu: [{
-			name: 'With Childs'
+			name: 'Child 1'
 		}, {
-			name: 'With Childs'
+			name: 'Child with link',
+			path: '/dashboard'
 		}]
 	}, {
 		path: '/dashboard',

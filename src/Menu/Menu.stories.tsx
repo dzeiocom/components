@@ -21,6 +21,6 @@ const list: Component['props']['items'] = [
 	{value: 'Menu item 10', icon: XOctagon}
 ]
 
-export const Basic = (args: any) => (
+export const Menu = (args: any) => (
 	<Component outline {...args} items={list} onClick={(_, index) => list[index].selected = !list[index].selected} />
 )

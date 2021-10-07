@@ -12,33 +12,34 @@ export default {
 	}
 } as Meta
 
-export const Basic: Story<any> = (args: any) => <Component {...args} />
-Basic.args = {
-	type: 'navbar',
+export const Navbar: Story<any> = (args: any) => <Component {...args} />
+Navbar.args = {
 	logo: {src: '/90-38.svg', width: 90, height: 38},
-	loginUrl: '/login',
-	registerUrl: '/register',
 	user: {
 		name: 'Username',
-		description: 'User Description',
-		menu: {
-			links: [{
-				path: '/logout',
-				name: 'Logout'
-			}, {
-				path: '/logout',
-				name: 'Logout'
-			}],
-			informations: (<Text>Testing :D</Text>)
-		}
+		menu: [{
+			path: '/logout',
+			value: 'Logout'
+		}, {
+			path: '/logout',
+			value: 'Logout'
+		}]
 	},
-	items: [{
-		path: '/dashboard',
+	menu: [{
 		name: 'Dasboard',
 		icon: Zap
 	}, {
+		name: 'With Childs',
+		icon: Zap,
+		subMenu: [{
+			name: 'Child 1'
+		}, {
+			name: 'Child with link',
+			path: '/dashboard'
+		}]
+	}, {
 		path: '/dashboard',
-		name: 'Dasboard',
+		name: 'Link',
 		icon: ZapOff
 	}],
 }

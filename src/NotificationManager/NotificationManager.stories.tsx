@@ -8,8 +8,8 @@ export default {
 	component: Component
 } as Meta
 
-export const Basic = (args: any) => <Component {...args} />
-Basic.args = {
+export const NotificationManager = (args: any) => <Component {...args} />
+NotificationManager.args = {
 	ttl: 999999999999,
 	notifications: [
 		'Test',

@@ -7,4 +7,4 @@ export default {
 	component: Checkbox
 } as Meta
 
-export const Basic = (args: any) => <Checkbox {...args} />
+export const Checkbox = (args: any) => <Checkbox {...args} />

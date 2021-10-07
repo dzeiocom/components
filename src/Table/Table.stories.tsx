@@ -9,7 +9,7 @@ export default {
 	component: Component
 } as Meta
 
-export const Basic = (args: any) => (
+export const Table = (args: any) => (
 	<Box icon={Settings} title="Storage">
 		<Component {...args}>
 			<thead>

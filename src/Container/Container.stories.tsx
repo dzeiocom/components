@@ -14,6 +14,6 @@ export default {
 	}
 } as Meta
 
-export const Basic = (args: any) => (
+export const Container = (args: any) => (
 	<Component {...args}><Text>Test</Text></Component>
 )

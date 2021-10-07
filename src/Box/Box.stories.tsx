@@ -12,7 +12,7 @@ export default {
 	}
 } as Meta
 
-export const Basic = (args: any) => (
+export const Box = (args: any) => (
 	<Component {...args}><Text>Test</Text></Component>
 )
 

@@ -11,9 +11,9 @@ export default {
 	}
 } as Meta
 
-export const Basic: Story<any> = (args: any) => <Component {...args} />
+export const Loader: Story<any> = (args: any) => <Component {...args} />
 
-let tmp = Basic.bind({})
+let tmp = Loader.bind({})
 tmp.args = {
 	auto: {interval : [10, 100], increment: [0, 5]}
 }

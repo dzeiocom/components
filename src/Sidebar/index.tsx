@@ -12,7 +12,6 @@ import { buildClassName } from '../Util'
 import css from './Sidebar.module.styl'
 import { Icon } from '../interfaces'
 import { Menu } from '..'
-import Router from 'next/router'
 
 interface MenuItem {
 		path?: string
@@ -38,16 +37,17 @@ interface Props {
 		/**
 		 * User Menu
 		 */
-		menu?: Menu['props']['items']
+		menu?: Array<MenuItem>
 	}
 	/**
 	 * Links to display
 	 */
 	menu: Array<MenuItem>
-	/**
-	 * Internal Use don't use it !
-	 */
-	onClose?: () => void
+
+	onClose?: () => boolean
+
+	fullWidth?: boolean
+
 }
 
 interface State {
@@ -88,7 +88,9 @@ export default class Navbar extends React.Component<Props, State> {
 		Router.events.on('routeChangeError', () => {
 			this.setState({path: Router.asPath, open: false})
 		})
-		document.body.classList.add(css.sidebarBody)
+		if (!this.props.fullWidth) {
+			document.body.classList.add(css.sidebarBody)
+		}
 		document.body.addEventListener('click', this.onBodyClick)
 	}
 
@@ -118,7 +120,8 @@ export default class Navbar extends React.Component<Props, State> {
 					y: (ev.currentTarget as HTMLElement).offsetTop,
 					menu: subMenu.map((v) => ({
 						display: v.name,
-						value: v.path
+						value: v.path,
+						href: v.path
 					}))
 				}
 			})
@@ -131,7 +134,8 @@ export default class Navbar extends React.Component<Props, State> {
 		<>
 			<nav className={buildClassName(
 				css.sidebar,
-				[css.short, !this.state.open]
+				[css.short, !this.state.open],
+				[css.fullWidth, this.props.fullWidth]
 			)}>
 				<Row nowrap justify="space-between" className={css.header} align="center">
 					{this.props.logo && (
@@ -142,11 +146,7 @@ export default class Navbar extends React.Component<Props, State> {
 						</Col>
 					)}
 					<Col nogrow><Text tag="div">
-						{this.state.open ? (
-							<Minus size={24} onClick={() => this.setState({open: false, activeMenu: undefined})} />
-						) : (
-							<Plus size={24} onClick={() => this.setState({open: true})} />
-						)}
+						<Plus size={24} onClick={this.onCloseOpenClick} />
 					</Text></Col>
 				</Row>
 				<ul>
@@ -162,8 +162,12 @@ export default class Navbar extends React.Component<Props, State> {
 				)}
 			</nav>
 			{this.props.user?.menu && this.state.userMenu && (
-				<div style={{position: 'absolute', bottom: 16, left: this.state.open ? 316 : 104}}>
-					<Menu onClick={this.onMenuClick} outline items={this.props.user.menu} />
+				<div style={{position: 'absolute', bottom: 16, left: this.props.fullWidth ? 16 : this.state.open ? 316 : 104}}>
+					<Menu onClick={this.onMenuClick} outline items={this.props.user.menu.map((v) => ({
+						display: v.name,
+						value: v.path,
+						href: v.path
+					}))} />
 				</div>
 			)}
 			{this.state.subMenu && (
@@ -173,6 +177,14 @@ export default class Navbar extends React.Component<Props, State> {
 			)}
 		</>
 	)
+
+	private onCloseOpenClick = () => {
+		let willBeOpen = !this.state.open
+		if (this.props.onClose && !willBeOpen) {
+			willBeOpen = this.props.onClose()
+		}
+		this.setState(!willBeOpen ? {open: false, activeMenu: undefined} : {open: true})
+	}
 
 	private onMenuClick = (value?: string) => {
 		this.setState({userMenu: false, subMenu: undefined})

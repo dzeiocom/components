@@ -13,4 +13,4 @@ export default {
 	}
 } as Meta
 
-export const Basic = (args: any) => <Component {...args}>{args.text}</Component>
+export const Link = (args: any) => <Component {...args}>{args.text}</Component>

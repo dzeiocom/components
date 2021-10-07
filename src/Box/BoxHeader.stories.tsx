@@ -12,7 +12,7 @@ export default {
 	}
 } as Meta
 
-export const Basic = (args: any) => (
+export const BoxHeader = (args: any) => (
 	<Component titel="Test" {...args} />
 )
 
