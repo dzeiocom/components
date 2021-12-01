@@ -17,7 +17,7 @@ export default class BoxHeader extends React.Component<Props> {
 		<div className={css.header}>
 			<Row justify="space-between">
 				<Col>
-					<Text className={css.title}>
+					<Text className={css.title} weight="bold">
 						{this.props.icon && (
 							<span className={css.icon}>
 								<this.props.icon strokeWidth="2" fontWeight="800" size="20" color="white" />

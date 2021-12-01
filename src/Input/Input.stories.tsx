@@ -20,7 +20,7 @@ tmp.args = {label: 'Label', helper: 'Helper', maxLength: 6, iconLeft: {
 export const Normal = tmp
 
 tmp = Basic.bind({})
-tmp.args = {label: 'Label', filled:true, helper: 'Helper', choices: [
+tmp.args = {label: 'Label', helper: 'Helper', choices: [
 	'a',
 	'a',
 	'a',

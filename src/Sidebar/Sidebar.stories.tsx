@@ -15,6 +15,7 @@ export const Sidebar: Story<any> = (args: any) => <Component {...args} />
 Sidebar.args = {
 	logo: {src: '/90-38.svg', width: 90, height: 38},
 	user: {
+		picture: '/16-16.svg',
 		name: 'Username',
 		menu: [{
 			path: '/logout',
@@ -41,4 +42,5 @@ Sidebar.args = {
 		name: 'Link',
 		icon: ZapOff
 	}],
+	// fullWidth: true
 }

@@ -1,12 +1,12 @@
 import React, { MouseEvent } from 'react'
 
 import Router from 'next/router'
-import Image, { ImageProps } from 'next/image'
 import { ChevronDown, Minus, MoreHorizontal, Plus } from 'lucide-react'
 import Text from '../Text'
 import Col from '../Col'
 import Row from '../Row'
 import Link from '../Link'
+import Image from '../Image'
 import { buildClassName } from '../Util'
 
 import css from './Sidebar.module.styl'
@@ -14,10 +14,9 @@ import { Icon } from '../interfaces'
 import { Menu } from '..'
 
 interface MenuItem {
-		path?: string
-		icon?: Icon
-		name: string
-		subMenu?: Array<MenuItem>
+	path?: string
+	icon?: Icon
+	name: string
 }
 
 interface Props {
@@ -25,11 +24,12 @@ interface Props {
 	/**
 	 * Logo to display
 	 */
-	logo?: ImageProps & {height: number, width: number}
+	logo?: Image['props']['imageProps'] & {height: number, width: number}
 	/**
 	 * User Informations if loggedin
 	 */
 	user?: {
+		picture?: string
 		/**
 		 * Username
 		 */
@@ -42,7 +42,7 @@ interface Props {
 	/**
 	 * Links to display
 	 */
-	menu: Array<MenuItem>
+	menu: Array<MenuItem & {subMenu?: Array<MenuItem>}>
 
 	onClose?: () => boolean
 
@@ -141,7 +141,7 @@ export default class Navbar extends React.Component<Props, State> {
 					{this.props.logo && (
 						<Col>
 							<Link href="/">
-								<Image {...this.props.logo} height={34} width={this.props.logo.width*34/this.props.logo.height} />
+								<Image imageProps={{ ...this.props.logo, height: 34, width: this.props.logo.width * 34 / this.props.logo.height }} />
 							</Link>
 						</Col>
 					)}
@@ -155,14 +155,17 @@ export default class Navbar extends React.Component<Props, State> {
 				<div style={{flex: 1}}></div>
 				{/* Spacer */}
 				{this.props.user && (
-					<Row className={css.userSpace}>
+					<Row className={css.userSpace} align="center" onClick={(ev) => {ev.stopPropagation(); this.setState({userMenu: !this.state.userMenu})}}>
+						{this.props.user.picture && (
+							<Col nogrow><Image imageProps={{ src: this.props.user.picture, width: 38, height: 38 }} /></Col>
+						)}
 						<Col><Text>{this.props.user.name}</Text></Col>
-						<Col nogrow><Text><MoreHorizontal size={24} onClick={(ev) => {ev.stopPropagation(); this.setState({userMenu: !this.state.userMenu})}} /></Text></Col>
+						<Col nogrow><Text><MoreHorizontal size={24} /></Text></Col>
 					</Row>
 				)}
 			</nav>
 			{this.props.user?.menu && this.state.userMenu && (
-				<div style={{position: 'absolute', bottom: 16, left: this.props.fullWidth ? 16 : this.state.open ? 316 : 104}}>
+				<div className={buildClassName(css.userMenu, [css.fullWidth, this.props.fullWidth], [css.short, !this.state.open])}>
 					<Menu onClick={this.onMenuClick} outline items={this.props.user.menu.map((v) => ({
 						display: v.name,
 						value: v.path,
@@ -193,7 +196,7 @@ export default class Navbar extends React.Component<Props, State> {
 		}
 	}
 
-	private makeMenuItem(obj: MenuItem, isSub = false) {
+	private makeMenuItem(obj: MenuItem & {subMenu?: Array<MenuItem>}, isSub = false) {
 		const id = obj.name + obj.path
 			const content = (
 				<>

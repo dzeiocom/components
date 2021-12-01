@@ -31,7 +31,7 @@ export default class Footer extends React.Component<Props> {
 						{this.props.text ? (
 							<Text>{this.props.text}</Text>
 						) : (
-							<Text>Made with <span className={css.animation}><Heart color={'#E6808A'} fill={'#E6808A'} size={16} fillOpacity={0.5} /></span> by {this.props.company || 'Dzeio'}</Text>
+							<Text weight="bold">Made with <span className={css.animation}><Heart color={'#E6808A'} fill={'#E6808A'} size={16} fillOpacity={0.5} /></span> by {this.props.company || 'Dzeio'}</Text>
 						)}
 					</Col>
 					<Col>

@@ -26,26 +26,7 @@
 	text-decoration none
 
 	&.outline
-		border 2px solid @background-color
-		padding 8px 18px // @padding - @border
-		background transparent
-		color @background-color
-
-		&:not(:disabled)
-			&:hover
-			&:active
-			&:focus
-				color $textOnMain
-
-		&:hover
-			box-shadow none
-
 	&.ghost
-		background transparent
-		color black
-		@media (prefers-color-scheme dark)
-			color white
-
 		&:hover
 			box-shadow none
 			background-color rgba($main, .25)
@@ -53,6 +34,25 @@
 		&:active
 		&:focus
 			background-color $main
+			color $textOnMain
+
+	&.outline
+		border 2px solid @background-color
+		padding 8px 18px // @padding - @border
+		background transparent
+		color @background-color
+
+		&:not(:disabled)
+			&:active
+			&:focus
+				color $textOnMain
+
+
+	&.ghost
+		background transparent
+		color black
+		@media (prefers-color-scheme dark)
+			color white
 
 	&:hover
 		background-color @background-color
