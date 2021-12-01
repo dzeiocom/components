@@ -22,6 +22,7 @@ import Navbar from './Navbar'
 import NotificationManager from './NotificationManager'
 import Popup from './Popup'
 import Row from './Row'
+import Sidebar from './Sidebar'
 import Table from './Table'
 import Text from './Text'
 import * as Util from './Util'
@@ -45,6 +46,7 @@ export {
 	NotificationManager,
 	Popup,
 	Row,
+	Sidebar,
 	Table,
 	Text,
 	Util
