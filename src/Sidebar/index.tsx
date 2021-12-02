@@ -138,13 +138,13 @@ export default class Navbar extends React.Component<Props, State> {
 				[css.fullWidth, this.props.fullWidth]
 			)}>
 				<Row nowrap justify="space-between" className={css.header} align="center">
-					{this.props.logo && (
-						<Col>
-							<Link href="/">
-								<Image imageProps={{ ...this.props.logo, height: 34, width: this.props.logo.width * 34 / this.props.logo.height }} />
-							</Link>
-						</Col>
-					)}
+					<Col>
+						{this.props.logo && (
+								<Link href="/">
+									<Image imageProps={{ ...this.props.logo, height: 34, width: this.props.logo.width * 34 / this.props.logo.height }} />
+								</Link>
+						)}
+					</Col>
 					<Col nogrow><Text tag="div">
 						<Plus size={24} onClick={this.onCloseOpenClick} />
 					</Text></Col>
