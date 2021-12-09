@@ -6,6 +6,7 @@ import './general.styl'
 
 import Box from './Box'
 import BoxHeader from './Box/BoxHeader'
+import Breadcrumb from './Breadcrumb'
 import Button from './Button'
 import Checkbox from './Checkbox'
 import Code from './Code'
@@ -21,6 +22,8 @@ import Menu from './Menu'
 import Navbar from './Navbar'
 import NotificationManager from './NotificationManager'
 import Popup from './Popup'
+import ProgressBar from './ProgressBar'
+import ProgressBox from './ProgressBox'
 import Row from './Row'
 import Sidebar from './Sidebar'
 import Table from './Table'
@@ -30,6 +33,7 @@ import * as Util from './Util'
 export {
 	Box,
 	BoxHeader,
+	Breadcrumb,
 	Button,
 	Checkbox,
 	Code,
@@ -45,6 +49,8 @@ export {
 	Navbar,
 	NotificationManager,
 	Popup,
+	ProgressBar,
+	ProgressBox,
 	Row,
 	Sidebar,
 	Table,

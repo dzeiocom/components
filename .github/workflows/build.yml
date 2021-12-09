@@ -27,14 +27,3 @@ jobs:
 
     - name: Build components
       run: npm run build
-
-    - uses: sonarsource/sonarcloud-github-action@master
-      with:
-        args: >
-          -Dsonar.organization=dzeio
-          -Dsonar.projectKey=dzeiocom_components
-          -Dsonar.sources=.
-          -Dsonar.sourceEncoding=UTF-8
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

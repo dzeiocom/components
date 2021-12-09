@@ -8,14 +8,10 @@ export default {
 	component: Component,
 	parameters: {
 		layout: 'fullscreen'
-	}
+	},
+	argTypes: {
+		percent: { control: 'number'}
+	},
 } as Meta
 
 export const Loader: Story<any> = (args: any) => <Component {...args} />
-
-let tmp = Loader.bind({})
-tmp.args = {
-	auto: {interval : [10, 100], increment: [0, 5]}
-}
-
-export const Auto = tmp

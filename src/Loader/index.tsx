@@ -1,5 +1,6 @@
 import { Router } from 'next/router'
 import React from 'react'
+import ProgressBar from '../ProgressBar'
 import { buildClassName } from '../Util'
 import css from './Loader.module.styl'
 
@@ -42,6 +43,7 @@ export default class Loader extends React.Component<Props, State> {
 	public componentDidMount() {
 		if (this.props.auto) {
 			Router.events.on('routeChangeComplete', this.routeChangeComplete)
+			Router.events.on('routeChangeError', this.routeChangeComplete)
 			Router.events.on('routeChangeStart', this.routeChangeStart)
 		}
 	}
@@ -49,15 +51,16 @@ export default class Loader extends React.Component<Props, State> {
 	public componentWillUnmount() {
 		if (this.props.auto) {
 			Router.events.off('routeChangeComplete', this.routeChangeComplete)
+			Router.events.off('routeChangeError', this.routeChangeComplete)
 			Router.events.off('routeChangeStart', this.routeChangeStart)
 		}
 	}
 
-	public render = () => (
-		<div className={buildClassName(css.div, [css.hide, (this.props.percent || this.state.percent) === 100])}>
-			<div style={{width: (this.props.percent || this.state.percent) ? `${(this.props.percent || this.state.percent)}%` : 0}}></div>
-		</div>
-	)
+	public render = () => <ProgressBar
+			noRoundBorders
+			progress={this.props.percent ?? this.state.percent ?? 0}
+			className={buildClassName(css.div, [css.hide, (this.props.percent ?? this.state.percent) === 100 || (this.props.percent ?? this.state.percent ?? 0) === 0])}
+		/>
 
 	private routeChangeComplete = () => {
 		if (this.interval) {

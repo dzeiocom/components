@@ -12,6 +12,11 @@ interface Props extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElem
 	children?: React.ReactNode
 }
 
+/**
+ * The box header that caan be used out of a box
+ *
+ * @version 1.0.0
+ */
 export default class BoxHeader extends React.Component<Props> {
 	public render = () => (
 		<div className={css.header}>

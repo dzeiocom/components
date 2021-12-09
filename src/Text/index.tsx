@@ -5,7 +5,7 @@ import css from './Text.module.styl'
 type Types = 'hero' | 'h1' | 'h2' | 'h3' | 'h4' | 'text' | 'light' | 'bold'
 
 interface Props {
-	color?: 'black' | 'white' | 'none'
+	color?: 'black' | 'white' | 'none' | 'main'
 	type?: Types
 	tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'em' | 'span' | 'div'
 	weight?: 'normal' | 'bold' | 'light'
@@ -14,6 +14,7 @@ interface Props {
 	noDarkTheme?: boolean
 	align?: 'left' | 'right' | 'center'
 	children: React.ReactNode
+	textProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLElement>, HTMLElement>
 }
 
 const types: Record<Types, {
@@ -55,6 +56,11 @@ const types: Record<Types, {
 	}
 }
 
+/**
+ * Display Text lol
+ *
+ * @version 1.0.0
+ */
 export default class Text extends React.PureComponent<Props> {
 
 	public render() {
@@ -70,10 +76,9 @@ export default class Text extends React.PureComponent<Props> {
 		}
 		const classes = buildClassName(
 			css.text,
+			css[this.props.color ?? 'black'],
 			[css[`weight-${data.weight}`], data.weight !== 'normal'],
 			[css[`size-${data.size}`], data.size !== 16],
-			[css.white, this.props.color === 'white'],
-			[css.black, this.props.color === 'black' || !this.props.color],
 			[css.noDarkTheme, this.props.noDarkTheme],
 			[css[`align-${this.props.align}`], this.props.align],
 			this.props.className
@@ -83,6 +88,6 @@ export default class Text extends React.PureComponent<Props> {
 			return (<p className={classes}><em>{this.props.children}</em></p>)
 		}
 
-		return React.createElement(this.props.tag ?? data.tag ?? 'p', {className: classes, children: this.props.children})
+		return React.createElement(this.props.tag ?? data.tag ?? 'p', {...this.props.textProps, className: classes, children: this.props.children})
 	}
 }

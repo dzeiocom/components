@@ -1,0 +1,24 @@
+@import '../config'
+
+.bar
+	width 100%
+	background rgba($main, .15)
+	height 8px
+	border-radius 8px
+
+	&.noBorder
+		border-radius 0
+		div
+
+			border-radius 0px 8px 8px 0px
+			&[style="width: 100%;"]
+				border-radius 0
+
+	div
+		transition width,border-radius
+		transition-duration $transitionTime
+		transition-timing-function $transitionFunction
+		height 100%
+		width 0
+		background $main
+		border-radius 8px
