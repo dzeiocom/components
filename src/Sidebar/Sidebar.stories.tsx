@@ -2,7 +2,6 @@ import React from 'react'
 import { Meta, Story } from '@storybook/react/types-6-0'
 import { Zap, ZapOff } from 'lucide-react'
 import Component from '.'
-
 export default {
 	title: 'DZEIO/Sidebar',
 	component: Component,
@@ -19,10 +18,10 @@ Sidebar.args = {
 		name: 'Username',
 		menu: [{
 			path: '/logout',
-			value: 'Logout'
+			name: 'Logout'
 		}, {
-			path: '/logout',
-			value: 'Logout'
+			path: '/mock-route',
+			name: 'Mock Route'
 		}]
 	},
 	menu: [{
@@ -34,8 +33,17 @@ Sidebar.args = {
 		subMenu: [{
 			name: 'Child 1'
 		}, {
+			name: 'Mock Route',
+			path: '/mock-route'
+		}]
+	}, {
+		name: 'With Childs2',
+		icon: Zap,
+		subMenu: [{
+			name: 'Child 1'
+		}, {
 			name: 'Child with link',
-			path: '/dashboard'
+			path: '/mock-route2'
 		}]
 	}, {
 		path: '/dashboard',

@@ -1,7 +1,7 @@
 import React, { MouseEvent } from 'react'
 
 import Router from 'next/router'
-import { ChevronDown, Minus, MoreHorizontal, Plus } from 'lucide-react'
+import { ChevronDown, MoreHorizontal, Plus } from 'lucide-react'
 import Text from '../Text'
 import Col from '../Col'
 import Row from '../Row'
@@ -71,7 +71,7 @@ interface State {
  * Sidebar Component
  * @version 1.0.0
  */
-export default class Navbar extends React.Component<Props, State> {
+export default class Sidebar extends React.Component<Props, State> {
 
 	public state: State = {
 		open: true,
@@ -79,14 +79,12 @@ export default class Navbar extends React.Component<Props, State> {
 	}
 
 	public componentDidMount() {
-		this.setState({
-			path: Router.asPath
-		})
+		this.onRouteChange(Router.asPath)
 		Router.events.on('routeChangeComplete', () => {
-			this.setState({path: Router.asPath, open: false})
+			this.onRouteChange(Router.asPath)
 		})
 		Router.events.on('routeChangeError', () => {
-			this.setState({path: Router.asPath, open: false})
+			this.onRouteChange(Router.asPath)
 		})
 		if (!this.props.fullWidth) {
 			document.body.classList.add(css.sidebarBody)
@@ -94,7 +92,18 @@ export default class Navbar extends React.Component<Props, State> {
 		document.body.addEventListener('click', this.onBodyClick)
 	}
 
+	private onRouteChange(newRoute: string) {
+		let activeMenu = undefined
+		for (const menu of this.props.menu) {
+			if (newRoute === menu.path || menu.subMenu?.find((it) => newRoute === it.path)) {
+				activeMenu = menu.name + (menu.path ?? '')
+			}
+		}
+		this.setState({path: newRoute, subMenu: undefined, userMenu: false, activeMenu})
+	}
+
 	public componentDidUpdate() {
+		//console.log(this.state.path)
 		if (this.state.open) {
 			document.body.classList.remove(css.short)
 		} else {
@@ -114,14 +123,15 @@ export default class Navbar extends React.Component<Props, State> {
 	public onClick = (id: string, subMenu?: Array<MenuItem>) => (ev: MouseEvent) => {
 		ev.stopPropagation()
 		if (!this.state.open && subMenu) {
-			console.log(ev)
+			//console.log(ev)
 			this.setState({
 				subMenu: {
 					y: (ev.currentTarget as HTMLElement).offsetTop,
 					menu: subMenu.map((v) => ({
 						display: v.name,
 						value: v.path,
-						href: v.path
+						href: v.path,
+						selected: this.state.path === v.path
 					}))
 				}
 			})
@@ -167,10 +177,11 @@ export default class Navbar extends React.Component<Props, State> {
 			{this.props.user?.menu && this.state.userMenu && (
 				<div className={buildClassName(css.userMenu, [css.fullWidth, this.props.fullWidth], [css.short, !this.state.open])}>
 					<Menu onClick={this.onMenuClick} outline items={this.props.user.menu.map((v) => ({
-						display: v.name,
-						value: v.path,
-						href: v.path
-					}))} />
+							display: v.name,
+							value: v.path,
+							href: v.path,
+							selected: this.state.path === v.path
+						}))} />
 				</div>
 			)}
 			{this.state.subMenu && (
@@ -197,7 +208,7 @@ export default class Navbar extends React.Component<Props, State> {
 	}
 
 	private makeMenuItem(obj: MenuItem & {subMenu?: Array<MenuItem>}, isSub = false) {
-		const id = obj.name + obj.path
+		const id = obj.name + (obj.path ?? '')
 			const content = (
 				<>
 					{obj.icon && (
@@ -211,9 +222,10 @@ export default class Navbar extends React.Component<Props, State> {
 					)}
 				</>
 			)
+			const isActive = this.state.path === obj.path || obj.subMenu?.find((it) => this.state.path === it.path)
 			return <li key={id} className={buildClassName(
-				[css.active, obj?.path && this.state.path?.startsWith(obj.path)],
-				[css.activeMenu, id === this.state.activeMenu]
+				[css.active, isActive],
+				[css.activeMenu, id === this.state.activeMenu && this.state.open]
 			)}>
 				<div onClick={isSub ? undefined : this.onClick(id, obj.subMenu)}>
 					{obj.path ? (
@@ -224,9 +236,7 @@ export default class Navbar extends React.Component<Props, State> {
 				</div>
 				{obj.subMenu && (
 					<ul>
-						{obj.subMenu.map((it, key) => (
-							<li key={it.name + key}>{this.makeMenuItem(it, true)}</li>
-						))}
+						{obj.subMenu.map((it) => this.makeMenuItem(it, true))}
 					</ul>
 				)}
 			</li>

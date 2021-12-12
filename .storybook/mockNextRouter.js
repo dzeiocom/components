@@ -7,5 +7,6 @@ Router.router = {
 	replace: async () => {},
 	prefetch: () => {},
 	route: '/mock-route',
+	asPath: '/mock-route',
 	pathname: 'mock-path',
 }
