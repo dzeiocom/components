@@ -5,10 +5,12 @@ import Row from '../Row'
 import Col from '../Col'
 import Text from '../Text'
 import { Icon } from '../interfaces'
+import { buildClassName } from '../Util'
 
 interface Props extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
 	title?: string
 	icon?: Icon
+	sidePadding?: boolean
 	children?: React.ReactNode
 }
 
@@ -19,7 +21,7 @@ interface Props extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElem
  */
 export default class BoxHeader extends React.Component<Props> {
 	public render = () => (
-		<div className={css.header}>
+		<div className={buildClassName(css.header, [css.noSidePadding, !this.props.sidePadding])}>
 			<Row justify="space-between">
 				<Col>
 					<Text className={css.title} weight="bold">

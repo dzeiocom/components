@@ -30,7 +30,7 @@ export default class Box extends React.Component<Props> {
 			className={buildClassName(css.box, this.props?.className, [css.noBottomBorder, this.props.noBottomBorder])}
 		>
 			{(this.props.rightHeader || this.props.title || this.props.icon) && (
-				<BoxHeader title={this.props.title} icon={this.props.icon}>{this.props.rightHeader}</BoxHeader>
+					<BoxHeader title={this.props.title} sidePadding icon={this.props.icon}>{this.props.rightHeader}</BoxHeader>
 			)}
 			{this.props.children && (
 				<div className={buildClassName([css.body, !this.props.noPadding])}>

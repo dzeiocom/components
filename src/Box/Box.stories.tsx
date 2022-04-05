@@ -3,6 +3,7 @@ import React from 'react'
 import Component from '.'
 import Text from '../Text'
 import { Lightbulb } from 'lucide-react'
+import BoxHeader from './BoxHeader'
 
 export default {
 	title: 'DZEIO/Box',
@@ -22,5 +23,8 @@ export const Complete = (args: any) => (
 		icon={Lightbulb}
 		rightHeader={<Text>Test</Text>}
 		// {...args}
-	><Text>Test</Text></Component>
+	>
+		<Text>Test</Text>
+		<BoxHeader title="BoxHeader" />
+	</Component>
 )
