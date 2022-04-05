@@ -85,7 +85,7 @@ export default class Text extends React.PureComponent<Props> {
 		)
 
 		if (this.props.tag === 'em') {
-			return (<p className={classes}><em>{this.props.children}</em></p>)
+			return <p className={classes}><em>{this.props.children}</em></p>
 		}
 
 		return React.createElement(this.props.tag ?? data.tag ?? 'p', {...this.props.textProps, className: classes, children: this.props.children})

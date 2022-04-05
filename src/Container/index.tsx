@@ -11,6 +11,9 @@ interface Props {
 
 export default class Container extends React.Component<Props> {
 
-	public render = () => React.createElement(this.props.mainContainer ? 'main' : 'div', {className: buildClassName(css.container, this.props.className, [css.main, this.props.mainContainer]), children: this.props.children})
+	public render = () => React.createElement(this.props.mainContainer ? 'main' : 'div', {
+			className: buildClassName(css.container, this.props.className, [css.main, this.props.mainContainer]),
+			children: this.props.children
+		})
 
 }
