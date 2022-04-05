@@ -12,6 +12,7 @@ import Checkbox from './Checkbox'
 import Code from './Code'
 import Col from './Col'
 import Container from './Container'
+import DebugCols from './Col/DebugCols'
 import Footer from './Footer'
 import GradientBackground from './GradientBackground'
 import Image from './Image'
@@ -39,6 +40,7 @@ export {
 	Code,
 	Col,
 	Container,
+	DebugCols,
 	Footer,
 	GradientBackground,
 	Image,
