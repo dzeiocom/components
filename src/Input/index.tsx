@@ -48,6 +48,11 @@ interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLIn
 	 * if enabled value will not be sent if it is not contained in the choices
 	 */
 	strictChoices?: boolean
+
+	/**
+	 * Allows you to disable automatic icons
+	 */
+	disableAutoIcons?: boolean
 }
 
 interface States {
@@ -181,20 +186,22 @@ export default class Input extends React.PureComponent<Props, States> {
 				break
 			case 'number':
 				baseProps.onWheel = (ev: React.WheelEvent<HTMLInputElement>) => ev.currentTarget.blur()
-				iconLeft = this.props.iconLeft ?? {icon: MinusSquare, transformer: (v) => {
-					let value = parseFloat(v)
-					if (isNaN(value)) {
-						value = 0
-					}
-					return (value - this.ensureNumber(this.props.step, 1)).toString()
-				}}
-				iconRight = this.props.iconRight ?? {icon: PlusSquare, transformer: (v) => {
-					let value = parseFloat(v)
-					if (isNaN(value)) {
-						value = 0
-					}
-					return (value + this.ensureNumber(this.props.step, 1)).toString()
-				}}
+				if (!this.props.disabled && !this.props.disableAutoIcons) {
+					iconLeft = this.props.iconLeft ?? {icon: MinusSquare, transformer: (v) => {
+						let value = parseFloat(v)
+						if (isNaN(value)) {
+							value = 0
+						}
+						return (value - this.ensureNumber(this.props.step, 1)).toString()
+					}}
+					iconRight = this.props.iconRight ?? {icon: PlusSquare, transformer: (v) => {
+						let value = parseFloat(v)
+						if (isNaN(value)) {
+							value = 0
+						}
+						return (value + this.ensureNumber(this.props.step, 1)).toString()
+					}}
+				}
 			default:
 				input = <input
 					{...props}
@@ -223,7 +230,7 @@ export default class Input extends React.PureComponent<Props, States> {
 				{/* Right Icon */}
 				{iconRight ?
 					this.getIcon(iconRight, 'right') :
-					(this.props.choices && !this.props.disabled) && (
+					(this.props.choices && !this.props.disabled && !this.props.disableAutoIcons) && (
 						<ChevronDown size="18" className={buildClassName(css.right, css.rotate)} />
 					)
 				}
@@ -316,6 +323,7 @@ export default class Input extends React.PureComponent<Props, States> {
 
 		if ('icon' in Icon) {
 			return <Icon.icon size="18" className={buildClassName(css[position], css.iconClickable)} onClick={async () => {
+				if (this.props.disabled) {return}
 				const value = Icon.transformer(this.state.value ?? this.state.displayedValue ?? '')
 				this.setState({ value: value, displayedValue: value, valueUpdate: true })
 			}} />
