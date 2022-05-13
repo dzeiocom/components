@@ -13,7 +13,7 @@ import { buildClassName } from '../Util'
 
 import css from './Navbar.module.styl'
 import { Icon } from '../interfaces'
-import { Button } from '..'
+import Button from '../Button'
 import { objectEqual } from '@dzeio/object-util'
 
 interface MenuItem {

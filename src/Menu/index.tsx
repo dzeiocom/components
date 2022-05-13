@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from '..'
+import Link from '../Link'
 import Box from '../Box'
 import { Icon } from '../interfaces'
 import { buildClassName } from '../Util'

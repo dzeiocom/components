@@ -11,7 +11,7 @@ import { buildClassName } from '../Util'
 
 import css from './Sidebar.module.styl'
 import { Icon } from '../interfaces'
-import { Menu } from '..'
+import Menu from '../Menu'
 
 interface MenuItem {
 	path?: string
