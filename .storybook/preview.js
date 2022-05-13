@@ -3,5 +3,6 @@ import './mockNextRouter'
 import './mockNextImage'
 
 export const parameters = {
-  layout: 'centered'
+  layout: 'centered',
+  actions: { argTypesRegex: '^on.*' }
 }

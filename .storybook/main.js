@@ -12,6 +12,9 @@ module.exports = {
 	"addons": [
 		"@storybook/addon-essentials"
 	],
+	reactOptions: {
+		strictMode: true
+	},
 	typescript: {
 		check: false,
 		checkOptions: {},

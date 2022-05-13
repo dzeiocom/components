@@ -1,5 +1,16 @@
 @import '../config'
 
+.label
+	font-size rem(16)
+	display block
+	font-weight bold
+	color black
+	padding-left 8px
+	padding-bottom 4px
+	cursor pointer
+	@media (prefers-color-scheme dark)
+		color white
+
 .parent
 	position relative
 	max-width 100%
@@ -10,6 +21,7 @@
 
 	svg
 		position absolute
+		user-select none
 		color $darkGrayLight
 		@media (prefers-color-scheme dark)
 			color $darkGrayDark
@@ -91,11 +103,11 @@
 		outline none
 		background $lightGrayLight
 		transition all $transition
-		border 2px solid $darkGrayLight
+		border 2px solid black
 		color black
 		@media (prefers-color-scheme dark)
 			background $lightGrayDark
-			border-color $darkGrayDark
+			border-color transparent
 			color white
 
 		&::placeholder
@@ -113,14 +125,10 @@
 
 
 		&:disabled
-			border-color #999
+			border-color $darkGrayLight
 
 			@media (prefers-color-scheme dark)
-				border-color #444
-				~label
-					color #444
-			~ label
-				color #999
+				border-color $darkGrayDark
 
 		&:not(:disabled)
 			&:hover
@@ -137,9 +145,6 @@
 			&:focus
 				border-color $main
 
-				~ label
-					color @border-color
-
 				~ svg
 					color @border-color
 				// &::placeholder
@@ -151,16 +156,10 @@
 			&:invalid
 				border-color $errorLight
 
-				~ label
-					color @border-color
-
 				~ svg
 					color @border-color
 				@media (prefers-color-scheme dark)
 					border-color $errorDark
-
-					~ label
-						color @border-color
 
 					~ svg
 						color @border-color
@@ -185,7 +184,6 @@
 
 	&.block
 	&.block input
-	&.block select
 	&.block textarea
 		width 100%
 		display block

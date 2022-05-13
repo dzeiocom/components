@@ -1,12 +1,12 @@
-import React, { FC } from 'react'
+import React, { FC, FocusEvent } from 'react'
 
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, MinusSquare, PlusSquare } from 'lucide-react'
 import Text from '../Text'
 import { Icon } from '../interfaces'
 import { buildClassName } from '../Util'
 import css from './Input.module.styl'
 import Menu from '../Menu'
-import { objectClone } from '@dzeio/object-util'
+import { objectOmit } from '@dzeio/object-util'
 
 interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
 	id?: string
@@ -32,34 +32,77 @@ interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLIn
 	 * Always display every choices
 	 */
 	displayAllOptions?: boolean
+
+	/**
+	 * Handle the change event
+	 * you will be returned the value (for choices too)
+	 */
+	onValue?: (newValue: string) => void
+
+	/**
+	 * Make the input take the whole width
+	 */
+	block?: boolean
+
+	/**
+	 * if enabled value will not be sent if it is not contained in the choices
+	 */
+	strictChoices?: boolean
 }
 
 interface States {
 	textAreaHeight?: number
 	value?: string
+	displayedValue?: string
+	valueUpdate: boolean
 	isInFirstPartOfScreen?: boolean
+	list: Menu['props']['items']
 }
 
 export default class Input extends React.PureComponent<Props, States> {
 
-	public state: States = {}
+	public state: States = {
+		valueUpdate: false,
+		list: []
+	}
 
-	// any because f*ck types
 	private inputRef: React.RefObject<HTMLInputElement> = React.createRef()
 	private parentRef: React.RefObject<HTMLDivElement> = React.createRef()
 
 	public componentDidMount() {
+
+		// Handle Text Area
 		if (this.props.type === 'textarea') {
 			this.textareaHandler()
 		}
+
+		// Handle choices
 		if (this.props.choices) {
 			window.addEventListener('scroll', this.parentScroll)
 			this.parentScroll()
 		}
-	}
 
-	public componentDidUpdate() {
-		console.log(this.state)
+		// Handle default Value
+		if (this.props.defaultValue) {
+			if (!this.props.choices) {
+				this.setState({displayedValue: this.props.defaultValue.toString()})
+			} else {
+				const res = this.props.choices.find((it) => {
+					return typeof it === 'string' ? it === this.props.defaultValue : it.value === this.props.defaultValue
+				})
+				if (!res) {
+					if (this.props.strictChoices) {
+						this.setState({value: '', displayedValue: ''})
+					} else {
+						this.setState({displayedValue: this.props.defaultValue.toString()})
+					}
+					return
+				}
+				this.setState({
+					displayedValue: typeof res === 'string' ? res : res.display
+				})
+			}
+		}
 	}
 
 	public componentWillUnmount() {
@@ -68,24 +111,56 @@ export default class Input extends React.PureComponent<Props, States> {
 		}
 	}
 
+	public async componentDidUpdate(_: Props, prevStates: States) {
+		if (prevStates.value !== this.state.value) {
+			if (this.props.onValue) {
+				this.props.onValue(this.state.value ?? '')
+			}
+			// console.log(`Value updated: ${prevStates.value} -> ${this.state.value}`)
+		}
+		// if (prevStates.displayedValue !== this.state.displayedValue) {
+		// 	console.log(`Displayed Value updated: ${prevStates.displayedValue} -> ${this.state.displayedValue}`)
+		// }
+		if (
+			prevStates.value !== this.state.value ||
+			prevStates.displayedValue !== this.state.displayedValue ||
+			prevStates.valueUpdate !== this.state.valueUpdate
+		) {
+			this.setState({list: this.buildList()})
+		}
+	}
+
+	/**
+	 * return the real value of the field (depending if you a choices and the display value)
+	 * @returns the value of the field
+	 */
+	public value(): string | number | readonly string[] | undefined {
+		return this.state?.value ?? this.state.displayedValue ?? this.props.value ?? undefined
+	}
+
 	public render() {
-		const props: Props = objectClone(this.props)
-		delete props.label
-		delete props.iconLeft
-		delete props.iconRight
-		delete props.inputRef
-		delete props.helper
-		delete props.choices
+		const props: Props = objectOmit(this.props, 'iconLeft', 'iconRight', 'inputRed', 'helper', 'choices', 'onValue', 'block', 'defaultValue', 'label')
 
 		const baseProps: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> = {
-			placeholder: this.props.label || this.props.placeholder || ' ',
 			ref: this.props.inputRef || this.inputRef,
 			className: buildClassName(
-				[css.iconLeft, this.props.iconLeft],
-				[css.iconRight, this.props.iconRight || this.props.choices]
+				[css.iconLeft, this.props.type === 'number' || this.props.iconLeft],
+				[css.iconRight, this.props.type === 'number' || this.props.iconRight || this.props.choices]
 			),
 			onInvalid: (ev: React.FormEvent<HTMLInputElement>) => ev.preventDefault(),
+			onFocus: (ev: FocusEvent<HTMLInputElement, Element>) => {
+				this.setState({valueUpdate: false})
+
+				if (props.onFocus) {
+					props.onFocus(ev)
+				}
+			},
+			value: this.state.displayedValue ?? this.state.value ?? this.props.value,
+			onChange: this.onChange
 		}
+
+		let iconRight = this.props.iconRight
+		let iconLeft = this.props.iconLeft
 
 		let input: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
@@ -106,159 +181,185 @@ export default class Input extends React.PureComponent<Props, States> {
 				break
 			case 'number':
 				baseProps.onWheel = (ev: React.WheelEvent<HTMLInputElement>) => ev.currentTarget.blur()
+				iconLeft = this.props.iconLeft ?? {icon: MinusSquare, transformer: (v) => {
+					let value = parseFloat(v)
+					if (isNaN(value)) {
+						value = 0
+					}
+					return (value - this.ensureNumber(this.props.step, 1)).toString()
+				}}
+				iconRight = this.props.iconRight ?? {icon: PlusSquare, transformer: (v) => {
+					let value = parseFloat(v)
+					if (isNaN(value)) {
+						value = 0
+					}
+					return (value + this.ensureNumber(this.props.step, 1)).toString()
+				}}
 			default:
-				input = (
-					<input
-						{...props}
-						{...baseProps}
-					/>
-			)
+				input = <input
+					{...props}
+					{...baseProps}
+				/>
 		}
 
 		return (
+			<>
+			{this.props.label && (
+				<label className={css.label} htmlFor={this.props.id}>{this.props.label}</label>
+			)}
 			<div
 				className={buildClassName(
-					css.parent
+					css.parent,
+					[css.block, this.props.block]
 				)}
-				onChangeCapture={this.onChange}
 				ref={this.parentRef}
 			>
+
 				{input as any}
 
 				{/* Left Icon */}
-				{this.getIcon('left')}
+				{this.getIcon(iconLeft, 'left')}
 
 				{/* Right Icon */}
-				{this.props.iconRight ?
-					this.getIcon('right') :
+				{iconRight ?
+					this.getIcon(iconRight, 'right') :
 					(this.props.choices && !this.props.disabled) && (
-					<ChevronDown size="18" className={buildClassName(css.right, css.rotate)} />
-				)}
+						<ChevronDown size="18" className={buildClassName(css.right, css.rotate)} />
+					)
+				}
 
 				{/* Helper text */}
 				{(this.props.helper) && (
 					<Text>{this.props.helper}</Text>
-				)}
+					)}
 
 				{/* List when this is an autocomplete */}
 				{this.props.choices && (
-					// <ul className={buildClassName(css.autocomplete, [css.reverse, !this.state.isInFirstPartOfScreen])}>
-					// 	{this.props.choices
-					// 		.map((item, index) => typeof item === 'string' ? ({item: {display: item, value: item}, index}) : {item, index})
-					// 		.filter(
-					// 			(item) => !this.getValue() || [item.item.display.toLowerCase(), item.item.value.toLowerCase()]
-					// 				.includes(this.getValue())
-					// 		)
-					// 		.map((item) => (<li key={item.index} onClick={this.onAutoCompleteClick(item.index)}><Text>{item.item.display}</Text></li>))}
-					// </ul>
 					<Menu
-						outline
-						hideWhenEmpty
-						className={buildClassName(css.autocomplete, [css.reverse, !this.state.isInFirstPartOfScreen])}
-						items={this.buildList()}
-						onClick={this.listSelection}
+					outline
+					hideWhenEmpty
+					className={buildClassName(css.autocomplete, [css.reverse, !this.state.isInFirstPartOfScreen])}
+					items={this.state.list ?? []}
+					onClick={this.listSelection}
 					/>
-				)}
+					)}
 			</div>
+			</>
 		)
 	}
 
+	private ensureNumber(item: string | number | undefined, defaultValue: number): number {
+		return typeof item === 'string' ? parseFloat(item) : item ?? defaultValue
+	}
+
 	/**
-	 * event for autocomplete to detect where on the screen it shoul display
+	 * event for the menu to detect where on the screen it should be displayed
 	 */
 	private parentScroll = async () => {
 		const div = this.parentRef.current
 		if (!div) {return}
 		const result = !(div.offsetTop - window.scrollY >= window.innerHeight / 2)
-		// console.log(result, div, this.state.isInFirstPartOfScreen)
+
 		if (this.state.isInFirstPartOfScreen !== result) {
 			this.setState({isInFirstPartOfScreen: result})
 		}
 	}
 
+	/**
+	 * Build the interactive list for the item
+	 * @returns the list
+	 */
 	private buildList(): Menu['props']['items'] {
 		if (!this.props.choices) {
 			return []
 		}
-		const v = this.getValue().toLowerCase()
+		const v = this.state.displayedValue?.toLowerCase()
 		return this.props.choices
-		.map((item, index) => typeof item === 'string' ? ({item: {display: item, value: item}, index}) : {item, index})
-		.filter(
-			(item) => this.props.displayAllOptions || !v || item.item.display.toLowerCase().includes(v) || item.item.display.toLowerCase().toLowerCase().includes(v)
-		)
-		.map((item) => ({display: item.item.display, value: item.index}))
+			.map((item, index) => typeof item === 'string' ? ({item: {display: item, value: item}, index}) : {item, index})
+			.filter(
+				(item) => this.props.displayAllOptions || !this.state.valueUpdate || !v || item.item.display.toLowerCase().includes(v) || item.item.display.toLowerCase().toLowerCase().includes(v)
+			)
+			.map((item) => item.item)
 	}
 
-	private listSelection: Menu['props']['onClick'] = async (value: number, key) => {
-		const newValue = this.props.choices?.[value]
+	/**
+	 * handle when an item is selected
+	 * @param key the index of the selected item
+	 */
+	private listSelection: Menu['props']['onClick'] = async (_, key) => {
+		const newValue = this.state.list[key]
+
 		if (!newValue) {
 			return
 		}
+
 		if (typeof newValue === 'string') {
-			return this.setValue(newValue)
+			this.setState({value: newValue, displayedValue: newValue, valueUpdate: true})
+			return
 		}
-		await this.setValue(newValue.display)
-		this.setState({value: newValue.value})
+
+		this.setState({displayedValue: newValue.display, value: newValue.value, valueUpdate: true})
 	}
 
-	private getIcon(icon: 'left' | 'right') {
-		const Icon = icon === 'left' ? this.props.iconLeft : this.props.iconRight
+	/**
+	 * get the icon duh
+	 * @param icon the icon
+	 * @returns the icon
+	 */
+	private getIcon(Icon: Icon | {
+		icon: Icon;
+		transformer: (value: string) => string;
+	} | undefined, position: 'left' | 'right') {
 		if (!Icon) {
 			return undefined
 		}
+
 		if ('icon' in Icon) {
-			return <Icon.icon size="18" className={buildClassName(css[icon], css.iconClickable)} onClick={() => {
-				const el = this.getElement()
-				console.log(el, 'pouet')
-				if (!el) {
-					return
-				}
-				el.value = Icon.transformer(el.value)
+			return <Icon.icon size="18" className={buildClassName(css[position], css.iconClickable)} onClick={async () => {
+				const value = Icon.transformer(this.state.value ?? this.state.displayedValue ?? '')
+				this.setState({ value: value, displayedValue: value, valueUpdate: true })
 			}} />
 		}
 
-		return <Icon size="18" className={css[icon]} />
+		return <Icon size="18" className={css[position]} />
 	}
 
-	private getValue(): string {
-		return this.state?.value?.toLowerCase() ?? this.props.value?.toString().toLowerCase() ?? ''
-	}
-
-	private getElement(): undefined | HTMLInputElement {
-		const item = this.props.inputRef || this.inputRef
-		if (!item || !item.current) {return}
-		return item.current
-	}
-
-	private textareaHandler = async () =>
+	/**
+	 * Handle textarea height changes
+	 */
+	private textareaHandler = async () => {
 		this.setState({textAreaHeight: undefined}, () => {
 			if (!this.inputRef.current) {return}
-			this.setState({textAreaHeight: this.inputRef.current.scrollHeight})
+			this.setState({ textAreaHeight: this.inputRef.current.scrollHeight })
 		})
-
-		private async setValue(value: string) {
-		const item = this.getElement()
-		if (!item) {return}
-		const valueSetter = Object.getOwnPropertyDescriptor(item, 'value')?.set
-		const prototype = Object.getPrototypeOf(item)
-		const prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value')?.set
-		if (valueSetter && valueSetter !== prototypeValueSetter) {
-			// @ts-expect-error IDK why
-			prototypeValueSetter.call(item, value)
-		} else {
-			// @ts-expect-error IDK why
-			valueSetter.call(item, value)
-		}
-		item.dispatchEvent(new Event('input', {bubbles: true}))
-		if (this.props.type === 'textarea') {
-			await this.parentScroll()
-		}
 	}
 
-	private onChange = async (event?: React.FormEvent<HTMLDivElement>) => {
-		if (event) {
-			this.setState({value: (event.target as HTMLInputElement).value })
+	/**
+	 * handle the change event of the input
+	 * @param event the event
+	 */
+	private onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+		// get the input
+		const value = event.currentTarget.value
+		// console.log("onChange", value)
+
+		if (typeof value !== 'string') {
+			return
 		}
+
+		if (this.props.onChange) {
+			this.props.onChange(event)
+		}
+
+		if (this.props.value) {
+			return
+		}
+
+		if (this.props.strictChoices) {
+			this.setState({ displayedValue: value, valueUpdate: true })
+			return
+		}
+		this.setState({ value: value, displayedValue: value, valueUpdate: true })
 	}
 
 }
