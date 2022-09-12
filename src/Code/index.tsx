@@ -4,6 +4,7 @@ import css from './Code.module.styl'
 
 interface Props {
 	block?: boolean
+	children?: React.ReactNode
 }
 
 export default class Code extends React.Component<Props> {
