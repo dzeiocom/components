@@ -1,7 +1,6 @@
 import { buildClassName } from '../Util'
 import Button from '../Button'
 import Box from '../Box'
-import Col from '../Col'
 import Text from '../Text'
 import Router from 'next/router'
 import React from 'react'

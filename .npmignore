@@ -1,8 +1,9 @@
+.github/
 .storybook/
 node_modules/
 *.stories.js
+.editorconfig
 .gitattributes
 .gitignore
 .npmignore
-yarn.lock
-yarn-error.log
+*.tgz

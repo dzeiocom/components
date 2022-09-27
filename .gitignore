@@ -1,5 +1,7 @@
 node_modules/
 types/
 
-index.js
+index.es.js
+index.umd.js
 style.css
+*.tgz

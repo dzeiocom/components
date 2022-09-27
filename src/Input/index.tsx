@@ -1,4 +1,4 @@
-import React, { FC, FocusEvent } from 'react'
+import React, { FocusEvent } from 'react'
 
 import { ChevronDown, MinusSquare, PlusSquare } from 'lucide-react'
 import Text from '../Text'
@@ -167,7 +167,10 @@ export default class Input extends React.PureComponent<Props, States> {
 		let iconRight = this.props.iconRight
 		let iconLeft = this.props.iconLeft
 
-		let input: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+		let input: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> = <input
+			{...props}
+			{...baseProps}
+		/>
 
 		switch (this.props.type) {
 			case 'textarea':
@@ -202,12 +205,13 @@ export default class Input extends React.PureComponent<Props, States> {
 						return (value + this.ensureNumber(this.props.step, 1)).toString()
 					}}
 				}
-			default:
 				input = <input
 					{...props}
 					{...baseProps}
 				/>
+				break
 		}
+
 
 		return (
 			<>

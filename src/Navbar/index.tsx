@@ -2,7 +2,7 @@ import Router from 'next/router'
 
 import Image, { ImageProps } from 'next/image'
 import React from 'react'
-import { ChevronDown, ChevronsRight, Menu as LucideMenu, X } from 'lucide-react'
+import { ChevronDown, Menu as LucideMenu } from 'lucide-react'
 import Text from '../Text'
 import Menu from '../Menu'
 import Sidebar from '../Sidebar'
@@ -14,7 +14,6 @@ import { buildClassName } from '../Util'
 import css from './Navbar.module.styl'
 import { Icon } from '../interfaces'
 import Button from '../Button'
-import { objectEqual } from '@dzeio/object-util'
 
 interface MenuItem {
 	path?: string

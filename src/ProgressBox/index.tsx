@@ -1,5 +1,4 @@
 import React from 'react'
-import { buildClassName } from '../Util'
 import css from './ProgressBox.module.styl'
 import ProgressBar from '../ProgressBar'
 import Row from '../Row'

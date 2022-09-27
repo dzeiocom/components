@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import Link from '../Link'
 import { ColorType, Icon } from '../interfaces'
 import { buildClassName } from '../Util'
