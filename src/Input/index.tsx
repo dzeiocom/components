@@ -120,7 +120,11 @@ export default class Input extends React.PureComponent<Props, States> {
 		}
 	}
 
-	public async componentDidUpdate(_: Props, prevStates: States) {
+
+	public async componentDidUpdate(prevProps: Props, prevStates: States) {
+		if (prevProps.value !== this.props.value) {
+			this.onChange(this.props.value?.toString() ?? '')
+		}
 		if (prevStates.value !== this.state.value) {
 			if (this.props.onValue) {
 				this.props.onValue(this.state.value ?? '')
@@ -354,16 +358,16 @@ export default class Input extends React.PureComponent<Props, States> {
 	 * handle the change event of the input
 	 * @param event the event
 	 */
-	private onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+	private onChange = async (event: React.ChangeEvent<HTMLInputElement>|string) => {
 		// get the input
-		const value = event.currentTarget.value
+		const value = typeof event === 'string' ? event : event.currentTarget.value
 		// console.log("onChange", value)
 
 		if (typeof value !== 'string') {
 			return
 		}
 
-		if (this.props.onChange) {
+		if (this.props.onChange && typeof event !== 'string') {
 			this.props.onChange(event)
 		}
 
