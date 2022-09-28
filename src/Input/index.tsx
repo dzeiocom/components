@@ -368,6 +368,7 @@ export default class Input extends React.PureComponent<Props, States> {
 		}
 
 		if (this.props.value) {
+			this.props.onValue?.(value)
 			return
 		}
 

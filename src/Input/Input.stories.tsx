@@ -77,6 +77,17 @@ tmp.args = {label: 'Label', helper: 'Helper', strictChoices: true, choices: [
 export const Select = tmp
 
 tmp = Input.bind({})
+tmp.args = {label: 'Label', helper: 'Helper', type: 'number', iconLeft: {
+	icon: X,
+	transformer: (v: string) => {
+		console.log("POUET :D")
+		return ""
+	}
+}}
+
+export const Number = tmp
+
+tmp = Input.bind({})
 tmp.args = {block: true, type: 'textarea', defaultValue : 'd', label: 'Label', helper: 'Helper', choices: [
 	'a',
 	'a',
