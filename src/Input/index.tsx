@@ -6,7 +6,7 @@ import { Icon } from '../interfaces'
 import { buildClassName } from '../Util'
 import css from './Input.module.styl'
 import Menu from '../Menu'
-import { objectOmit } from '@dzeio/object-util'
+import { objectEqual, objectOmit } from '@dzeio/object-util'
 
 interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
 	id?: string
@@ -123,8 +123,20 @@ export default class Input extends React.PureComponent<Props, States> {
 
 
 	public async componentDidUpdate(prevProps: Props, prevStates: States) {
-		if (prevProps.value !== this.props.value) {
-			this.setState({ displayedValue: this.props.value?.toString(), value : this.props.value?.toString(), valueUpdate: true })
+		if (prevProps.value !== this.props.value && this.props.value !== this.state.value) {
+			if (this.props.choices) {
+				const choice = this.props.choices.find((it) => typeof it === 'string' ? it : it.value === this.props.value?.toString())
+				if (choice) {
+					this.setState({
+						displayedValue: typeof choice === 'string' ? choice : choice.display,
+						value: typeof choice === 'string' ? choice : choice.value,
+						valueUpdate: true
+					})
+				}
+			} else {
+				this.setState({ displayedValue: this.props.value?.toString(), value : this.props.value?.toString(), valueUpdate: true })
+
+			}
 		}
 		if (prevStates.value !== this.state.value) {
 			if (this.props.onValue) {
@@ -138,8 +150,10 @@ export default class Input extends React.PureComponent<Props, States> {
 		if (
 			prevStates.value !== this.state.value ||
 			prevStates.displayedValue !== this.state.displayedValue ||
-			prevStates.valueUpdate !== this.state.valueUpdate
+			prevStates.valueUpdate !== this.state.valueUpdate ||
+			!objectEqual(prevProps.choices ?? [], this.props.choices ?? [])
 		) {
+			console.log('list updated')
 			this.setState({list: this.buildList()})
 		}
 	}
