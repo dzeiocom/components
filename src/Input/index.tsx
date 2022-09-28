@@ -88,18 +88,19 @@ export default class Input extends React.PureComponent<Props, States> {
 		}
 
 		// Handle default Value
-		if (this.props.defaultValue) {
+		if (this.props.defaultValue || this.props.value) {
+			const value = this.props.defaultValue ?? this.props.value ?? ''
 			if (!this.props.choices) {
-				this.setState({displayedValue: this.props.defaultValue.toString()})
+				this.setState({displayedValue: value.toString()})
 			} else {
-				const res = this.props.choices.find((it) => {
-					return typeof it === 'string' ? it === this.props.defaultValue : it.value === this.props.defaultValue
-				})
+				const res = this.props.choices.find(
+					(it) => typeof it === 'string' ? it === value : it.value === value
+				)
 				if (!res) {
 					if (this.props.strictChoices) {
 						this.setState({value: '', displayedValue: ''})
 					} else {
-						this.setState({displayedValue: this.props.defaultValue.toString()})
+						this.setState({displayedValue: value.toString()})
 					}
 					return
 				}
@@ -123,7 +124,7 @@ export default class Input extends React.PureComponent<Props, States> {
 
 	public async componentDidUpdate(prevProps: Props, prevStates: States) {
 		if (prevProps.value !== this.props.value) {
-			this.onChange(this.props.value?.toString() ?? '')
+			this.setState({ displayedValue: this.props.value?.toString(), value : this.props.value?.toString(), valueUpdate: true })
 		}
 		if (prevStates.value !== this.state.value) {
 			if (this.props.onValue) {
@@ -147,7 +148,7 @@ export default class Input extends React.PureComponent<Props, States> {
 	 * return the real value of the field (depending if you a choices and the display value)
 	 * @returns the value of the field
 	 */
-	public value(): string | number | readonly string[] | undefined {
+	public value(): string | number | ReadonlyArray<string> | undefined {
 		return this.state?.value ?? this.state.displayedValue ?? this.props.value ?? undefined
 	}
 
@@ -223,46 +224,46 @@ export default class Input extends React.PureComponent<Props, States> {
 
 		return (
 			<>
-			{this.props.label && (
-				<label className={css.label} htmlFor={this.props.id}>{this.props.label}</label>
-			)}
-			<div
-				className={buildClassName(
-					css.parent,
-					[css.block, this.props.block]
+				{this.props.label && (
+					<label className={css.label} htmlFor={this.props.id}>{this.props.label}</label>
 				)}
-				ref={this.parentRef}
-			>
+				<div
+					className={buildClassName(
+						css.parent,
+						[css.block, this.props.block]
+					)}
+					ref={this.parentRef}
+				>
 
-				{input as any}
+					{input as any}
 
-				{/* Left Icon */}
-				{this.getIcon(iconLeft, 'left')}
+					{/* Left Icon */}
+					{this.getIcon(iconLeft, 'left')}
 
-				{/* Right Icon */}
-				{iconRight ?
-					this.getIcon(iconRight, 'right') :
-					(this.props.choices && !this.props.disabled && !this.props.disableAutoIcons) && (
-						<ChevronDown size="18" className={buildClassName(css.right, css.rotate)} />
-					)
-				}
+					{/* Right Icon */}
+					{iconRight ?
+						this.getIcon(iconRight, 'right') :
+						this.props.choices && !this.props.disabled && !this.props.disableAutoIcons && (
+							<ChevronDown size="18" className={buildClassName(css.right, css.rotate)} />
+						)
+					}
 
-				{/* Helper text */}
-				{(this.props.helper) && (
-					<Text>{this.props.helper}</Text>
+					{/* Helper text */}
+					{this.props.helper && (
+						<Text>{this.props.helper}</Text>
 					)}
 
-				{/* List when this is an autocomplete */}
-				{this.props.choices && (
-					<Menu
-					outline
-					hideWhenEmpty
-					className={buildClassName(css.autocomplete, [css.reverse, !this.state.isInFirstPartOfScreen])}
-					items={this.state.list ?? []}
-					onClick={this.listSelection}
-					/>
+					{/* List when this is an autocomplete */}
+					{this.props.choices && (
+						<Menu
+							outline
+							hideWhenEmpty
+							className={buildClassName(css.autocomplete, [css.reverse, !this.state.isInFirstPartOfScreen])}
+							items={this.state.list ?? []}
+							onClick={this.listSelection}
+						/>
 					)}
-			</div>
+				</div>
 			</>
 		)
 	}
@@ -294,7 +295,7 @@ export default class Input extends React.PureComponent<Props, States> {
 		}
 		const v = this.state.displayedValue?.toLowerCase()
 		return this.props.choices
-			.map((item, index) => typeof item === 'string' ? ({item: {display: item, value: item}, index}) : {item, index})
+			.map((item, index) => typeof item === 'string' ? {item: {display: item, value: item}, index} : {item, index})
 			.filter(
 				(item) => this.props.displayAllOptions || !this.state.valueUpdate || !v || item.item.display.toLowerCase().includes(v) || item.item.display.toLowerCase().toLowerCase().includes(v)
 			)
@@ -326,8 +327,8 @@ export default class Input extends React.PureComponent<Props, States> {
 	 * @returns the icon
 	 */
 	private getIcon(Icon: Icon | {
-		icon: Icon;
-		transformer: (value: string) => string;
+		icon: Icon
+		transformer: (value: string) => string
 	} | undefined, position: 'left' | 'right') {
 		if (!Icon) {
 			return undefined
