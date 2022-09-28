@@ -108,6 +108,10 @@ export default class Input extends React.PureComponent<Props, States> {
 				})
 			}
 		}
+
+		if (this.props.choices) {
+			this.setState({list: this.buildList()})
+		}
 	}
 
 	public componentWillUnmount() {

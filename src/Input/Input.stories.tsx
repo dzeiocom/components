@@ -53,6 +53,30 @@ tmp.args = {defaultValue : 'd', label: 'Label', helper: 'Helper', choices: [
 export const AutoComplete = tmp
 
 tmp = Input.bind({})
+tmp.args = {label: 'Label', helper: 'Helper', strictChoices: true, choices: [
+	'a',
+	'a',
+	'a',
+	'a',
+	'a',
+	'a',
+	'a',
+	'a',
+	'b',
+	{value: 'd', display: 'D'},
+	{value: '4', display: 'Mai'},
+	'cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc'
+], iconLeft: {
+	icon: X,
+	transformer: (v: string) => {
+		console.log("POUET :D")
+		return ""
+	}
+}}
+
+export const Select = tmp
+
+tmp = Input.bind({})
 tmp.args = {block: true, type: 'textarea', defaultValue : 'd', label: 'Label', helper: 'Helper', choices: [
 	'a',
 	'a',
