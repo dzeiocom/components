@@ -17,7 +17,7 @@ export default defineConfig({
 		rollupOptions: {
 			// externalize deps that shouldn't be bundled
 			// into your library
-			external: ['react', 'react-dom', /next/gu, ...external],
+			external: ['react', 'react-dom', /^next/gu, ...external],
 			output: {
 				// Provide global variables to use in the UMD build
 				// for externalized deps
