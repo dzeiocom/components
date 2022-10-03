@@ -30,15 +30,15 @@ generateTheme($name, c50, c100, c200, c300, c400, c500, c600, c700, c800, c900)
 	{"--" + $name + "-800-color"}: hextorgb(c800)
 	{"--" + $name + "-900-color"}: hextorgb(c900)
 	{"--" + $name + "-50-text"}: light(c50 ) ? black : white
-	{"--" + $name + "-100-text"}:    light(c100) ? black : white
-	{"--" + $name + "-200-text"}:    light(c200) ? black : white
-	{"--" + $name + "-300-text"}:    light(c300) ? black : white
-	{"--" + $name + "-400-text"}:    light(c400) ? black : white
-	{"--" + $name + "-500-text"}:    light(c500) ? black : white
-	{"--" + $name + "-600-text"}:    light(c600) ? black : white
-	{"--" + $name + "-700-text"}:    light(c700) ? black : white
-	{"--" + $name + "-800-text"}:    light(c800) ? black : white
-	{"--" + $name + "-900-text"}:    light(c900) ? black : white
+	{"--" + $name + "-100-text"}: light(c100) ? black : white
+	{"--" + $name + "-200-text"}: light(c200) ? black : white
+	{"--" + $name + "-300-text"}: light(c300) ? black : white
+	{"--" + $name + "-400-text"}: light(c400) ? black : white
+	{"--" + $name + "-500-text"}: light(c500) ? black : white
+	{"--" + $name + "-600-text"}: light(c600) ? black : white
+	{"--" + $name + "-700-text"}: light(c700) ? black : white
+	{"--" + $name + "-800-text"}: light(c800) ? black : white
+	{"--" + $name + "-900-text"}: light(c900) ? black : white
 
 :root
 	generateTheme(
@@ -67,6 +67,7 @@ generateTheme($name, c50, c100, c200, c300, c400, c500, c600, c700, c800, c900)
 	--gray-900 hextorgb(#212121)
 
 :root
+:root.theme-base-red
 .red
 .red *
 	--theme-50: hextorgb(#FFEBEE)
@@ -80,6 +81,7 @@ generateTheme($name, c50, c100, c200, c300, c400, c500, c600, c700, c800, c900)
 	--theme-800: hextorgb(#C62828)
 	--theme-900: hextorgb(#B71C1C)
 
+:root.theme-base-pink
 .pink
 .pink *
 	--theme-50: hextorgb(#FCE4EC)
@@ -93,6 +95,7 @@ generateTheme($name, c50, c100, c200, c300, c400, c500, c600, c700, c800, c900)
 	--theme-800: hextorgb(#AD1457)
 	--theme-900: hextorgb(#880E4F)
 
+:root.theme-base-purple
 .purple
 .purple *
 	--theme-50: hextorgb(#F3E5F5)
@@ -119,6 +122,7 @@ generateTheme($name, c50, c100, c200, c300, c400, c500, c600, c700, c800, c900)
 	--theme-800 hextorgb(#4527A0)
 	--theme-900 hextorgb(#311B92)
 
+:root.theme-base-indigo
 .indigo
 .indigo *
 	--theme-50 hextorgb(#E8EAF6)
@@ -132,6 +136,7 @@ generateTheme($name, c50, c100, c200, c300, c400, c500, c600, c700, c800, c900)
 	--theme-800 hextorgb(#283593)
 	--theme-900 hextorgb(#1A237E)
 
+:root.theme-base-blue
 .blue
 .blue *
 	--theme-50 hextorgb(#E3F2FD)
@@ -158,6 +163,7 @@ generateTheme($name, c50, c100, c200, c300, c400, c500, c600, c700, c800, c900)
 	--theme-800 hextorgb(#0277BD)
 	--theme-900 hextorgb(#01579B)
 
+:root.theme-base-cyan
 .cyan
 .cyan *
 	--theme-50 hextorgb(#E0F7FA)
@@ -171,6 +177,7 @@ generateTheme($name, c50, c100, c200, c300, c400, c500, c600, c700, c800, c900)
 	--theme-800 hextorgb(#00838F)
 	--theme-900 hextorgb(#006064)
 
+:root.theme-base-teal
 .teal
 .teal *
 	--theme-50 hextorgb(#E0F2F1)
@@ -184,6 +191,7 @@ generateTheme($name, c50, c100, c200, c300, c400, c500, c600, c700, c800, c900)
 	--theme-800 hextorgb(#00695C)
 	--theme-900 hextorgb(#004D40)
 
+:root.theme-base-green
 .green
 .green *
 	--theme-50 hextorgb(#E8F5E9)
@@ -197,6 +205,7 @@ generateTheme($name, c50, c100, c200, c300, c400, c500, c600, c700, c800, c900)
 	--theme-800 hextorgb(#2E7D32)
 	--theme-900 hextorgb(#1B5E20)
 
+:root.theme-base-light-green
 .light-green
 .light-green *
 	--theme-50 hextorgb(#F1F8E9)
@@ -210,6 +219,7 @@ generateTheme($name, c50, c100, c200, c300, c400, c500, c600, c700, c800, c900)
 	--theme-800 hextorgb(#558B2F)
 	--theme-900 hextorgb(#33691E)
 
+:root.theme-base-lime
 .lime
 .lime *
 	--theme-50 hextorgb(#F9FBE7)
@@ -223,6 +233,7 @@ generateTheme($name, c50, c100, c200, c300, c400, c500, c600, c700, c800, c900)
 	--theme-800 hextorgb(#9E9D24)
 	--theme-900 hextorgb(#827717)
 
+:root.theme-base-yellow
 .yellow
 .yellow *
 	--theme-50 hextorgb(#FFFDE7)
@@ -236,6 +247,7 @@ generateTheme($name, c50, c100, c200, c300, c400, c500, c600, c700, c800, c900)
 	--theme-800 hextorgb(#F9A825)
 	--theme-900 hextorgb(#F57F17)
 
+:root.theme-base-amber
 .amber
 .amber *
 	--theme-100 hextorgb(#FFECB3)
@@ -248,6 +260,7 @@ generateTheme($name, c50, c100, c200, c300, c400, c500, c600, c700, c800, c900)
 	--theme-800 hextorgb(#FF8F00)
 	--theme-900 hextorgb(#FF6F00)
 
+:root.theme-base-orange
 .orange
 .orange *
 	--theme-50 hextorgb(#FFF3E0)
@@ -261,6 +274,7 @@ generateTheme($name, c50, c100, c200, c300, c400, c500, c600, c700, c800, c900)
 	--theme-800 hextorgb(#EF6C00)
 	--theme-900 hextorgb(#E65100)
 
+:root.theme-base-deep-orange
 .deep-orange
 .deep-orange *
 	--theme-50 hextorgb(#FBE9E7)
@@ -275,7 +289,8 @@ generateTheme($name, c50, c100, c200, c300, c400, c500, c600, c700, c800, c900)
 	--theme-900 hextorgb(#BF360C)
 
 
-
+:root.theme-base-brown
+.brown
 .brown *
 	--theme-50 hextorgb(#EFEBE9)
 	--theme-100 hextorgb(#D7CCC8)
@@ -288,6 +303,8 @@ generateTheme($name, c50, c100, c200, c300, c400, c500, c600, c700, c800, c900)
 	--theme-800 hextorgb(#4E342E)
 	--theme-900 hextorgb(#3E2723)
 
+:root.theme-base-blue-gray
+.blue-gray
 .blue-gray *
 	--theme-50 hextorgb(#ECEFF1)
 	--theme-100 hextorgb(#CFD8DC)
