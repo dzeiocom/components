@@ -15,7 +15,6 @@ import Container from './Container'
 import DebugCols from './Col/DebugCols'
 import Footer from './Footer'
 import Fieldset from './Fieldset'
-import GradientBackground from './GradientBackground'
 import Image from './Image'
 import Input from './Input'
 import Link from './Link'
@@ -45,7 +44,6 @@ export {
 	DebugCols,
 	Footer,
 	Fieldset,
-	GradientBackground,
 	Image,
 	Input,
 	Link,

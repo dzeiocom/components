@@ -1,11 +1,8 @@
 @import '../config'
 
 .link
-	color $infoDark
-	@media (prefers-color-scheme dark)
-		color $infoLight
-	&:hover
-		text-decoration underline
+	color nativeRGB(var(--theme-500))
+	text-decoration underline
 
 .icon
 	vertical-align sub

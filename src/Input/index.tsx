@@ -53,6 +53,8 @@ interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLIn
 	 * Allows you to disable automatic icons
 	 */
 	disableAutoIcons?: boolean
+
+	placeholder?: string
 }
 
 interface States {

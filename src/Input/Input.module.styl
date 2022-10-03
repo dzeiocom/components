@@ -22,9 +22,9 @@
 	svg
 		position absolute
 		user-select none
-		color $darkGrayLight
+		color black
 		@media (prefers-color-scheme dark)
-			color $darkGrayDark
+			color white
 		transition color $transition
 		pointer-events none
 		&.iconClickable
@@ -44,10 +44,10 @@
 		appearance none
 
 		option
-			background $foregroundLight
+			background nativeRGB(var(--theme-50))
 			color black
 			@media (prefers-color-scheme dark)
-				background lighten($foregroundDark, 5%)
+				background nativeRGB(var(--gray-800))
 				color white
 
 	textarea
@@ -101,17 +101,17 @@
 		max-width 100%
 		font-size .875rem
 		outline none
-		background $lightGrayLight
+		background nativeRGB(var(--theme-50))
 		transition all $transition
 		border 2px solid black
 		color black
 		@media (prefers-color-scheme dark)
-			background $lightGrayDark
+			background nativeRGB(var(--gray-800))
 			border-color transparent
+			border 2px solid nativeRGB(var(--gray-500))
 			color white
 
 		&::placeholder
-			font-weight 700
 			font-size rem(16)
 			transition color $transition
 			opacity 1
@@ -125,10 +125,7 @@
 
 
 		&:disabled
-			border-color $darkGrayLight
-
-			@media (prefers-color-scheme dark)
-				border-color $darkGrayDark
+			border-color nativeRGB(var(--gray-500))
 
 		&:not(:disabled)
 			&:hover
@@ -143,7 +140,7 @@
 					@media (prefers-color-scheme dark)
 						color white
 			&:focus
-				border-color $main
+				border-color nativeRGB(var(--theme-color))
 
 				~ svg
 					color @border-color
@@ -152,18 +149,6 @@
 
 				// 	@media (prefers-color-scheme dark)
 				// 		color white
-
-			&:invalid
-				border-color $errorLight
-
-				~ svg
-					color @border-color
-				@media (prefers-color-scheme dark)
-					border-color $errorDark
-
-					~ svg
-						color @border-color
-
 
 		&.iconLeft
 			padding-left 16px + 24px + 10px

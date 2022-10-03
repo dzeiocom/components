@@ -12,10 +12,10 @@
 	color white
 
 .black
-	color #212121
+	color black
 
 .main
-	color $main
+	color nativeRGB(var(--theme-color))
 
 for size in 36 28 24 20 18 16 14
 	.size-{size}
@@ -38,6 +38,6 @@ for weight in 'normal' 'bold'
 
 @media (prefers-color-scheme dark)
 	.white:not(.noDarkTheme)
-		color #212121
+		color black
 	.black:not(.noDarkTheme)
 		color white

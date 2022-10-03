@@ -1,7 +1,13 @@
+// native RGBA function to replace Stylus rgba function
+nativeRGBA(color, opacity)
+	unquote('rgba(') color unquote(', ') opacity unquote(');')
+nativeRGB(color)
+	unquote('rgb(') color unquote(');')
 
-$main = #4285F4
+// @deprecated
+$main = nativeRGB(var(--theme-color))
 $textOnMain = white
-$mainGradient = linear-gradient(to right, $main, lighten($main, 20%))
+$mainGradient = linear-gradient(to right, $main, nativeRGB(var(--theme-color)))
 
 $infoDark = #01579B
 $infoLight = #29B6F6
@@ -15,10 +21,10 @@ $errorLight = #F44336
 $warningDark = #C43E00
 $warningLight = #FF9800
 
-$backgroundDark = darken($main, 92%)
-$backgroundLight = lighten($main, 94%)
-$foregroundDark = #202020
-$foregroundLight = #FFFFFF
+$backgroundDark = nativeRGB(var(--gray-900))
+$backgroundLight = nativeRGB(var(--gray-50))
+$foregroundDark = nativeRGB(var(--gray-800))
+$foregroundLight = nativeRGB(var(--theme-50))
 
 // Light theme grays
 $darkGrayLight = #777
@@ -27,6 +33,7 @@ $lightGrayLight = #F4F4F4
 // Dark theme grays
 $darkGrayDark = #444
 $lightGrayDark = #AAA
+// -@deprecated
 
 $transitionTime = .15s
 $transitionFunction = ease-in-out
@@ -52,4 +59,4 @@ rem($a)
 use('stylusUtils.js')
 
 // Import theme in the root folder of the project
-@import '../../../../../../theme' if file-exists('../../../../../../theme.styl')
+@import '../../../../../theme' if file-exists('../../../../../theme.styl')

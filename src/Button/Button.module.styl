@@ -16,8 +16,8 @@
 	border none
 	justify-content center
 	align-items center
-	color $textOnMain
-	background-color $main
+	color white
+	background-color nativeRGB(var(--theme-color))
 
 	// Chrome Specific
 	outline none
@@ -29,12 +29,12 @@
 	&.ghost
 		&:hover
 			box-shadow none
-			background-color rgba($main, .25)
+			background-color nativeRGBA(var(--theme-500), .2)
 
 		&:active
 		&:focus
-			background-color $main
-			color $textOnMain
+			background-color nativeRGB(var(--theme-color))
+			color white
 
 	&.outline
 		border 2px solid @background-color
@@ -45,7 +45,7 @@
 		&:not(:disabled)
 			&:active
 			&:focus
-				color $textOnMain
+				color white
 
 
 	&.ghost
@@ -56,11 +56,11 @@
 
 	&:hover
 		background-color @background-color
-		box-shadow 0 0 0 4px rgba(@background-color,.2)
+		box-shadow 0 0 0 4px nativeRGBA(var(--theme-500), .2)
 
 	&:active
 	&:focus
-		background-color darken(@background-color, 30%)
+		background-color nativeRGB(var(--theme-800))
 
 	&.block
 		display flex
@@ -86,8 +86,8 @@
 		margin-top 0
 
 	&:disabled
-		background $lightGrayLight
-		color $darkGrayLight
+		background nativeRGB(var(--gray-500))
+		color nativeRGB(var(--gray-500))
 		transform none
 		box-shadow none
 		cursor initial
@@ -97,11 +97,11 @@
 			color $darkGrayDark
 
 		&.outline
-			border 2px solid @color
+			border 2px solid nativeRGB(var(--gray-500))
 			background transparent
 
 			@media (prefers-color-scheme dark)
-				border 2px solid $darkGrayDark
+				border 2px solid nativeRGB(var(--gray-500))
 
 	&.loading
 		color transparent
@@ -111,8 +111,8 @@
 		&::after
 			content ""
 			display block
-			border $textOnMain 2px solid
-			border-color transparent transparent $textOnMain $textOnMain
+			border white 2px solid
+			border-color transparent transparent white white
 			width 1em
 			position absolute
 			top calc(50% - (1em / 2))
@@ -122,10 +122,11 @@
 			box-sizing inherit
 			animation ButtonLoading .75s infinite linear
 
-		&:disabled::after
-			border-color transparent transparent $darkGrayLight $darkGrayLight
-			@media (prefers-color-scheme dark)
-				border-color transparent transparent $darkGrayDark $darkGrayDark
+		// &:disabled::after
+		// 	$rgb = nativeRGB(var(--gray-500))
+		// 	border-color transparent transparent $rgb $rgb
+		// 	@media (prefers-color-scheme dark)
+		// 		border-color transparent transparent $rgb $rgb
 
 svg + .textInner
 	margin-left 8px
@@ -161,7 +162,7 @@ btn($color, $theme)
 		if $theme is 'darken'
 			&:active
 			&:focus
-				background-color darken(@color, 30%)
+				background-color nativeRGB(var(--theme-700))
 
 
 	&.ghost
@@ -170,7 +171,7 @@ btn($color, $theme)
 
 		&:hover
 			box-shadow none
-			background-color rgba($color, .25)
+			background-color nativeRGBA($color, .25)
 
 		&:active
 		&:focus
@@ -178,39 +179,19 @@ btn($color, $theme)
 
 	&:hover
 		background-color @background-color
-		box-shadow 0 4px 4px rgba(@background-color,.2)
+		box-shadow 0 4px 4px nativeRGBA(@background-color,.2)
 
 	&:active
 	&:focus
 		if $theme is 'darken'
-			background-color darken(@background-color, 30%)
+			background-color nativeRGB(var(--theme-700))
 		else
-			background-color lighten(@background-color, 30%)
+			background-color nativeRGB(var(--theme-300))
 
 	&.loading
 		color transparent
 		&::after
 			border-color transparent transparent $textColor $textColor
-
-.info:not(:disabled)
-	btn($infoLight, 'darken')
-	@media (prefers-color-scheme dark)
-		btn($infoDark, 'lighten')
-
-.success:not(:disabled)
-	btn($successLight, 'darken')
-	@media (prefers-color-scheme dark)
-		btn($successDark, 'lighten')
-
-.error:not(:disabled)
-	btn($errorLight, 'darken')
-	@media (prefers-color-scheme dark)
-		btn($errorDark, 'lighten')
-
-.warning:not(:disabled)
-	btn($warningLight, 'darken')
-	@media (prefers-color-scheme dark)
-		btn($warningDark, 'lighten')
 
 @keyframes ButtonLoading
 	0%

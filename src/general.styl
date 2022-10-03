@@ -1,5 +1,6 @@
 //@import "_aileron"
 @import "config"
+@import "colors"
 
 *
 *::before
@@ -7,10 +8,10 @@
 	box-sizing border-box
 
 	scrollbar-width 16px
-	scrollbar-color darken($foregroundLight, 16%) $foregroundLight
-	@media (prefers-color-scheme dark)
-		scrollbar-color lighten($foregroundDark, 16%) $foregroundDark
-	font-family: ui-system, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif
+	// scrollbar-color nativeRGB(var(--theme-50)) nativeRGB(var(--theme-50))
+	// @media (prefers-color-scheme dark)
+	// 	scrollbar-color nativeRGB(var(--gray-800)) nativeRGB(var(--gray-800))
+	font-family ui-system, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif
 
 // Georgia,Cambria,"Times New Roman",Times,serif
 
@@ -22,10 +23,10 @@ body
 body > div[id="__next"]
 	margin 0
 	min-height 100vh
-	background $backgroundLight
+	background nativeRGB(var(--gray-50))
 
 	@media (prefers-color-scheme dark)
-		background $backgroundDark
+		background nativeRGB(var(--gray-900))
 
 a
 	color inherit
@@ -35,26 +36,25 @@ a
 ::-webkit-scrollbar
 	width 16px
 
-
 /* Track */
 ::-webkit-scrollbar-corner
 ::-webkit-scrollbar-track
-	background $foregroundLight
+	background nativeRGB(var(--theme-50))
 	transition $transition
 	@media (prefers-color-scheme dark)
-		background $foregroundDark
+		background nativeRGB(var(--gray-800))
 
-::-webkit-scrollbar-thumb
-	background: darken($foregroundLight, 16%)
-	transition $transition
-	@media (prefers-color-scheme dark)
-		background lighten($foregroundDark, 16%)
-	&:hover
-		background: darken($foregroundLight, 24%)
-		@media (prefers-color-scheme dark)
-			background: lighten($foregroundDark, 24%)
+// ::-webkit-scrollbar-thumb
+// 	background: darken(nativeRGB(var(--theme-50)), 16%)
+// 	transition $transition
+// 	@media (prefers-color-scheme dark)
+// 		background lighten(nativeRGB(var(--gray-800)), 16%)
+// 	&:hover
+// 		background: darken(nativeRGB(var(--theme-50)), 24%)
+// 		@media (prefers-color-scheme dark)
+// 			background: lighten(nativeRGB(var(--gray-800)), 24%)
 
-		&:active
-			background: darken($foregroundLight, 32%)
-			@media (prefers-color-scheme dark)
-				background: lighten($foregroundDark, 32%)
+// 		&:active
+// 			background: darken(nativeRGB(var(--theme-50)), 32%)
+// 			@media (prefers-color-scheme dark)
+// 				background: lighten(nativeRGB(var(--gray-800)), 32%)

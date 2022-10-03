@@ -1,8 +1,8 @@
 @import '../config.styl'
 
 .fieldset
-	border-radius 4px
-	border 2px solid $grayDark
+	border-radius 8px
+	border 2px solid nativeRGB(var(--gray-500))
 	transition all $transition
 	margin 0
 
@@ -12,8 +12,3 @@
 		padding 0 4px
 		@media (prefers-color-scheme dark)
 			color white
-	&:hover
-		border-color black
-
-		@media (prefers-color-scheme dark)
-			border-color white

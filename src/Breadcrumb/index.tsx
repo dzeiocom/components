@@ -31,7 +31,7 @@ export default class Breadcrumb extends React.Component<Props> {
 					</li>
 					{this.props.items.map((el, index) => (
 						<li property="itemListElement" typeof="ListItem" key={index}>
-							<Text {...this.props.textProps} tag="span"><ChevronRight size={14} /></Text>
+							<Text {...this.props.textProps} tag="span"><ChevronRight size={14} className={css.chevron} /></Text>
 							{el.href ? (
 								<Link className={css.item} noStyle href={el.href.replace(/ /g, '-')} linkProps={{ property: "item", typeof: "WebPage" }}>
 									<Text {...this.props.textProps} tag="span" textProps={{ property: "name" }}>{el.display}</Text>

@@ -23,7 +23,9 @@ tmp.args = {
 	id: 'pouet',
 	type: 'number',
 	step: 10,
-	defaultValue: 'test'
+	defaultValue: 'test',
+	placeholder: 'test',
+	disabled: false
 }
 
 export const Normal = tmp

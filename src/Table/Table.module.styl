@@ -4,21 +4,18 @@
 	border-spacing 0
 	width 100%
 
-	tr
-		$radius = 16px
-		th:first-child
-			border-top-left-radius $radius
-			border-bottom-left-radius $radius
-
-		th:last-child
-			border-top-right-radius $radius
-			border-bottom-right-radius $radius
-
-	&.horizontalBorders tr:not(:last-child) td
+	tr:not(:last-child) td
 		border-bottom 1px solid $darkGrayLight
+	tr th
+		border-bottom 2px solid $darkGrayLight
 
-	&.verticalBorders tr td:not(:first-child)
+	tr td:not(:first-child)
+	tr th:not(:first-child)
 		border-left 1px solid $darkGrayLight
+
+	th
+		font-weight bold
+		font-size rem(18)
 
 	th
 	td
@@ -27,12 +24,6 @@
 		color black
 		@media (prefers-color-scheme dark)
 			color white
-	th
-		background $lightGrayLight
-		color $darkGrayLight
-		@media (prefers-color-scheme dark)
-			background $lightGrayDark
-			color $darkGrayDark
 
 .parent
 	overflow-x auto

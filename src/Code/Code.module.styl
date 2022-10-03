@@ -1,12 +1,13 @@
-@import "../config.styl"
+@import "../config"
 
 .code
 .pre
-	background $lightGrayLight
+	background nativeRGB(var(--theme-50))
 	padding 4px 8px
 	border-radius 8px
 	@media (prefers-color-scheme dark)
-		background $lightGrayDark
+		background nativeRGB(var(--gray-700))
+		color white
 
 .pre
 	display block

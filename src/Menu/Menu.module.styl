@@ -2,7 +2,7 @@
 
 .menu
 	&.outline
-		border 2px solid $main
+		border 2px solid nativeRGB(var(--theme-color))
 	&.hidden
 		display none
 	ul
@@ -20,20 +20,20 @@
 			overflow-x hidden
 			text-overflow: ellipsis;
 			margin-bottom 8px
-			color $darkGrayLight
+			color black
 			cursor pointer
 			transition all $transition
 			font-weight bold
 			border-radius 8px
 			&:hover
 				color black
-				background $lightGrayLight
+				background nativeRGB(var(--theme-100))
 			@media (prefers-color-scheme dark)
-				color $lightGrayDark
+				color white
 				&:hover
 					color white
-					background $darkGrayDark
+					background nativeRGB(var(--gray-700))
 			&.selected
 			&:active
-				background $main
-				color $textOnMain
+				background nativeRGB(var(--theme-500))
+				color white

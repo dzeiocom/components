@@ -1,9 +1,9 @@
 @import "../config"
 
 .box
-	background $foregroundLight
+	background nativeRGB(var(--theme-50))
 	@media (prefers-color-scheme dark)
-		background $foregroundDark
+		background nativeRGB(var(--gray-800))
 	border-radius 16px
 	&.noBottomBorder
 		border-radius 16px 16px 0 0
@@ -31,6 +31,6 @@
 	width 24px
 	height 24px
 	display inline-block
-	background $main
+	background nativeRGB(var(--theme-color))
 	border-radius 4px
 	margin-right 8px
