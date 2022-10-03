@@ -1,4 +1,8 @@
 .github/
+src/
+README.md
+tsconfig.json
+vite.config.js
 .storybook/
 node_modules/
 *.stories.js

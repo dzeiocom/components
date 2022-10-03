@@ -2,12 +2,6 @@
 hextorgb(color)
 	red(color) unquote(', ') green(color) unquote(', ') blue(color)
 
-// not as :root for other components to use the closest value
-*
-	--theme-color: var(--theme-500)
-	// @media (prefers-color-scheme dark)
-	// 	--theme-color: var(--theme-500)
-
 generateTheme($name, c50, c100, c200, c300, c400, c500, c600, c700, c800, c900)
 	{"--" + $name + "-50"}: hextorgb(c50)
 	{"--" + $name + "-100"}: hextorgb(c100)
@@ -19,16 +13,6 @@ generateTheme($name, c50, c100, c200, c300, c400, c500, c600, c700, c800, c900)
 	{"--" + $name + "-700"}: hextorgb(c700)
 	{"--" + $name + "-800"}: hextorgb(c800)
 	{"--" + $name + "-900"}: hextorgb(c900)
-	{"--" + $name + "-50-color"}: hextorgb(c50)
-	{"--" + $name + "-100-color"}: hextorgb(c100)
-	{"--" + $name + "-200-color"}: hextorgb(c200)
-	{"--" + $name + "-300-color"}: hextorgb(c300)
-	{"--" + $name + "-400-color"}: hextorgb(c400)
-	{"--" + $name + "-500-color"}: hextorgb(c500)
-	{"--" + $name + "-600-color"}: hextorgb(c600)
-	{"--" + $name + "-700-color"}: hextorgb(c700)
-	{"--" + $name + "-800-color"}: hextorgb(c800)
-	{"--" + $name + "-900-color"}: hextorgb(c900)
 	{"--" + $name + "-50-text"}: light(c50 ) ? black : white
 	{"--" + $name + "-100-text"}: light(c100) ? black : white
 	{"--" + $name + "-200-text"}: light(c200) ? black : white
@@ -41,278 +25,321 @@ generateTheme($name, c50, c100, c200, c300, c400, c500, c600, c700, c800, c900)
 	{"--" + $name + "-900-text"}: light(c900) ? black : white
 
 :root
-	generateTheme(
-		'test',
-		#000,
-		#100,
-		#200,
-		#003,
-		#004,
-		#005,
-		#006,
-		#007,
-		#008,
-		#fff
-	)
 	// gray is not a theme
-	--gray-50 hextorgb(#FAFAFA)
-	--gray-100 hextorgb(#F5F5F5)
-	--gray-200 hextorgb(#EEEEEE)
-	--gray-300 hextorgb(#E0E0E0)
-	--gray-400 hextorgb(#BDBDBD)
-	--gray-500 hextorgb(#9E9E9E)
-	--gray-600 hextorgb(#757575)
-	--gray-700 hextorgb(#616161)
-	--gray-800 hextorgb(#424242)
-	--gray-900 hextorgb(#212121)
-
+	generateTheme(
+		'gray',
+		#FAFAFA,
+		#F5F5F5,
+		#EEEEEE,
+		#E0E0E0,
+		#BDBDBD,
+		#9E9E9E,
+		#757575,
+		#616161,
+		#424242,
+		#212121
+	)
 :root
 :root.theme-base-red
 .red
 .red *
-	--theme-50: hextorgb(#FFEBEE)
-	--theme-100: hextorgb(#FFCDD2)
-	--theme-200: hextorgb(#EF9A9A)
-	--theme-300: hextorgb(#E57373)
-	--theme-400: hextorgb(#EF5350)
-	--theme-500: hextorgb(#F44336)
-	--theme-600: hextorgb(#E53935)
-	--theme-700: hextorgb(#D32F2F)
-	--theme-800: hextorgb(#C62828)
-	--theme-900: hextorgb(#B71C1C)
-
+	generateTheme(
+		'theme',
+		#FFEBEE,
+		#FFCDD2,
+		#EF9A9A,
+		#E57373,
+		#EF5350,
+		#F44336,
+		#E53935,
+		#D32F2F,
+		#C62828,
+		#D50000
+	)
 :root.theme-base-pink
 .pink
 .pink *
-	--theme-50: hextorgb(#FCE4EC)
-	--theme-100: hextorgb(#F8BBD0)
-	--theme-200: hextorgb(#F48FB1)
-	--theme-300: hextorgb(#F06292)
-	--theme-400: hextorgb(#EC407A)
-	--theme-500: hextorgb(#E91E63)
-	--theme-600: hextorgb(#D81B60)
-	--theme-700: hextorgb(#C2185B)
-	--theme-800: hextorgb(#AD1457)
-	--theme-900: hextorgb(#880E4F)
-
+	generateTheme(
+		'theme',
+		#FCE4EC,
+		#F8BBD0,
+		#F48FB1,
+		#F06292,
+		#EC407A,
+		#E91E63,
+		#D81B60,
+		#C2185B,
+		#AD1457,
+		#880E4F
+	)
 :root.theme-base-purple
 .purple
 .purple *
-	--theme-50: hextorgb(#F3E5F5)
-	--theme-100: hextorgb(#E1BEE7)
-	--theme-200: hextorgb(#CE93D8)
-	--theme-300: hextorgb(#BA68C8)
-	--theme-400: hextorgb(#AB47BC)
-	--theme-500: hextorgb(#9C27B0)
-	--theme-600: hextorgb(#8E24AA)
-	--theme-700: hextorgb(#7B1FA2)
-	--theme-800: hextorgb(#6A1B9A)
-	--theme-900: hextorgb(#4A148C)
-
+	generateTheme(
+		'theme',
+		#F3E5F5,
+		#E1BEE7,
+		#CE93D8,
+		#BA68C8,
+		#AB47BC,
+		#9C27B0,
+		#8E24AA,
+		#7B1FA2,
+		#6A1B9A,
+		#4A148C
+	)
 .deep-purple
 .deep-purple *
-	--theme-50 hextorgb(#EDE7F6)
-	--theme-100 hextorgb(#D1C4E9)
-	--theme-200 hextorgb(#B39DDB)
-	--theme-300 hextorgb(#9575CD)
-	--theme-400 hextorgb(#7E57C2)
-	--theme-500 hextorgb(#673AB7)
-	--theme-600 hextorgb(#5E35B1)
-	--theme-700 hextorgb(#512DA8)
-	--theme-800 hextorgb(#4527A0)
-	--theme-900 hextorgb(#311B92)
-
+	generateTheme(
+		'theme',
+		#EDE7F6,
+		#D1C4E9,
+		#B39DDB,
+		#9575CD,
+		#7E57C2,
+		#673AB7,
+		#5E35B1,
+		#512DA8,
+		#4527A0,
+		#311B92
+	)
 :root.theme-base-indigo
 .indigo
 .indigo *
-	--theme-50 hextorgb(#E8EAF6)
-	--theme-100 hextorgb(#C5CAE9)
-	--theme-200 hextorgb(#9FA8DA)
-	--theme-300 hextorgb(#7986CB)
-	--theme-400 hextorgb(#5C6BC0)
-	--theme-500 hextorgb(#3F51B5)
-	--theme-600 hextorgb(#3949AB)
-	--theme-700 hextorgb(#303F9F)
-	--theme-800 hextorgb(#283593)
-	--theme-900 hextorgb(#1A237E)
-
+	generateTheme(
+		'theme',
+		#E8EAF6,
+		#C5CAE9,
+		#9FA8DA,
+		#7986CB,
+		#5C6BC0,
+		#3F51B5,
+		#3949AB,
+		#303F9F,
+		#283593,
+		#1A237E
+	)
 :root.theme-base-blue
 .blue
 .blue *
-	--theme-50 hextorgb(#E3F2FD)
-	--theme-100 hextorgb(#BBDEFB)
-	--theme-200 hextorgb(#90CAF9)
-	--theme-300 hextorgb(#64B5F6)
-	--theme-400 hextorgb(#42A5F5)
-	--theme-500 hextorgb(#2196F3)
-	--theme-600 hextorgb(#1E88E5)
-	--theme-700 hextorgb(#1976D2)
-	--theme-800 hextorgb(#1565C0)
-	--theme-900 hextorgb(#0D47A1)
-
+	generateTheme(
+		'theme',
+		#E3F2FD,
+		#BBDEFB,
+		#90CAF9,
+		#64B5F6,
+		#42A5F5,
+		#2196F3,
+		#1E88E5,
+		#1976D2,
+		#1565C0,
+		#0D47A1
+	)
 .light-blue
 .light-blue *
-	--theme-50 hextorgb(#E1F5FE)
-	--theme-100 hextorgb(#B3E5FC)
-	--theme-200 hextorgb(#81D4FA)
-	--theme-300 hextorgb(#4FC3F7)
-	--theme-400 hextorgb(#29B6F6)
-	--theme-500 hextorgb(#03A9F4)
-	--theme-600 hextorgb(#039BE5)
-	--theme-700 hextorgb(#0288D1)
-	--theme-800 hextorgb(#0277BD)
-	--theme-900 hextorgb(#01579B)
-
+	generateTheme(
+		'theme',
+		#E1F5FE,
+		#B3E5FC,
+		#81D4FA,
+		#4FC3F7,
+		#29B6F6,
+		#03A9F4,
+		#039BE5,
+		#0288D1,
+		#0277BD,
+		#01579B
+	)
 :root.theme-base-cyan
 .cyan
 .cyan *
-	--theme-50 hextorgb(#E0F7FA)
-	--theme-100 hextorgb(#B2EBF2)
-	--theme-200 hextorgb(#80DEEA)
-	--theme-300 hextorgb(#4DD0E1)
-	--theme-400 hextorgb(#26C6DA)
-	--theme-500 hextorgb(#00BCD4)
-	--theme-600 hextorgb(#00ACC1)
-	--theme-700 hextorgb(#0097A7)
-	--theme-800 hextorgb(#00838F)
-	--theme-900 hextorgb(#006064)
-
+	generateTheme(
+		'theme',
+		#E0F7FA,
+		#B2EBF2,
+		#80DEEA,
+		#4DD0E1,
+		#26C6DA,
+		#00BCD4,
+		#00ACC1,
+		#0097A7,
+		#00838F,
+		#006064
+	)
 :root.theme-base-teal
 .teal
 .teal *
-	--theme-50 hextorgb(#E0F2F1)
-	--theme-100 hextorgb(#B2DFDB)
-	--theme-200 hextorgb(#80CBC4)
-	--theme-300 hextorgb(#4DB6AC)
-	--theme-400 hextorgb(#26A69A)
-	--theme-500 hextorgb(#009688)
-	--theme-600 hextorgb(#00897B)
-	--theme-700 hextorgb(#00796B)
-	--theme-800 hextorgb(#00695C)
-	--theme-900 hextorgb(#004D40)
-
+	generateTheme(
+		'theme',
+		#E0F2F1,
+		#B2DFDB,
+		#80CBC4,
+		#4DB6AC,
+		#26A69A,
+		#009688,
+		#00897B,
+		#00796B,
+		#00695C,
+		#004D40
+	)
 :root.theme-base-green
 .green
 .green *
-	--theme-50 hextorgb(#E8F5E9)
-	--theme-100 hextorgb(#C8E6C9)
-	--theme-200 hextorgb(#A5D6A7)
-	--theme-300 hextorgb(#81C784)
-	--theme-400 hextorgb(#66BB6A)
-	--theme-500 hextorgb(#4CAF50)
-	--theme-600 hextorgb(#43A047)
-	--theme-700 hextorgb(#388E3C)
-	--theme-800 hextorgb(#2E7D32)
-	--theme-900 hextorgb(#1B5E20)
-
+	generateTheme(
+		'theme',
+		#E8F5E9,
+		#C8E6C9,
+		#A5D6A7,
+		#81C784,
+		#66BB6A,
+		#4CAF50,
+		#43A047,
+		#388E3C,
+		#2E7D32,
+		#1B5E20
+	)
 :root.theme-base-light-green
 .light-green
 .light-green *
-	--theme-50 hextorgb(#F1F8E9)
-	--theme-100 hextorgb(#DCEDC8)
-	--theme-200 hextorgb(#C5E1A5)
-	--theme-300 hextorgb(#AED581)
-	--theme-400 hextorgb(#9CCC65)
-	--theme-500 hextorgb(#8BC34A)
-	--theme-600 hextorgb(#7CB342)
-	--theme-700 hextorgb(#689F38)
-	--theme-800 hextorgb(#558B2F)
-	--theme-900 hextorgb(#33691E)
-
+	generateTheme(
+		'theme',
+		#F1F8E9,
+		#DCEDC8,
+		#C5E1A5,
+		#AED581,
+		#9CCC65,
+		#8BC34A,
+		#7CB342,
+		#689F38,
+		#558B2F,
+		#33691E
+	)
 :root.theme-base-lime
 .lime
 .lime *
-	--theme-50 hextorgb(#F9FBE7)
-	--theme-100 hextorgb(#F0F4C3)
-	--theme-200 hextorgb(#E6EE9C)
-	--theme-300 hextorgb(#DCE775)
-	--theme-400 hextorgb(#D4E157)
-	--theme-500 hextorgb(#CDDC39)
-	--theme-600 hextorgb(#C0CA33)
-	--theme-700 hextorgb(#AFB42B)
-	--theme-800 hextorgb(#9E9D24)
-	--theme-900 hextorgb(#827717)
-
+	generateTheme(
+		'theme',
+		#F9FBE7,
+		#F0F4C3,
+		#E6EE9C,
+		#DCE775,
+		#D4E157,
+		#CDDC39,
+		#C0CA33,
+		#AFB42B,
+		#9E9D24,
+		#827717
+	)
 :root.theme-base-yellow
 .yellow
 .yellow *
-	--theme-50 hextorgb(#FFFDE7)
-	--theme-100 hextorgb(#FFF9C4)
-	--theme-200 hextorgb(#FFF59D)
-	--theme-300 hextorgb(#FFF176)
-	--theme-400 hextorgb(#FFEE58)
-	--theme-500 hextorgb(#FFEB3B)
-	--theme-600 hextorgb(#FDD835)
-	--theme-700 hextorgb(#FBC02D)
-	--theme-800 hextorgb(#F9A825)
-	--theme-900 hextorgb(#F57F17)
-
+	generateTheme(
+		'theme',
+		#FFFDE7,
+		#FFF9C4,
+		#FFF59D,
+		#FFF176,
+		#FFEE58,
+		#FFEB3B,
+		#FDD835,
+		#FBC02D,
+		#F9A825,
+		#F57F17
+	)
 :root.theme-base-amber
 .amber
 .amber *
-	--theme-100 hextorgb(#FFECB3)
-	--theme-200 hextorgb(#FFE082)
-	--theme-300 hextorgb(#FFD54F)
-	--theme-400 hextorgb(#FFCA28)
-	--theme-500 hextorgb(#FFC107)
-	--theme-600 hextorgb(#FFB300)
-	--theme-700 hextorgb(#FFA000)
-	--theme-800 hextorgb(#FF8F00)
-	--theme-900 hextorgb(#FF6F00)
-
+	generateTheme(
+		'theme',
+		#FFF8E1,
+		#FFECB3,
+		#FFE082,
+		#FFD54F,
+		#FFCA28,
+		#FFC107,
+		#FFB300,
+		#FFA000,
+		#FF8F00,
+		#FF6F00
+	)
 :root.theme-base-orange
 .orange
 .orange *
-	--theme-50 hextorgb(#FFF3E0)
-	--theme-100 hextorgb(#FFE0B2)
-	--theme-200 hextorgb(#FFCC80)
-	--theme-300 hextorgb(#FFB74D)
-	--theme-400 hextorgb(#FFA726)
-	--theme-500 hextorgb(#FF9800)
-	--theme-600 hextorgb(#FB8C00)
-	--theme-700 hextorgb(#F57C00)
-	--theme-800 hextorgb(#EF6C00)
-	--theme-900 hextorgb(#E65100)
-
+	generateTheme(
+		'theme',
+		#FFF3E0,
+		#FFE0B2,
+		#FFCC80,
+		#FFB74D,
+		#FFA726,
+		#FF9800,
+		#FB8C00,
+		#F57C00,
+		#EF6C00,
+		#E65100
+	)
 :root.theme-base-deep-orange
 .deep-orange
 .deep-orange *
-	--theme-50 hextorgb(#FBE9E7)
-	--theme-100 hextorgb(#FFCCBC)
-	--theme-200 hextorgb(#FFAB91)
-	--theme-300 hextorgb(#FF8A65)
-	--theme-400 hextorgb(#FF7043)
-	--theme-500 hextorgb(#FF5722)
-	--theme-600 hextorgb(#F4511E)
-	--theme-700 hextorgb(#E64A19)
-	--theme-800 hextorgb(#D84315)
-	--theme-900 hextorgb(#BF360C)
-
+	generateTheme(
+		'theme',
+		#FBE9E7,
+		#FFCCBC,
+		#FFAB91,
+		#FF8A65,
+		#FF7043,
+		#FF5722,
+		#F4511E,
+		#E64A19,
+		#D84315,
+		#BF360C
+	)
 
 :root.theme-base-brown
 .brown
 .brown *
-	--theme-50 hextorgb(#EFEBE9)
-	--theme-100 hextorgb(#D7CCC8)
-	--theme-200 hextorgb(#BCAAA4)
-	--theme-300 hextorgb(#A1887F)
-	--theme-400 hextorgb(#8D6E63)
-	--theme-500 hextorgb(#795548)
-	--theme-600 hextorgb(#6D4C41)
-	--theme-700 hextorgb(#5D4037)
-	--theme-800 hextorgb(#4E342E)
-	--theme-900 hextorgb(#3E2723)
-
+	generateTheme(
+		'theme',
+		#EFEBE9,
+		#D7CCC8,
+		#BCAAA4,
+		#A1887F,
+		#8D6E63,
+		#795548,
+		#6D4C41,
+		#5D4037,
+		#4E342E,
+		#3E2723
+	)
 :root.theme-base-blue-gray
 .blue-gray
 .blue-gray *
-	--theme-50 hextorgb(#ECEFF1)
-	--theme-100 hextorgb(#CFD8DC)
-	--theme-200 hextorgb(#B0BEC5)
-	--theme-300 hextorgb(#90A4AE)
-	--theme-400 hextorgb(#78909C)
-	--theme-500 hextorgb(#607D8B)
-	--theme-600 hextorgb(#546E7A)
-	--theme-700 hextorgb(#455A64)
-	--theme-800 hextorgb(#37474F)
-	--theme-900 hextorgb(#263238)
+	generateTheme(
+		'theme',
+		#ECEFF1,
+		#CFD8DC,
+		#B0BEC5,
+		#90A4AE,
+		#78909C,
+		#607D8B,
+		#546E7A,
+		#455A64,
+		#37474F,
+		#263238
+	)
+:root.theme-base-gray
+.gray
+.gray *
+	generateTheme(
+		'theme',
+		#FAFAFA,
+		#F5F5F5,
+		#EEEEEE,
+		#E0E0E0,
+		#BDBDBD,
+		#9E9E9E,
+		#757575,
+		#616161,
+		#424242,
+		#212121
+	)

@@ -5,21 +5,8 @@ nativeRGB(color)
 	unquote('rgb(') color unquote(');')
 
 // @deprecated
-$main = nativeRGB(var(--theme-color))
+$main = nativeRGB(var(--theme-500))
 $textOnMain = white
-$mainGradient = linear-gradient(to right, $main, nativeRGB(var(--theme-color)))
-
-$infoDark = #01579B
-$infoLight = #29B6F6
-
-$successDark = #1B5E20
-$successLight = #7CB342
-
-$errorDark = #7F0000
-$errorLight = #F44336
-
-$warningDark = #C43E00
-$warningLight = #FF9800
 
 $backgroundDark = nativeRGB(var(--gray-900))
 $backgroundLight = nativeRGB(var(--gray-50))
@@ -54,9 +41,3 @@ $gapSize = 16px
 
 rem($a)
 	($a / 16)rem
-
-// See https://github.com/stylus/stylus/issues/1872#issuecomment-86553717
-use('stylusUtils.js')
-
-// Import theme in the root folder of the project
-@import '../../../../../theme' if file-exists('../../../../../theme.styl')
