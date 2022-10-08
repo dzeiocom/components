@@ -3,6 +3,8 @@ import React from 'react'
 import { Zap, ZapOff } from 'lucide-react'
 import Component from '.'
 import Text from '../Text'
+import Col from '../Col'
+import Row from '../Row'
 
 export default {
 	title: 'DZEIO/Navbar',
@@ -42,4 +44,12 @@ Navbar.args = {
 		name: 'Link',
 		icon: ZapOff
 	}],
+	children: (
+		<Row align='center'>
+			<Col><Text>Test</Text></Col>
+			<Col><Text>Test</Text></Col>
+			<Col><Text>Test</Text></Col>
+			<Col><Text>Test</Text></Col>
+		</Row>
+	)
 }

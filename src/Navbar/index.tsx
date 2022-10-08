@@ -52,6 +52,7 @@ interface Props {
 	 * Links to display
 	 */
 	menu: Array<MenuItem>
+	children?: React.ReactNode
 }
 
 interface State {
@@ -124,6 +125,7 @@ export default class Navbar extends React.Component<Props, State> {
 						</Col>
 					)}
 				</Row>
+				{this.props.children}
 				{/* Spacer */}
 				<div style={{flex: 1}}></div>
 
