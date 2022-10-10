@@ -223,11 +223,17 @@ export default class Sidebar extends React.Component<Props, State> {
 				</>
 			)
 			const isActive = this.state.path === obj.path || obj.subMenu?.find((it) => this.state.path === it.path)
-			return <li key={id} className={buildClassName(
-				[css.active, isActive],
-				[css.activeMenu, id === this.state.activeMenu && this.state.open]
-			)}>
-				<div onClick={isSub ? undefined : this.onClick(id, obj.subMenu)}>
+			return <li
+					key={id}
+					className={buildClassName(
+						[css.active, isActive],
+						[css.activeMenu, id === this.state.activeMenu && this.state.open]
+					)}
+					onClick={isSub ? undefined : this.onClick(id, obj.subMenu)}
+				>
+				<div
+					className={buildClassName([css.link, obj.path])}
+				>
 					{obj.path ? (
 						<Link noStyle href={obj.path}>
 							{content}

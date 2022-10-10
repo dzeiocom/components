@@ -10,7 +10,7 @@ export default {
 
 const list: Component['props']['items'] = [
 	{value: 'Menu item 1'},
-	{value: 'Menu item 2', icon: XOctagon},
+	{value: 'Menu with link', icon: XOctagon, href: '/'},
 	{value: 'Menu item 3', icon: XOctagon},
 	{value: 'Menu item 4', icon: XOctagon},
 	{value: 'Menu item 5', selected: true, icon: XOctagon},

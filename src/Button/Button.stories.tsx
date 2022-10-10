@@ -13,9 +13,9 @@ export const Button = (args: any) => <Box><Component {...args}>Button</Component
 Button.args = {
 	nomargintop: true,
 	icon: Zap,
+	mobileBlock: true,
 	iconLeft: Zap,
-	size: 'small',
-	block: true
+	size: 'small'
 }
 
 export const WithImg = (args: any) => <Box><Component {...args}>Button</Component></Box>

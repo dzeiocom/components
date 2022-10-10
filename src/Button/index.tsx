@@ -19,6 +19,7 @@ interface Props {
 	block?: boolean
 	href?: string
 	as?: string
+	mobileBlock?: boolean
 	disabled?: boolean
 	loading?: boolean
 	onClick?: (event: React.MouseEvent<HTMLButtonElement|HTMLAnchorElement, MouseEvent>) => void
@@ -57,7 +58,8 @@ export default class Button extends React.Component<Props> {
 			[css.block, this.props.block],
 			[css[this.props.size as string], this.props.size],
 			[css.nomargintop, this.props.nomargintop],
-			[css.loading, this.props.loading]
+			[css.loading, this.props.loading],
+			[css.mobileBlock, this.props.mobileBlock]
 		)
 
 		if (this.props.href && !this.props.disabled) {

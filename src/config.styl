@@ -4,23 +4,6 @@ nativeRGBA(color, opacity)
 nativeRGB(color)
 	unquote('rgb(') color unquote(');')
 
-// @deprecated
-$main = nativeRGB(var(--theme-500))
-$textOnMain = white
-
-$backgroundDark = nativeRGB(var(--gray-900))
-$backgroundLight = nativeRGB(var(--gray-50))
-$foregroundDark = nativeRGB(var(--gray-800))
-$foregroundLight = nativeRGB(var(--theme-50))
-
-// Light theme grays
-$darkGrayLight = #777
-$lightGrayLight = #F4F4F4
-
-// Dark theme grays
-$darkGrayDark = #444
-$lightGrayDark = #AAA
-// -@deprecated
 
 $transitionTime = .15s
 $transitionFunction = ease-in-out

@@ -29,8 +29,8 @@ export default class Menu extends React.Component<Props> {
 					)
 					if (item.href) {
 						return (
-						<li key={key} className={buildClassName([css.selected, item.selected])}>
-							<Link noStyle href={item.href}>{content}</Link>
+						<li key={key} className={buildClassName([css.selected, item.selected], css.link)}>
+							<Link noStyle href={item.href} className={css.linkInternal}>{content}</Link>
 						</li>
 						)
 					}

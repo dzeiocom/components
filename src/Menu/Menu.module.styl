@@ -13,10 +13,12 @@
 		li
 			svg
 				margin-right 8px
+				vertical-align sub
 			&:last-child
 				margin 0
-			display inline-flex
 			padding 8px
+			&.link
+				padding 0
 			overflow-x hidden
 			text-overflow: ellipsis;
 			margin-bottom 8px
@@ -37,3 +39,12 @@
 			&:active
 				background nativeRGB(var(--theme-500))
 				color white
+
+.link
+	padding 0
+.linkInternal
+	padding 8px
+	display inline-block
+	width 100%
+.icon
+	vertical-align sub

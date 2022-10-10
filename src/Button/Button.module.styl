@@ -68,6 +68,13 @@
 		margin 0
 		margin-top 8px
 
+	@media (max-width $mobile)
+		&.mobileBlock
+			display flex
+			width 100%
+			margin 0
+			margin-top 8px
+
 	&.large
 		padding 15px 30px
 		font-size rem(20)
@@ -87,14 +94,10 @@
 
 	&:disabled
 		background nativeRGB(var(--gray-500))
-		color nativeRGB(var(--gray-500))
+		color nativeRGB(var(--gray-500--text))
 		transform none
 		box-shadow none
 		cursor initial
-
-		@media (prefers-color-scheme dark)
-			background $lightGrayDark
-			color $darkGrayDark
 
 		&.outline
 			border 2px solid nativeRGB(var(--gray-500))
