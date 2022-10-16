@@ -68,7 +68,7 @@ interface State {
 
 /**
  * Navbar Component
- * @version 1.0.3
+ * @version 1.0.4
  */
 export default class Navbar extends React.Component<Props, State> {
 
@@ -162,13 +162,20 @@ export default class Navbar extends React.Component<Props, State> {
 			)}
 			{this.state.subMenu && (
 				<div style={{position: 'fixed', top: 76, right: this.state.subMenu.x}}>
-					<Menu outline items={this.state.subMenu.menu} />
+					<Menu className={css.menu} outline items={this.state.subMenu.menu} />
 				</div>
 			)}
 		</>
 	)
 
-	private onBodyClick = () => {
+	private onBodyClick = (ev: MouseEvent) => {
+		let target = ev.target as HTMLElement | null
+		do {
+			if (target && target.classList.contains(css.menu)) {
+				return
+			}
+			target = target?.parentElement as HTMLElement | null
+		} while (target)
 		this.setState({subMenu: undefined})
 	}
 
@@ -176,7 +183,6 @@ export default class Navbar extends React.Component<Props, State> {
 		ev.stopPropagation()
 		const x = window.innerWidth - (ev.currentTarget.offsetLeft + ev.currentTarget.offsetWidth)
 		if (subMenu && (!this.state.subMenu || x !== this.state.subMenu?.x)) {
-			console.log(ev)
 			this.setState({
 				subMenu: {
 					x,
