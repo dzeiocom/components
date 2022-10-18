@@ -39,22 +39,22 @@ a
 /* Track */
 ::-webkit-scrollbar-corner
 ::-webkit-scrollbar-track
-	background nativeRGB(var(--theme-50))
+	background nativeRGB(var(--theme-100))
 	transition $transition
 	@media (prefers-color-scheme dark)
 		background nativeRGB(var(--gray-800))
 
-// ::-webkit-scrollbar-thumb
-// 	background: darken(nativeRGB(var(--theme-50)), 16%)
-// 	transition $transition
-// 	@media (prefers-color-scheme dark)
-// 		background lighten(nativeRGB(var(--gray-800)), 16%)
-// 	&:hover
-// 		background: darken(nativeRGB(var(--theme-50)), 24%)
-// 		@media (prefers-color-scheme dark)
-// 			background: lighten(nativeRGB(var(--gray-800)), 24%)
+::-webkit-scrollbar-thumb
+	background: nativeRGB(var(--theme-200))
+	transition $transition
+	@media (prefers-color-scheme dark)
+		background nativeRGB(var(--gray-700))
+	&:hover
+		background: nativeRGB(var(--theme-300))
+		@media (prefers-color-scheme dark)
+			background: nativeRGB(var(--gray-600))
 
-// 		&:active
-// 			background: darken(nativeRGB(var(--theme-50)), 32%)
-// 			@media (prefers-color-scheme dark)
-// 				background: lighten(nativeRGB(var(--gray-800)), 32%)
+		&:active
+			background: nativeRGB(var(--theme-400))
+			@media (prefers-color-scheme dark)
+				background: nativeRGB(var(--gray-500))

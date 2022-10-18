@@ -1,6 +1,6 @@
 {
 	"name": "@dzeio/components",
-	"version": "1.0.0-beta.4",
+	"version": "1.0.0-beta.5",
 	"license": "MIT",
 	"main": "./index.umd.js",
 	"module": "./index.es.js",
@@ -14,6 +14,7 @@
 		"@types/node": "^18",
 		"@types/react": "^18",
 		"@types/react-dom": "^18",
+		"html-webpack-plugin": "^5.5.0",
 		"next": "^12",
 		"react": "^18",
 		"react-dom": "^18",
