@@ -133,11 +133,11 @@ export default class Navbar extends React.Component<Props, State> {
 				{!this.state.isMobile && (
 					<ul>
 						{!this.state.isMobile && this.props.menu.map((item) => (
-							<li key={item.path}><Button nomargintop type="ghost" href={item.path} icon={item.icon} onClick={item.subMenu ? this.onClick(item.subMenu) : undefined}>{item.name}</Button></li>
+							<li key={item.path}><Button type="ghost" href={item.path} icon={item.icon} onClick={item.subMenu ? this.onClick(item.subMenu) : undefined}>{item.name}</Button></li>
 						))}
 						{this.props.user && (
 							<li>
-								<Button nomargintop type="ghost" iconLeft={ChevronDown} onClick={this.props.user.menu ? this.onClick(this.props.user.menu) : undefined}>{this.props.user.name}</Button>
+								<Button type="ghost" iconLeft={ChevronDown} onClick={this.props.user.menu ? this.onClick(this.props.user.menu) : undefined}>{this.props.user.name}</Button>
 							</li>
 						)}
 					</ul>

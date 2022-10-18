@@ -9,7 +9,6 @@ import css from './Button.module.styl'
 // MAKE OUTLINE use Fieldset instead of the current one xd
 
 interface Props {
-	nomargintop?: boolean
 	color?: ColorType
 	children?: React.ReactNode
 	icon?: Icon | string
@@ -57,7 +56,6 @@ export default class Button extends React.Component<Props> {
 			[css[this.props.type as string], this.props.type],
 			[css.block, this.props.block],
 			[css[this.props.size as string], this.props.size],
-			[css.nomargintop, this.props.nomargintop],
 			[css.loading, this.props.loading],
 			[css.mobileBlock, this.props.mobileBlock]
 		)
