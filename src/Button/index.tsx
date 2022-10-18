@@ -11,20 +11,21 @@ import css from './Button.module.styl'
 interface Props {
 	color?: ColorType
 	children?: React.ReactNode
+	className?: string
 	icon?: Icon | string
 	iconLeft?: Icon | string
 	size?: 'large' | 'small'
 	type?: 'outline' | 'ghost'
 	block?: boolean
 	href?: string
-	as?: string
+	linkExternal?: boolean
 	mobileBlock?: boolean
 	disabled?: boolean
 	loading?: boolean
 	onClick?: (event: React.MouseEvent<HTMLButtonElement|HTMLAnchorElement, MouseEvent>) => void
 }
 
-export default class Button extends React.Component<Props> {
+export default class Button extends React.PureComponent<Props> {
 
 	public render = () => {
 
@@ -57,12 +58,13 @@ export default class Button extends React.Component<Props> {
 			[css.block, this.props.block],
 			[css[this.props.size as string], this.props.size],
 			[css.loading, this.props.loading],
-			[css.mobileBlock, this.props.mobileBlock]
+			[css.mobileBlock, this.props.mobileBlock],
+			this.props.className
 		)
 
 		if (this.props.href && !this.props.disabled) {
 			return (
-				<Link linkProps={{onClick: this.props.onClick}} noStyle href={this.props.href} className={buildClassName([classes], [css.disabled, this.props.disabled])}>
+				<Link external={this.props.linkExternal} linkProps={{onClick: this.props.onClick}} noStyle href={this.props.href} className={buildClassName(classes, [css.disabled, this.props.disabled])}>
 					{inner}
 				</Link>
 			)
