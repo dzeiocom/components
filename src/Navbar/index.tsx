@@ -20,6 +20,7 @@ interface MenuItem {
 	icon?: Icon
 	name: string
 	subMenu?: Array<MenuItem>
+	mobileOnly?: boolean
 }
 
 interface Props {
@@ -132,7 +133,7 @@ export default class Navbar extends React.Component<Props, State> {
 				{/* Menu */}
 				{!this.state.isMobile && (
 					<ul>
-						{!this.state.isMobile && this.props.menu.map((item) => (
+						{this.props.menu.filter((it) => !it.mobileOnly).map((item) => (
 							<li key={item.path}><Button type="ghost" href={item.path} icon={item.icon} onClick={item.subMenu ? this.onClick(item.subMenu) : undefined}>{item.name}</Button></li>
 						))}
 						{this.props.user && (
@@ -161,7 +162,7 @@ export default class Navbar extends React.Component<Props, State> {
 				</div>
 			)}
 			{this.state.subMenu && (
-				<div style={{position: 'fixed', top: 76, right: this.state.subMenu.x}}>
+				<div style={{position: 'fixed', top: 76, right: this.state.subMenu.x, zIndex: 1}}>
 					<Menu className={css.menu} outline items={this.state.subMenu.menu} />
 				</div>
 			)}

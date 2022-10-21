@@ -59,7 +59,6 @@ interface State {
 	 */
 	open: boolean
 	activeMenu?: string
-	isMobile: boolean
 	userMenu?: boolean
 	subMenu?: {
 		y: number
@@ -74,8 +73,7 @@ interface State {
 export default class Sidebar extends React.Component<Props, State> {
 
 	public state: State = {
-		open: true,
-		isMobile: false
+		open: true
 	}
 
 	public componentDidMount() {
