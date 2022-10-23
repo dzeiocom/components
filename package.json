@@ -1,6 +1,6 @@
 {
 	"name": "@dzeio/components",
-	"version": "1.0.0-beta.7",
+	"version": "1.0.0-beta.8",
 	"license": "MIT",
 	"main": "./index.umd.js",
 	"module": "./index.es.js",
