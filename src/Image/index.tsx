@@ -69,6 +69,7 @@ export default class Image extends React.Component<Props, States> {
 						priority
 						quality={100}
 						{...this.props.imageProps}
+						layout={this.state.image ? 'fill' : this.props.imageProps.layout}
 						objectFit="contain"
 					/>
 				</div>
