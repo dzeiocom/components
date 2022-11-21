@@ -1,8 +1,9 @@
+import { objectOmit } from '@dzeio/object-util'
 import React from 'react'
 import { buildClassName } from '../Util'
 import css from './Col.module.styl'
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
 	size?: 0|1|2|3|4|5|6|7|8|9|10|11|12
 	offset?: 1|2|3|4|5|6|7|8|9|10|11
 	children?: React.ReactNode
@@ -21,10 +22,25 @@ interface Props {
 	mobileGrow?: boolean
 }
 
+
+
 export default class Col extends React.Component<Props> {
 
 	public render = () => (
-		<div className={buildClassName(
+		<div {...objectOmit(
+			this.props,
+			"size",
+			"offset",
+			"children",
+			"className",
+			"nogrow",
+			"tabletSize",
+			"tabletoffset",
+			"tabletGrow",
+			"mobileSize",
+			"mobileoffset",
+			"mobileGrow"
+		)} className={buildClassName(
 			css.col,
 
 			// Normal
