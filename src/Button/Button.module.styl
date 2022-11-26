@@ -15,7 +15,7 @@
 	border none
 	justify-content center
 	align-items center
-	color white
+	color var(--theme-500-text)
 	background-color nativeRGB(var(--theme-500))
 
 	// Chrome Specific
@@ -33,7 +33,7 @@
 		&:active
 		&:focus
 			background-color nativeRGB(var(--theme-500))
-			color white
+			color var(--theme-500-text)
 
 	&.outline
 		border 2px solid @background-color
@@ -44,7 +44,7 @@
 		&:not(:disabled)
 			&:active
 			&:focus
-				color white
+				color var(--theme-500-text)
 
 
 	&.ghost
@@ -90,7 +90,7 @@
 
 	&:disabled
 		background nativeRGB(var(--gray-500))
-		color nativeRGB(var(--gray-500--text))
+		color var(--gray-500--text)
 		transform none
 		box-shadow none
 		cursor initial
@@ -131,66 +131,6 @@ svg + .textInner
 	margin-left 8px
 .textInner + svg
 	margin-left 8px
-
-/**
- * $color: the color to use
- * $theme: the theme used ('lighten' | 'darken')
-*/
-btn($color, $theme)
-	background-color $color
-
-	// Get Text Color
-	$textColor = white
-	if $theme is 'darken'
-		$textColor = black
-	else
-		$textColor = white
-
-	color $textColor
-
-	&.outline
-		color @background-color
-		border-color @background-color
-		// background none
-
-		&:hover
-		&:active
-		&:focus
-			color $textColor
-
-		if $theme is 'darken'
-			&:active
-			&:focus
-				background-color nativeRGB(var(--theme-700))
-
-
-	&.ghost
-		background transparent
-		color $textColor
-
-		&:hover
-			box-shadow none
-			background-color nativeRGBA($color, .25)
-
-		&:active
-		&:focus
-			background-color $color
-
-	&:hover
-		background-color @background-color
-		box-shadow 0 4px 4px nativeRGBA(@background-color,.2)
-
-	&:active
-	&:focus
-		if $theme is 'darken'
-			background-color nativeRGB(var(--theme-700))
-		else
-			background-color nativeRGB(var(--theme-300))
-
-	&.loading
-		color transparent
-		&::after
-			border-color transparent transparent $textColor $textColor
 
 @keyframes ButtonLoading
 	0%
