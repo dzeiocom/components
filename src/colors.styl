@@ -3,16 +3,26 @@ hextorgb(color)
 	red(color) unquote(', ') green(color) unquote(', ') blue(color)
 
 generateTheme($name, c50, c100, c200, c300, c400, c500, c600, c700, c800, c900)
-	{"--" + $name + "-50"}: hextorgb(c50)
-	{"--" + $name + "-100"}: hextorgb(c100)
-	{"--" + $name + "-200"}: hextorgb(c200)
-	{"--" + $name + "-300"}: hextorgb(c300)
-	{"--" + $name + "-400"}: hextorgb(c400)
-	{"--" + $name + "-500"}: hextorgb(c500)
-	{"--" + $name + "-600"}: hextorgb(c600)
-	{"--" + $name + "-700"}: hextorgb(c700)
-	{"--" + $name + "-800"}: hextorgb(c800)
-	{"--" + $name + "-900"}: hextorgb(c900)
+	{"--" + $name + "-50"}:  c50
+	{"--" + $name + "-100"}: c100
+	{"--" + $name + "-200"}: c200
+	{"--" + $name + "-300"}: c300
+	{"--" + $name + "-400"}: c400
+	{"--" + $name + "-500"}: c500
+	{"--" + $name + "-600"}: c600
+	{"--" + $name + "-700"}: c700
+	{"--" + $name + "-800"}: c800
+	{"--" + $name + "-900"}: c900
+	{"--" + $name + "-50-rgb"}:  hextorgb(c50)
+	{"--" + $name + "-100-rgb"}: hextorgb(c100)
+	{"--" + $name + "-200-rgb"}: hextorgb(c200)
+	{"--" + $name + "-300-rgb"}: hextorgb(c300)
+	{"--" + $name + "-400-rgb"}: hextorgb(c400)
+	{"--" + $name + "-500-rgb"}: hextorgb(c500)
+	{"--" + $name + "-600-rgb"}: hextorgb(c600)
+	{"--" + $name + "-700-rgb"}: hextorgb(c700)
+	{"--" + $name + "-800-rgb"}: hextorgb(c800)
+	{"--" + $name + "-900-rgb"}: hextorgb(c900)
 	{"--" + $name + "-50-text"}:  light(c50)  ? black : white
 	{"--" + $name + "-100-text"}: light(c100) ? black : white
 	{"--" + $name + "-200-text"}: light(c200) ? black : white

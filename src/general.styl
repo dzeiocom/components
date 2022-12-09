@@ -8,9 +8,9 @@
 	box-sizing border-box
 
 	scrollbar-width 16px
-	// scrollbar-color nativeRGB(var(--theme-50)) nativeRGB(var(--theme-50))
+	// scrollbar-color var(--theme-50) var(--theme-50)
 	// @media (prefers-color-scheme dark)
-	// 	scrollbar-color nativeRGB(var(--gray-800)) nativeRGB(var(--gray-800))
+	// 	scrollbar-color var(--gray-800) var(--gray-800)
 	font-family ui-system, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif
 
 // Georgia,Cambria,"Times New Roman",Times,serif
@@ -23,10 +23,10 @@ body
 body > div[id="__next"]
 	margin 0
 	min-height 100vh
-	background nativeRGB(var(--gray-50))
+	background var(--gray-50)
 
 	@media (prefers-color-scheme dark)
-		background nativeRGB(var(--gray-900))
+		background var(--gray-900)
 
 a
 	color inherit
@@ -39,22 +39,22 @@ a
 /* Track */
 ::-webkit-scrollbar-corner
 ::-webkit-scrollbar-track
-	background nativeRGB(var(--theme-100))
+	background var(--theme-100)
 	transition $transition
 	@media (prefers-color-scheme dark)
-		background nativeRGB(var(--gray-800))
+		background var(--gray-800)
 
 ::-webkit-scrollbar-thumb
-	background: nativeRGB(var(--theme-200))
+	background: var(--theme-200)
 	transition $transition
 	@media (prefers-color-scheme dark)
-		background nativeRGB(var(--gray-700))
+		background var(--gray-700)
 	&:hover
-		background: nativeRGB(var(--theme-300))
+		background: var(--theme-300)
 		@media (prefers-color-scheme dark)
-			background: nativeRGB(var(--gray-600))
+			background: var(--gray-600)
 
 		&:active
-			background: nativeRGB(var(--theme-400))
+			background: var(--theme-400)
 			@media (prefers-color-scheme dark)
-				background: nativeRGB(var(--gray-500))
+				background: var(--gray-500)

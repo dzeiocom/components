@@ -16,7 +16,7 @@
 	justify-content center
 	align-items center
 	color var(--theme-500-text)
-	background-color nativeRGB(var(--theme-500))
+	background-color var(--theme-500)
 
 	// Chrome Specific
 	outline none
@@ -28,11 +28,11 @@
 	&.ghost
 		&:hover
 			box-shadow none
-			background-color nativeRGBA(var(--theme-500), .2)
+			background-color nativeRGBA(var(--theme-500-rgb), .2)
 
 		&:active
 		&:focus
-			background-color nativeRGB(var(--theme-500))
+			background-color var(--theme-500)
 			color var(--theme-500-text)
 
 	&.outline
@@ -55,11 +55,11 @@
 
 	&:hover
 		background-color @background-color
-		box-shadow 0 0 0 4px nativeRGBA(var(--theme-500), .2)
+		box-shadow 0 0 0 4px nativeRGBA(var(--theme-500-rgb), .2)
 
 	&:active
 	&:focus
-		background-color nativeRGB(var(--theme-800))
+		background-color var(--theme-800)
 
 	&.block
 		display flex
@@ -89,18 +89,18 @@
 			padding 3px 8px // @padding - @border
 
 	&:disabled
-		background nativeRGB(var(--gray-500))
+		background var(--gray-500)
 		color var(--gray-500--text)
 		transform none
 		box-shadow none
 		cursor initial
 
 		&.outline
-			border 2px solid nativeRGB(var(--gray-500))
+			border 2px solid var(--gray-500)
 			background transparent
 
 			@media (prefers-color-scheme dark)
-				border 2px solid nativeRGB(var(--gray-500))
+				border 2px solid var(--gray-500)
 
 	&.loading
 		color transparent
@@ -122,7 +122,7 @@
 			animation ButtonLoading .75s infinite linear
 
 		// &:disabled::after
-		// 	$rgb = nativeRGB(var(--gray-500))
+		// 	$rgb = var(--gray-500)
 		// 	border-color transparent transparent $rgb $rgb
 		// 	@media (prefers-color-scheme dark)
 		// 		border-color transparent transparent $rgb $rgb

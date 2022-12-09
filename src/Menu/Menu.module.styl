@@ -2,7 +2,7 @@
 
 .menu
 	&.outline
-		border 2px solid nativeRGB(var(--theme-500))
+		border 2px solid var(--theme-500)
 	&.hidden
 		display none
 	ul
@@ -29,15 +29,15 @@
 			border-radius 8px
 			&:hover
 				color black
-				background nativeRGB(var(--theme-100))
+				background var(--theme-100)
 			@media (prefers-color-scheme dark)
 				color white
 				&:hover
 					color white
-					background nativeRGB(var(--gray-700))
+					background var(--gray-700)
 			&.selected
 			&:active
-				background nativeRGB(var(--theme-500))
+				background var(--theme-500)
 				color white
 
 .link

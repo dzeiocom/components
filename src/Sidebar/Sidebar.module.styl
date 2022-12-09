@@ -10,9 +10,9 @@
 		margin-left 56px
 
 .sidebar
-	background nativeRGB(var(--theme-50))
+	background var(--theme-50)
 	@media (prefers-color-scheme dark)
-		background nativeRGB(var(--gray-800))
+		background var(--gray-800)
 	position fixed
 	left 0
 	top 0
@@ -53,13 +53,13 @@
 			border-radius 8px
 			&:hover
 				color black
-				background nativeRGB(var(--theme-100))
+				background var(--theme-100)
 				@media (prefers-color-scheme dark)
 					color white
-					background nativeRGB(var(--gray-700))
+					background var(--gray-700)
 			&:active
 				color white
-				background nativeRGB(var(--theme-500))
+				background var(--theme-500)
 	&.short
 		width 88px
 		.userSpace > div:not(:last-child)
@@ -139,13 +139,13 @@
 			&:hover
 
 				color black
-				background nativeRGB(var(--theme-100))
+				background var(--theme-100)
 				@media (prefers-color-scheme dark)
 					color white
-					background nativeRGB(var(--gray-700))
+					background var(--gray-700)
 			&:active
 				color white
-				background nativeRGB(var(--theme-500))
+				background var(--theme-500)
 
 			padding 8px
 			display flex
@@ -174,7 +174,7 @@
 
 		&.active > div
 			color white
-			background nativeRGB(var(--theme-500))
+			background var(--theme-500)
 	ul
 		list-style none
 		margin 0
