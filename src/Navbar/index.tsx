@@ -1,19 +1,19 @@
 import Router from 'next/router'
 
+import { ChevronDown, Menu as LucideMenu } from 'lucide-react'
 import Image, { ImageProps } from 'next/image'
 import React from 'react'
-import { ChevronDown, Menu as LucideMenu } from 'lucide-react'
-import Text from '../Text'
-import Menu from '../Menu'
-import Sidebar from '../Sidebar'
 import Col from '../Col'
-import Row from '../Row'
 import Link from '../Link'
+import Menu from '../Menu'
+import Row from '../Row'
+import Sidebar from '../Sidebar'
+import Text from '../Text'
 import { buildClassName } from '../Util'
 
-import css from './Navbar.module.styl'
-import { Icon } from '../interfaces'
 import Button from '../Button'
+import { Icon } from '../interfaces'
+import css from './Navbar.module.styl'
 
 interface MenuItem {
 	path?: string
@@ -27,7 +27,7 @@ interface Props {
 	/**
 	 * Logo to display
 	 */
-	logo?: ImageProps & {height: number, width: number}
+	logo?: ImageProps & {height: number, width: number, name?: string}
 	/**
 	 * Login URL
 	 */
@@ -120,7 +120,7 @@ export default class Navbar extends React.Component<Props, State> {
 				<Row nowrap className={css.header} align="center">
 					{this.props.logo && (
 						<Col className={css.imgContainer}>
-							<Link href="/">
+							<Link href="/" linkProps={{"aria-label": this.props.logo.name}}>
 								<Image {...this.props.logo} height={34} width={this.props.logo.width*34/this.props.logo.height} />
 							</Link>
 						</Col>
