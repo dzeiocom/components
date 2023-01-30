@@ -12,6 +12,7 @@ interface Props {
 	nowrap?: boolean
 	nogrow?: boolean
 	className?: string
+	nogap?: boolean
 	onClick?: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
@@ -27,6 +28,7 @@ export default class Row extends React.Component<Props> {
 				[css[`align-${this.props.align}`], this.props.align],
 				[css.nowrap, this.props.nowrap],
 				[css.nogrow, this.props.nogrow],
+				[css.nogap, this.props.nogap],
 				this.props.className
 			)}
 			onClick={this.props.onClick}

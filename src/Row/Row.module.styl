@@ -3,7 +3,8 @@
 .row
 	display flex
 	flex-wrap wrap
-	margin (0 - $gapSize) 0 0 (0 - $gapSize)
+	&:not(.nogap)
+		gap $gapSize
 
 .nowrap
 	flex-wrap nowrap
