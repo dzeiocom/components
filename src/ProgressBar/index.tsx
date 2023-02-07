@@ -19,7 +19,7 @@ interface Props {
  *
  * @version 1.0.0
  */
-export default class extends React.PureComponent<Props> {
+export default class extends React.Component<Props> {
 
 	public render = () => (
 		<div className={buildClassName(css.bar, [css.noBorder, this.props.noRoundBorders], this.props.className)}>

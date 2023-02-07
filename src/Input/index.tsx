@@ -1,12 +1,12 @@
 import React, { FocusEvent } from 'react'
 
+import { objectEqual, objectOmit } from '@dzeio/object-util'
 import { ChevronDown, MinusSquare, PlusSquare } from 'lucide-react'
-import Text from '../Text'
 import { Icon } from '../interfaces'
+import Menu from '../Menu'
+import Text from '../Text'
 import { buildClassName } from '../Util'
 import css from './Input.module.styl'
-import Menu from '../Menu'
-import { objectEqual, objectOmit } from '@dzeio/object-util'
 
 interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
 	id?: string
@@ -66,7 +66,7 @@ interface States {
 	list: Menu['props']['items']
 }
 
-export default class Input extends React.PureComponent<Props, States> {
+export default class Input extends React.Component<Props, States> {
 
 	public state: States = {
 		valueUpdate: false,

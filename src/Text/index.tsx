@@ -61,7 +61,7 @@ const types: Record<Types, {
  *
  * @version 1.0.0
  */
-export default class Text extends React.PureComponent<Props> {
+export default class Text extends React.Component<Props> {
 
 	public render() {
 		let data: { weight: Props['weight'], size: Props['size'], tag?: Props['tag'] } = Object.assign({

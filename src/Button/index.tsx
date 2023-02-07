@@ -1,8 +1,8 @@
 import React from 'react'
-import Link from '../Link'
-import { ColorType, Icon } from '../interfaces'
-import { buildClassName } from '../Util'
 import Image from '../Image'
+import { ColorType, Icon } from '../interfaces'
+import Link from '../Link'
+import { buildClassName } from '../Util'
 
 import css from './Button.module.styl'
 
@@ -25,7 +25,7 @@ interface Props {
 	onClick?: (event: React.MouseEvent<HTMLButtonElement|HTMLAnchorElement, MouseEvent>) => void
 }
 
-export default class Button extends React.PureComponent<Props> {
+export default class Button extends React.Component<Props> {
 
 	public render = () => {
 
