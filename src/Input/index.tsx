@@ -155,7 +155,6 @@ export default class Input extends React.Component<Props, States> {
 			prevStates.valueUpdate !== this.state.valueUpdate ||
 			!objectEqual(prevProps.choices ?? [], this.props.choices ?? [])
 		) {
-			console.log('list updated')
 			this.setState({list: this.buildList()})
 		}
 	}
@@ -169,7 +168,7 @@ export default class Input extends React.Component<Props, States> {
 	}
 
 	public render() {
-		const props: Props = objectOmit(this.props, 'iconLeft', 'iconRight', 'inputRed', 'helper', 'choices', 'onValue', 'block', 'defaultValue', 'label')
+		const props: Props = objectOmit(this.props, 'iconLeft', 'iconRight', 'inputRed', 'helper', 'choices', 'onValue', 'block', 'defaultValue', 'label', 'strictChoices')
 
 		const baseProps: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> = {
 			ref: this.props.inputRef || this.inputRef,
