@@ -350,7 +350,8 @@ export default class Input extends React.Component<Props, States> {
 		}
 
 		if ('icon' in Icon) {
-			return <Icon.icon size="18" className={buildClassName(css[position], css.iconClickable)} onClick={async () => {
+			// 18 + 8 of padding
+			return <Icon.icon size={8*2+18} className={buildClassName(css[position], css.iconClickable)} onClick={async () => {
 				if (this.props.disabled) {return}
 				const value = Icon.transformer(this.state.value ?? this.state.displayedValue ?? '')
 				this.setState({ value: value, displayedValue: value, valueUpdate: true })
