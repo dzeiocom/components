@@ -22,7 +22,7 @@
 	svg
 		position absolute
 		user-select none
-		padding 8px
+		padding 16px
 		color black
 		@media (prefers-color-scheme dark)
 			color white
@@ -31,15 +31,15 @@
 		&.iconClickable
 			pointer-events all
 			cursor pointer
-		top 14px
+		top -2px
 		&.left
-			left 16px // input padding-left
+			left 0px // input padding-left
 
 			~ label
-				left 16px + 24px + 10px
+				left 0px + 24px + 10px
 
 		&.right
-			right 16px
+			right 0
 
 	select
 		appearance none
