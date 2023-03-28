@@ -15,12 +15,13 @@ for i in (0...$colCount+1)
 		if i == 0
 			display none
 		else
-			flex 0 0 ((i / 12) * 100)%
-			min-width ((i / 12) * 100)%
+			$tmp = ((i / $colCount) * 100)%
+			flex "0 0 calc(%s - %s)" % ($tmp $gapSize)
+			min-width "calc(%s - %s)" % ($tmp $gapSize)
 
 	if i != $colCount and i != 0
 		.offset-{i}
-			margin-left ((i / 12) * 100)% + (i * $gapSize + $gapSize)px
+			margin-left ((i / $colCount) * 100)% + (i * $gapSize + $gapSize)px
 
 @media (max-width $tablet)
 	.col.tabletGrow
@@ -31,8 +32,9 @@ for i in (0...$colCount+1)
 			if i == 0
 				display none
 			else
-				flex 0 0 ((i / $colCountTablet) * 100)%
-				min-width ((i / $colCountTablet) * 100)%
+				$tmp = ((i / $colCountTablet) * 100)%
+				flex "0 0 calc(%s - %s)" % ($tmp $gapSize)
+				min-width "calc(%s - %s)" % ($tmp $gapSize)
 
 		if i != $colCountTablet and i != 0
 			.offset-tablet-{i}
@@ -47,8 +49,9 @@ for i in (0...$colCount+1)
 			if i == 0
 				display none
 			else
-				flex 0 0 ((i / $colCountMobile) * 100)%
-				min-width ((i / $colCountMobile) * 100)%
+				$tmp = ((i / $colCountMobile) * 100)%
+				flex "0 0 calc(%s - %s)" % ($tmp $gapSize)
+				min-width "calc(%s - %s)" % ($tmp $gapSize)
 		if i != $colCountMobile and i != 0
 			.offset-tablet-{i}
 				margin-left ((i / $colCountMobile) * 100)% + (i * $gapSize - $gapSize)
