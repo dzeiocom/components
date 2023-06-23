@@ -2,10 +2,10 @@ import React, { FocusEvent } from 'react'
 
 import { objectEqual, objectOmit } from '@dzeio/object-util'
 import { ChevronDown, MinusSquare, PlusSquare } from 'lucide-react'
-import { Icon } from '../interfaces'
 import Menu from '../Menu'
 import Text from '../Text'
 import { buildClassName } from '../Util'
+import { Icon } from '../interfaces'
 import css from './Input.module.styl'
 
 interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
@@ -129,15 +129,10 @@ export default class Input extends React.Component<Props, States> {
 			if (this.props.choices) {
 				const choice = this.props.choices.find((it) => typeof it === 'string' ? it : it.value === this.props.value?.toString())
 				if (choice) {
-					this.setState({
-						displayedValue: typeof choice === 'string' ? choice : choice.display,
-						value: typeof choice === 'string' ? choice : choice.value,
-						valueUpdate: true
-					})
+					this.onChange(typeof choice === 'string' ? choice : choice.value)
 				}
 			} else {
-				this.setState({ displayedValue: this.props.value?.toString(), value : this.props.value?.toString(), valueUpdate: true })
-
+				this.onChange(this.props.value?.toString() ?? '')
 			}
 		}
 		if (prevStates.value !== this.state.value) {
@@ -354,7 +349,7 @@ export default class Input extends React.Component<Props, States> {
 			return <Icon.icon size={16*2+18} className={buildClassName(css[position], css.iconClickable)} onClick={async () => {
 				if (this.props.disabled) {return}
 				const value = Icon.transformer(this.state.value ?? this.state.displayedValue ?? '')
-				this.setState({ value: value, displayedValue: value, valueUpdate: true })
+				this.onChange(value)
 			}} />
 		}
 
@@ -377,14 +372,23 @@ export default class Input extends React.Component<Props, States> {
 	 */
 	private onChange = async (event: React.ChangeEvent<HTMLInputElement>|string) => {
 		// get the input
-		const value = typeof event === 'string' ? event : event.currentTarget.value
-		// console.log("onChange", value)
+		let value = typeof event === 'string' ? event : event.currentTarget.value
 
 		if (typeof value !== 'string') {
 			return
 		}
 
+		if (this.props.type === 'number') {
+			const val = parseFloat(value)
+			const min = typeof this.props.min !== 'undefined' ? typeof this.props.min === 'string' ? parseFloat(this.props.min) : this.props.min : -Infinity
+			const max = typeof this.props.max !== 'undefined' ? typeof this.props.max === 'string' ? parseFloat(this.props.max) : this.props.max : Infinity
+			console.log('pouet', val, this.props.min, min, this.props.max, max)
+			value = Math.min(max, Math.max(min, val)).toString()
+		}
+		console.log("onChange", value, this.props.type)
+
 		if (this.props.onChange && typeof event !== 'string') {
+			event.currentTarget.value = value
 			this.props.onChange(event)
 		}
 

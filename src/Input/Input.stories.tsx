@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/react/types-6-0'
 import { Story } from "@storybook/react"
+import { Meta } from '@storybook/react/types-6-0'
+import { X } from 'lucide-react'
 import React from 'react'
 import Component from '.'
-import { X } from 'lucide-react'
 
 export default {
 	title: 'DZEIO/Input',
@@ -20,6 +20,7 @@ tmp.args = {
 	// 	icon: X,
 	// 	transformer: (v: string) => v + 1
 	// },
+	min: 0,
 	id: 'pouet',
 	type: 'number',
 	step: 10,
