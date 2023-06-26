@@ -84,7 +84,7 @@ tmp.args = {label: 'Label', helper: 'Helper', type: 'number', iconLeft: {
 	icon: X,
 	transformer: (v: string) => {
 		console.log("POUET :D")
-		return ""
+		return v + 2
 	}
 }}
 

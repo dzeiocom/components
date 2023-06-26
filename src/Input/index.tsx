@@ -90,7 +90,7 @@ export default class Input extends React.Component<Props, States> {
 		}
 
 		// Handle default Value
-		if (this.props.defaultValue || this.props.value) {
+		if (typeof (this.props.defaultValue ?? this.props.value) !== 'undefined') {
 			const value = this.props.defaultValue ?? this.props.value ?? ''
 			if (!this.props.choices) {
 				this.setState({displayedValue: value.toString()})
@@ -129,21 +129,16 @@ export default class Input extends React.Component<Props, States> {
 			if (this.props.choices) {
 				const choice = this.props.choices.find((it) => typeof it === 'string' ? it : it.value === this.props.value?.toString())
 				if (choice) {
-					this.onChange(typeof choice === 'string' ? choice : choice.value)
+					this.setState({
+						displayedValue: typeof choice === 'string' ? choice : choice.display,
+						value: typeof choice === 'string' ? choice : choice.value,
+						valueUpdate: true
+					})
 				}
 			} else {
-				this.onChange(this.props.value?.toString() ?? '')
+				this.setState({ displayedValue: this.props.value?.toString(), value : this.props.value?.toString(), valueUpdate: true })
 			}
 		}
-		if (prevStates.value !== this.state.value) {
-			if (this.props.onValue) {
-				this.props.onValue(this.state.value ?? '')
-			}
-			// console.log(`Value updated: ${prevStates.value} -> ${this.state.value}`)
-		}
-		// if (prevStates.displayedValue !== this.state.displayedValue) {
-		// 	console.log(`Displayed Value updated: ${prevStates.displayedValue} -> ${this.state.displayedValue}`)
-		// }
 		if (
 			prevStates.value !== this.state.value ||
 			prevStates.displayedValue !== this.state.displayedValue ||
@@ -210,17 +205,11 @@ export default class Input extends React.Component<Props, States> {
 				baseProps.onWheel = (ev: React.WheelEvent<HTMLInputElement>) => ev.currentTarget.blur()
 				if (!this.props.disabled && !this.props.disableAutoIcons) {
 					iconLeft = this.props.iconLeft ?? {icon: MinusSquare, transformer: (v) => {
-						let value = parseFloat(v)
-						if (isNaN(value)) {
-							value = 0
-						}
+						let value = this.ensureNumber(v)
 						return (value - this.ensureNumber(this.props.step, 1)).toString()
 					}}
 					iconRight = this.props.iconRight ?? {icon: PlusSquare, transformer: (v) => {
-						let value = parseFloat(v)
-						if (isNaN(value)) {
-							value = 0
-						}
+						let value = this.ensureNumber(v)
 						return (value + this.ensureNumber(this.props.step, 1)).toString()
 					}}
 				}
@@ -278,8 +267,15 @@ export default class Input extends React.Component<Props, States> {
 		)
 	}
 
-	private ensureNumber(item: string | number | undefined, defaultValue: number): number {
-		return typeof item === 'string' ? parseFloat(item) : item ?? defaultValue
+	private ensureNumber(item: string | number | undefined, defaultValue: number = 0): number {
+		console.log('ensureNumber', item, typeof item)
+		if (typeof item === 'number') return item
+		if (typeof item === 'undefined') return defaultValue
+		const res = parseFloat(item)
+		if (isNaN(res)) {
+			return defaultValue
+		}
+		return res
 	}
 
 	/**
@@ -370,37 +366,34 @@ export default class Input extends React.Component<Props, States> {
 	 * handle the change event of the input
 	 * @param event the event
 	 */
-	private onChange = async (event: React.ChangeEvent<HTMLInputElement>|string) => {
+	private onChange = async (event: React.ChangeEvent<HTMLInputElement>|string | number) => {
 		// get the input
-		let value = typeof event === 'string' ? event : event.currentTarget.value
+		let value = typeof event === 'object' ? event.currentTarget.value : event
 
-		if (typeof value !== 'string') {
-			return
+		if (typeof value === 'number') {
+			value = value.toString()
 		}
 
 		if (this.props.type === 'number') {
-			const val = parseFloat(value)
-			const min = typeof this.props.min !== 'undefined' ? typeof this.props.min === 'string' ? parseFloat(this.props.min) : this.props.min : -Infinity
-			const max = typeof this.props.max !== 'undefined' ? typeof this.props.max === 'string' ? parseFloat(this.props.max) : this.props.max : Infinity
+			const val = this.ensureNumber(value)
+			const min = typeof this.props.min !== 'undefined' ? typeof this.props.min === 'string' ? this.ensureNumber(this.props.min) : this.props.min : -Infinity
+			const max = typeof this.props.max !== 'undefined' ? typeof this.props.max === 'string' ? this.ensureNumber(this.props.max) : this.props.max : Infinity
 			console.log('pouet', val, this.props.min, min, this.props.max, max)
 			value = Math.min(max, Math.max(min, val)).toString()
-		}
-		console.log("onChange", value, this.props.type)
-
-		if (this.props.onChange && typeof event !== 'string') {
-			event.currentTarget.value = value
-			this.props.onChange(event)
-		}
-
-		if (this.props.value) {
-			this.props.onValue?.(value)
-			return
 		}
 
 		if (this.props.strictChoices) {
 			this.setState({ displayedValue: value, valueUpdate: true })
 			return
 		}
+
+		if (this.props.onChange && typeof event === 'object') {
+			event.currentTarget.value = value
+			this.props.onChange(event)
+		}
+
+		this.props.onValue?.(value)
+
 		this.setState({ value: value, displayedValue: value, valueUpdate: true })
 	}
 
