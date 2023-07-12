@@ -1,0 +1,36 @@
+@import "../config"
+
+.box
+	background var(--theme-50)
+	@media (prefers-color-scheme dark)
+		background var(--gray-800)
+	border-radius 16px
+	&.noBottomBorder
+		border-radius 16px 16px 0 0
+
+.header
+	padding 16px
+
+	&.noSidePadding
+		padding 16px 0
+
+	+ .body
+		padding-top 0
+
+.title
+	font-weight 700
+	font-size rem(16)
+	display inline-flex
+
+// BODY
+.body
+	padding 16px
+
+.icon
+	padding 2px
+	width 24px
+	height 24px
+	display inline-block
+	background var(--theme-500)
+	border-radius 4px
+	margin-right 8px

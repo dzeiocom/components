@@ -1,0 +1,26 @@
+// native RGBA function to replace Stylus rgba function
+nativeRGBA(color, opacity)
+	unquote('rgba(') color unquote(', ') opacity unquote(');')
+nativeRGB(color)
+	unquote('rgb(') color unquote(');')
+
+
+$transitionTime = .15s
+$transitionFunction = ease-in-out
+$transition = $transitionTime $transitionFunction
+
+
+// Breakpoints
+$mobile = 768px
+$tablet = 1200px
+
+// Row/Col
+$totalGapSize = 10%
+$colCount = 12
+$colCountTablet = 8
+$colCountMobile = 4
+
+$gapSize = 16px
+
+rem($a)
+	($a / 16)rem

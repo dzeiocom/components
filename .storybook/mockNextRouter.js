@@ -1,8 +1,12 @@
-import Router from 'next/router';
+import Router from 'next/router'
 
 Router.router = {
-	push: async () => {},
+	push: async (route) => {
+		console.log('Pushing router to', route)
+	},
 	replace: async () => {},
 	prefetch: () => {},
 	route: '/mock-route',
-	pathname: 'mock-path',};
+	asPath: '/mock-route',
+	pathname: 'mock-path',
+}

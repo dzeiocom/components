@@ -1,0 +1,29 @@
+@import '../config'
+
+.table
+	border-spacing 0
+	width 100%
+
+	tr:not(:last-child) td
+		border-bottom 1px solid var(--gray-600)
+	tr th
+		border-bottom 2px solid var(--gray-600)
+
+	tr td:not(:first-child)
+	tr th:not(:first-child)
+		border-left 1px solid var(--gray-600)
+
+	th
+		font-weight bold
+		font-size rem(18)
+
+	th
+	td
+		padding 16px
+		text-align left
+		color black
+		@media (prefers-color-scheme dark)
+			color white
+
+.parent
+	overflow-x auto

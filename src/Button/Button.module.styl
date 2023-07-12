@@ -1,0 +1,143 @@
+@import '../config'
+
+.button
+	font-size rem(16)
+	position relative
+	transition all $transition
+	font-weight 600
+	line-height 1.5
+	display inline-flex
+	padding 10px 20px
+	cursor pointer
+	align-items center
+	text-align center
+	border-radius 4px
+	border none
+	justify-content center
+	align-items center
+	color var(--theme-500-text)
+	background-color var(--theme-500)
+
+	// Chrome Specific
+	outline none
+
+	// Link specific
+	text-decoration none
+
+	&.outline
+	&.ghost
+		&:hover
+			box-shadow none
+			background-color nativeRGBA(var(--theme-500-rgb), .2)
+
+		&:active
+		&:focus
+			background-color var(--theme-500)
+			color var(--theme-500-text)
+
+	&.outline
+		border 2px solid @background-color
+		padding 8px 18px // @padding - @border
+		background transparent
+		color @background-color
+
+		&:not(:disabled)
+			&:active
+			&:focus
+				color var(--theme-500-text)
+
+
+	&.ghost
+		background transparent
+		color black
+		@media (prefers-color-scheme dark)
+			color white
+
+	&:hover
+		background-color @background-color
+		box-shadow 0 0 0 4px nativeRGBA(var(--theme-500-rgb), .2)
+
+	&:active
+	&:focus
+		background-color var(--theme-800)
+
+	&.block
+		display flex
+		width 100%
+		margin 0
+		margin-top 8px
+
+	@media (max-width $mobile)
+		&.mobileBlock
+			display flex
+			width 100%
+			margin 0
+			margin-top 8px
+
+	&.large
+		padding 15px 30px
+		font-size rem(20)
+
+		&.outline
+			padding 13px 28px // @padding - @border
+
+	&.small
+		padding 5px 10px
+		font-size rem(14)
+
+		&.outline
+			padding 3px 8px // @padding - @border
+
+	&:disabled
+		background var(--gray-500)
+		color var(--gray-500--text)
+		transform none
+		box-shadow none
+		cursor initial
+
+		&.outline
+			border 2px solid var(--gray-500)
+			background transparent
+
+			@media (prefers-color-scheme dark)
+				border 2px solid var(--gray-500)
+
+	&.loading
+		color transparent
+		position relative
+		pointer-events none
+
+		&::after
+			content ""
+			display block
+			border white 2px solid
+			border-color transparent transparent white white
+			width 1em
+			position absolute
+			top calc(50% - (1em / 2))
+			left calc(50% - (1em / 2))
+			border-radius 100%
+			height 1em
+			box-sizing inherit
+			animation ButtonLoading .75s infinite linear
+
+		// &:disabled::after
+		// 	$rgb = var(--gray-500)
+		// 	border-color transparent transparent $rgb $rgb
+		// 	@media (prefers-color-scheme dark)
+		// 		border-color transparent transparent $rgb $rgb
+
+svg + .textInner
+	margin-left 8px
+.textInner + svg
+	margin-left 8px
+
+@keyframes ButtonLoading
+	0%
+		transform rotate(0)
+
+	100%
+		transform rotate(365deg)
+
+.img
+	min-width 16px

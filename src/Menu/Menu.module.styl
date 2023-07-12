@@ -1,0 +1,50 @@
+@import "../config"
+
+.menu
+	&.outline
+		border 2px solid var(--theme-500)
+	&.hidden
+		display none
+	ul
+		padding 0
+		margin 0
+		display flex
+		flex-direction column
+		li
+			svg
+				margin-right 8px
+				vertical-align sub
+			&:last-child
+				margin 0
+			padding 8px
+			&.link
+				padding 0
+			overflow-x hidden
+			text-overflow: ellipsis;
+			margin-bottom 8px
+			color black
+			cursor pointer
+			transition all $transition
+			font-weight bold
+			border-radius 8px
+			&:hover
+				color black
+				background var(--theme-100)
+			@media (prefers-color-scheme dark)
+				color white
+				&:hover
+					color white
+					background var(--gray-700)
+			&.selected
+			&:active
+				background var(--theme-500)
+				color white
+
+.link
+	padding 0
+.linkInternal
+	padding 8px
+	display inline-block
+	width 100%
+.icon
+	vertical-align sub

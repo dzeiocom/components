@@ -1,0 +1,60 @@
+//@import "_aileron"
+@import "config"
+@import "colors"
+
+*
+*::before
+*::after
+	box-sizing border-box
+
+	scrollbar-width 16px
+	// scrollbar-color var(--theme-50) var(--theme-50)
+	// @media (prefers-color-scheme dark)
+	// 	scrollbar-color var(--gray-800) var(--gray-800)
+	font-family ui-system, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif
+
+// Georgia,Cambria,"Times New Roman",Times,serif
+
+code, pre
+	font-family ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, monospace;
+
+html
+body
+body > div[id="__next"]
+	margin 0
+	min-height 100vh
+	background var(--gray-50)
+
+	@media (prefers-color-scheme dark)
+		background var(--gray-900)
+
+a
+	color inherit
+	text-decoration none
+
+/* width */
+::-webkit-scrollbar
+	width 16px
+
+/* Track */
+::-webkit-scrollbar-corner
+::-webkit-scrollbar-track
+	background var(--theme-100)
+	transition $transition
+	@media (prefers-color-scheme dark)
+		background var(--gray-800)
+
+::-webkit-scrollbar-thumb
+	background: var(--theme-200)
+	transition $transition
+	@media (prefers-color-scheme dark)
+		background var(--gray-700)
+	&:hover
+		background: var(--theme-300)
+		@media (prefers-color-scheme dark)
+			background: var(--gray-600)
+
+		&:active
+			background: var(--theme-400)
+			@media (prefers-color-scheme dark)
+				background: var(--gray-500)

@@ -1,8 +1,13 @@
+.github/
 .storybook/
 node_modules/
-*.stories.js
+src/
+.editorconfig
 .gitattributes
 .gitignore
 .npmignore
-yarn.lock
-yarn-error.log
+LICENSE
+vite.config.js
+package-lock.json
+tsconfig.json
+README.md

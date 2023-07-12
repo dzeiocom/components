@@ -1,52 +1,61 @@
 /**
- * Copyright (c) 2021
- *
  * @summary DZEIO Component Library
  */
 
-import './dzeio/general.styl'
+import './general.styl'
 
-import Box from './dzeio/Box'
-import Button from './dzeio/Button'
-import Checkbox from './dzeio/Checkbox'
-import Code from './dzeio/Code'
-import Col from './dzeio/Col'
-import Container from './dzeio/Container'
-import Fieldset from './dzeio/Fieldset'
-import Footer from './dzeio/Footer'
-import GradientBackground from './dzeio/GradientBackground'
-import Image from './dzeio/Image'
-import Input from './dzeio/Input'
-import Link from './dzeio/Link'
-import Loader from './dzeio/Loader'
-import Navbar from './dzeio/Navbar'
-import NotificationManager from './dzeio/NotificationManager'
-import Overflow from './dzeio/Overflow'
-import Popup from './dzeio/Popup'
-import Row from './dzeio/Row'
-import Table from './dzeio/Table'
-import Text from './dzeio/Text'
-import * as Util from './dzeio/Util'
+import Box from './Box'
+import BoxHeader from './Box/BoxHeader'
+import Breadcrumb from './Breadcrumb'
+import Button from './Button'
+import Checkbox from './Checkbox'
+import Code from './Code'
+import Col from './Col'
+import Container from './Container'
+import DebugCols from './Col/DebugCols'
+import Footer from './Footer'
+import Fieldset from './Fieldset'
+import Image from './Image'
+import Input from './Input'
+import Link from './Link'
+import Loader from './Loader'
+import Menu from './Menu'
+import Navbar from './Navbar'
+import NotificationManager from './NotificationManager'
+import Popup from './Popup'
+import ProgressBar from './ProgressBar'
+import ProgressBox from './ProgressBox'
+import Row from './Row'
+import Sidebar from './Sidebar'
+import Table from './Table'
+import Text from './Text'
+
+import * as Util from './Util'
 
 export {
 	Box,
+	BoxHeader,
+	Breadcrumb,
 	Button,
 	Checkbox,
 	Code,
 	Col,
 	Container,
-	Fieldset,
+	DebugCols,
 	Footer,
-	GradientBackground,
+	Fieldset,
 	Image,
 	Input,
 	Link,
 	Loader,
+	Menu,
 	Navbar,
 	NotificationManager,
-	Overflow,
 	Popup,
+	ProgressBar,
+	ProgressBox,
 	Row,
+	Sidebar,
 	Table,
 	Text,
 	Util

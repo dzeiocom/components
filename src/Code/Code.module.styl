@@ -1,0 +1,15 @@
+@import "../config"
+
+.code
+.pre
+	background var(--theme-50)
+	padding 4px 8px
+	border-radius 8px
+	@media (prefers-color-scheme dark)
+		background var(--gray-700)
+		color var(--gray-700-text)
+
+.pre
+	display block
+	.code
+		padding 0
