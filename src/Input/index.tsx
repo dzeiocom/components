@@ -320,11 +320,10 @@ export default class Input extends React.Component<Props, States> {
 		}
 
 		if (typeof newValue === 'string') {
-			this.setState({value: newValue, displayedValue: newValue, valueUpdate: true})
+			this.onChange(newValue)
 			return
 		}
-
-		this.setState({displayedValue: newValue.display, value: newValue.value, valueUpdate: true})
+		this.onChange(newValue.value)
 	}
 
 	/**
@@ -382,9 +381,17 @@ export default class Input extends React.Component<Props, States> {
 			value = Math.min(max, Math.max(min, val)).toString()
 		}
 
-		if (this.props.strictChoices) {
-			this.setState({ displayedValue: value, valueUpdate: true })
-			return
+		let displayedValue = value
+
+		if (this.props.choices) {
+			const item = this.props.choices.find((it) => typeof it === 'string' ? it === value : it.value === value)
+			if (this.props.strictChoices && !item) {
+				this.setState({ displayedValue: displayedValue, valueUpdate: true })
+				return
+			}
+			if (item && typeof item !== 'string') {
+				displayedValue = item?.display
+			}
 		}
 
 		if (this.props.onChange && typeof event === 'object') {
@@ -394,7 +401,7 @@ export default class Input extends React.Component<Props, States> {
 
 		this.props.onValue?.(value)
 
-		this.setState({ value: value, displayedValue: value, valueUpdate: true })
+		this.setState({ value: value, displayedValue: displayedValue, valueUpdate: true })
 	}
 
 }
