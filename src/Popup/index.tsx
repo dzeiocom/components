@@ -21,7 +21,7 @@ export default class Popup extends React.Component<Props> {
 				className={css.popupChild}
 				onClick={(ev) => ev.stopPropagation()}
 				rightHeader={
-					(<Text><X onClick={this.props.onClose} className={css.exit} /></Text>)
+					(<Text onClick={this.props.onClose}><X className={css.exit} /></Text>)
 				}
 			>
 				{this.props.children}
